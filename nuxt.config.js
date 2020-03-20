@@ -77,7 +77,8 @@ export default {
   modules: [
     '@nuxtjs/bulma',
     '@nuxtjs/pwa',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'nuxt-material-design-icons'
   ],
   /*
    ** vuetify module configuration
@@ -103,7 +104,7 @@ export default {
   },
   pwa: {
     manifest: {
-      name: 'Kopasmart',
+      name: 'NBS',
       lang: 'en'
     },
     meta: {

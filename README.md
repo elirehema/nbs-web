@@ -1,4 +1,4 @@
-# Kopasmart [![Build Status](https://travis-ci.com/finspointa/kopasmart-webapp.svg?branch=master)](https://travis-ci.com/finspointa/kopasmart-webapp)
+# NBS [![Build Status](https://travis-ci.com/finspointa/kopasmart-webapp.svg?branch=master)](https://travis-ci.com/finspointa/kopasmart-webapp)
 
 > Kopasmart Web Application
 

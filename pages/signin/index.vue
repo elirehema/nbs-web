@@ -1,61 +1,58 @@
 <template>
-  <v-app class="app">
-    <v-container fluid>
-      <v-card class="mx-auto" style flat outlined>
-        <v-toolbar color="info" cards dark flat>
-          <v-subheader class="font-weight-light">{{ $t('label.button.buttonsignin')}}</v-subheader>
-          <v-spacer></v-spacer>
-        </v-toolbar>
-        <v-form ref="form" class="pa-4 pt-6 text-center">
-          <v-container fluid>
-            <v-row>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  type="text"
-                  label="Username"
-                  :rules="[rules.required]"
-                  prepend-icon="mdi-account"
-                  single-line
-                  v-model="username"
-                ></v-text-field>
+  <section class="login-page" xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+    <v-app>
+      <v-content>
+        <v-container class="fill-height" fluid>
+          <v-row align="center" justify="center">
+            <v-col cols="12" sm="8" md="4">
+              <v-card class="elevation-12">
+                <v-toolbar prominent src="@/assets/img/reg_pannel_background.jpg" flat>
+                  <v-toolbar-title>Login form</v-toolbar-title>
+                  <v-spacer></v-spacer>
+                </v-toolbar>
+                <v-card-text>
+                  <v-form @submit.prevent="login" id="check-login-form" v-model="valid">
+                    <v-text-field
+                      label="Username"
+                      v-model="username"
+                      prepend-inner-icon="person"
+                      :rules=" [rules.required]"
+                      outlined
+                      required
+                    ></v-text-field>
 
-                <v-text-field
-                  v-model="password"
-                  type="password"
-                  label="Password"
-                  :rules="[rules.required, rules.min]"
-                  :prepend-icon=" show1 ? 'mdi-eye':'mdi-eye-off'"
-                  single-line
-                  autocomplete
-                ></v-text-field>
-
-                <div class="my-2">
+                    <v-text-field
+                      v-model="password"
+                      prepend-inner-icon="lock"
+                      :append-icon="show1 ? 'visibility' : 'visibility_off'"
+                      :rules="[rules.required, rules.min]"
+                      :type="show1 ? 'text' : 'password'"
+                      name="input-10-1"
+                      label="Password"
+                      hint="At least 8 characters"
+                      counter
+                      @click:append="show1 = !show1"
+                      outlined
+                    ></v-text-field>
+                  </v-form>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn v-on:click="nativateToHere('signup')">Register</v-btn>
+                  <v-spacer></v-spacer>
                   <v-btn
-                    color="info"
-                    dark
-                    rounded
-                    small
-                    class="font-weight-light"
-                    @click="signInWithCredential"
-                  >{{ $t('label.button.buttonsignin') }}</v-btn>
-                </div>
-
-                <p class="font-weight-light">{{ $t('qnNewToKopasmart') }}</p>
-                <router-link to="/signup" tag="a">
-                  <a>{{ $t('createAccount') }}</a>
-                </router-link>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <p class="font-weight-regular">{{ $t('homeDescriptionTitle') }}</p>
-
-                <p class="font-weight-light">{{ $t('homeDescription') }}</p>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-form>
-      </v-card>
-    </v-container>
-  </v-app>
+                    color="primary"
+                    type="submit"
+                    :disabled="!valid"
+                    form="check-login-form"
+                  >Login</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-content>
+    </v-app>
+  </section>
 </template>
 <script lang="js" src="~/static/js/signin.js">
 
