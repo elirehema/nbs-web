@@ -1,7 +1,7 @@
 {
-  "name": "kopasmart",
+  "name": "nbs",
   "version": "1.0.0",
-  "description": "Kopasmart Web Application",
+  "description": "Tanzania National Bureau Of Statistics Administrator Dashboard",
   "author": "=elirehema",
   "private": true,
   "scripts": {
