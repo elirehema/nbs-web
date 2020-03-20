@@ -1,120 +1,59 @@
 <template>
-  <v-app dark class="app">
-    <v-container fluid>
-      <v-card class="mx-auto" style flat>
-        <v-toolbar color="info" cards dark flat>
-          <v-row align="center">
-            <v-col cols="6" sm="6">
-              <v-subheader>{{ $t('homePage') }}</v-subheader>
-            </v-col>
+  <section class="login-page" xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+    <v-app>
+      <v-content>
+        <v-container class="fill-height" fluid>
+          <v-row align="center" justify="center">
+            <v-col cols="12" sm="8" md="4">
+              <v-card class="elevation-12">
+                <v-toolbar prominent src="@/assets/img/reg_pannel_background.jpg" flat>
+                  <v-toolbar-title>Login form</v-toolbar-title>
+                  <v-spacer></v-spacer>
+                </v-toolbar>
+                <v-card-text>
+                  <v-form @submit.prevent="login" id="check-login-form" v-model="valid">
+                    <v-text-field
+                      label="Username"
+                      v-model="username"
+                      prepend-inner-icon="person"
+                      :rules=" [rules.required]"
+                      outlined
+                      required
+                    ></v-text-field>
 
-            <v-col cols="6" sm="6">
-              <v-select
-                v-model="select"
-                :hint="`${select.locale}, ${select.lang}`"
-                :items="locales"
-                item-text="locale"
-                item-value="lang"
-                label="Select"
-                persistent-hint
-                return-object
-                single-line
-                @change="changeLanguage(select.lang)"
-              ></v-select>
+                    <v-text-field
+                      v-model="password"
+                      prepend-inner-icon="lock"
+                      :append-icon="show1 ? 'visibility' : 'visibility_off'"
+                      :rules="[rules.required, rules.min]"
+                      :type="show1 ? 'text' : 'password'"
+                      name="input-10-1"
+                      label="Password"
+                      hint="At least 8 characters"
+                      counter
+                      @click:append="show1 = !show1"
+                      outlined
+                    ></v-text-field>
+                  </v-form>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn v-on:click="nativateToHere('signup')">Register</v-btn>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="primary"
+                    type="submit"
+                    :disabled="!valid"
+                    form="check-login-form"
+                  >Login</v-btn>
+                </v-card-actions>
+              </v-card>
             </v-col>
           </v-row>
-        </v-toolbar>
-        <v-row align="center" class="pa-6">
-          <v-col cols="12" sm="6">
-            <div class="text-center">
-              <p class="text-center font-weight-bold">
-                {{$t('label.tooltip.tooltiphello')}}
-                <br />
-                {{$t('label.tooltip.tooltipwelcometo')}} {{ $t('appName') }}
-              </p>
-            </div>
-          </v-col>
-          <v-col cols="12" sm="6">
-            <div class="text-center">
-              <div class="my-2 pa-1">
-                <v-btn
-                  color="info"
-                  small
-                  rounded
-                  to="/calculator"
-                  router
-                  exact
-                  class="font-weight-light"
-                >{{ $t('label.button.btncalculator') }}</v-btn>
-              </div>
-              <div class="my-2 pa-1">
-                <v-btn
-                  color="success"
-                  class="font-weight-light"
-                  rounded
-                  small
-                  @click="routingAction"
-                  dark
-                >{{label}}</v-btn>
-              </div>
-            </div>
-          </v-col>
-        </v-row>
-      </v-card>
-    </v-container>
-  </v-app>
+        </v-container>
+      </v-content>
+    </v-app>
+  </section>
 </template>
-<script>
-export default {
-  meta: {
-    auth: { requiresAuth: false }
-  },
-  layout(context) {
-    return "home";
-  },
-  data: () => ({
-    locale: "",
-    selectedLocale: null,
-    select: { locale: "English", lang: "en" },
-    label: "Sign In",
-    locales: [
-      { locale: "English", lang: "en" },
-      { locale: "Swahili", lang: "sw" },
-      { locale: "French", lang: "fr" },
-      { locale: "Arabic", lang: "ar" }
-    ]
-  }),
+<script lang="js" src="~/static/js/signin.js">
 
-  computed: {},
-  methods: {
-    changeLanguage(lang) {
-      // Change the i18n context object's locale
-      // This makes it so the correct locale file is used
-      this.$i18n.locale = lang;
-    },
-    changeLabel() {
-      this.label = "Go Home";
-    },
-    routingAction() {
-      if (!(localStorage.getItem("qAccessToken") === null)) {
-        this.$router.push("/homepage");
-      } else {
-        this.$router.push("/signin");
-      }
-    }
-  },
-  beforeMount() {
-    if (!(localStorage.getItem("qAccessToken") == null)) {
-      this.changeLabel();
-    }
-  }
-};
 </script>
-<style lang="scss" scoped>
-.my-2,
-p {
-  padding: none;
-  color: #006da3ff;
-  text-align: center;
-}
-</style>

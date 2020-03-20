@@ -48,7 +48,7 @@ const actions = {
     commit
   }) {
     commit(mutation.REPAYMENT_SCHEDULES);
-    await this.$api.$get(`repayment-schedules/`)
+    await this.$api.$get(`news/`)
       .then(response => {
         commit(mutation.REPAYMENT_SCHEDULES_SUCCESS, response.results);
 
