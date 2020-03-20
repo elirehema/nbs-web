@@ -5,6 +5,8 @@ import SignUp from "./modules/signup";
 import Schedules from "./modules/schedule";
 import Repayments from "./modules/repayments";
 import Profile from "./modules/profile";
+import IndicatorModule from "./modules/indicators.module";
+import SectorsModule from "./modules/sectors.module";
 
 Vue.use(Vuex);
 
@@ -18,7 +20,9 @@ const store = () => {
       SignUp,
       Schedules,
       Repayments,
-      Profile
+      Profile,
+      IndicatorModule,
+      SectorsModule
 
     }
   });

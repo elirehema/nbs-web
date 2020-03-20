@@ -5,10 +5,9 @@
       <v-row class="hidden-md-and-up">
         <v-col cols="4" sm="4" class="d-flex child-flex"></v-col>
         <v-col cols="4" sm="4" class="d-flex child-flex">
-          <img :src="require('~/assets/images/logo_gold.png')" alt="Kopasmat" />
+          <img :src="require('~/assets/images/logo_gold.png')" alt="NBS" />
         </v-col>
-        <v-col cols="4" sm="4" class="d-flex child-flex">
-        </v-col>
+        <v-col cols="4" sm="4" class="d-flex child-flex"></v-col>
       </v-row>
 
       <v-content>
@@ -28,15 +27,15 @@ export default {
       locales: ["English", "Kiswahili"]
     };
   },
-   head () {
-    return{
-      title: 'Home Page'
-    }
-  },
+  head() {
+    return {
+      title: "Home Page"
+    };
+  }
 };
 </script>
 <style scoped>
-.container{
-  padding: 0%
+.container {
+  padding: 0%;
 }
 </style>
