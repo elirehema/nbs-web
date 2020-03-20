@@ -23,14 +23,17 @@ export default {
   },
   methods: {
 
-    signInWithCredential() {
+    login() {
       let data = {
         username: this.username,
         password: this.password
       };
       this.$store.dispatch('login', data);
 
-    }
+    },
+    nativateToHere(id) {
+      this.$router.push('/' + id);
+    },
   },
   beforeMount() {
     if (localStorage.getItem("qAccessToken") != null) {
