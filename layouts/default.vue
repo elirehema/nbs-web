@@ -1,6 +1,6 @@
 <template>
   <v-app class="app">
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
+    <!-- <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
       <v-card class="mx-auto" flat>
         <v-list-item>
           <v-router-link to="/profile">
@@ -60,17 +60,22 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
-    <v-app-bar elevation="1" :clipped-left="clipped" fixed app>
+    </v-navigation-drawer>-->
+    <v-app-bar
+      elevation="0"
+      :clipped-left="clipped"
+      color="indigo darken-2"
+      fixed
+      app
+      dark
+      shrink-on-scroll
+      prominent
+    >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 
-      <v-img
-        class="mx-1"
-        :src="require('~/assets/images/logo_gold.png')"
-        max-height="80"
-        max-width="80"
-        contain
-      ></v-img>
+      <v-toolbar-title>Tanzania National Bureau of Statistics</v-toolbar-title>
+
+      <v-spacer></v-spacer>
       <v-spacer />
     </v-app-bar>
     <v-content>

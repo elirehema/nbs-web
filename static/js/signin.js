@@ -6,6 +6,7 @@ export default {
   },
   layout: "home",
   data: () => ({
+    valid: false,
     show1: false,
     show2: true,
     show3: false,
@@ -28,7 +29,20 @@ export default {
         username: this.username,
         password: this.password
       };
-      this.$store.dispatch('login', data);
+      this.$store.dispatch('login', data).then(response => {
+        console.log(data);
+        if (response != null && response.data.session != null) {
+          console.log(response.data);
+          var user = response.data.user;
+          const cookie = response.data.session.cookie;
+          this.$cookies.set("quser", user, cookie.exipires, true);
+          this.$cookies.set("qAccessToken", response.accessToken, cookie.exipires, true);
+          //this.$cookies.set("quuid", user.id, cookie.exipires, true);
+          this.$router.push('/home');
+        }
+      }, error => {
+        //console.log(error.message);
+      });
 
     },
     nativateToHere(id) {

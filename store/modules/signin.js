@@ -38,15 +38,16 @@ const actions = {
     commit(mutation.LOGIN);
     await this.$api.$post(`auth/signin`, payload)
       .then(response => {
+        console.log(payload);
         if (response.accessToken != null) {
-          console.log(response);
+
           commit(mutation.LOGIN_SUCCESS, response);
           const token = response.accessToken;
-          const uuId = response.id;
+          //const uuId = response.id;
           localStorage.setItem('qAccessToken', token);
           localStorage.setItem('mroles', response.roles);
           localStorage.setItem('mmail', response.email);
-          localStorage.setItem('uuId', uuId);
+          //localStorage.setItem('uuId', uuId);
           this.$router.push('/homepage');
         }
 
