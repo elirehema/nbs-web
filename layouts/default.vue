@@ -1,6 +1,6 @@
 <template>
   <v-app class="app">
-    <!-- <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
+    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
       <v-card class="mx-auto" flat>
         <v-list-item>
           <v-router-link to="/profile">
@@ -13,12 +13,7 @@
             <v-list-item-subtitle>{{userdata.email}}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-        <v-img
-          height="250"
-          src="https://answersafrica.com/wp-content/uploads/2015/01/somalia.jpg"
-          dark
-          v-if="picture"
-        ></v-img>
+
         <v-card-actions class="info lighten-1">
           <v-btn dark icon @click="drawer = !drawer">
             <v-icon>mdi-chevron-left</v-icon>
@@ -44,10 +39,6 @@
               </v-list-item>
             </v-list>
           </v-menu>
-          <v-btn dark icon @click="picture = !picture">
-            <v-icon v-if="picture">mdi-eye-off</v-icon>
-            <v-icon v-if="!picture">mdi-eye</v-icon>
-          </v-btn>
         </v-card-actions>
       </v-card>
       <v-list subheader tile>
@@ -60,11 +51,11 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>-->
+    </v-navigation-drawer>
     <v-app-bar
       elevation="0"
       :clipped-left="clipped"
-      color="indigo darken-2"
+      color="indigo lighten-2"
       fixed
       app
       dark
@@ -76,7 +67,6 @@
       <v-toolbar-title>Tanzania National Bureau of Statistics</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-spacer />
     </v-app-bar>
     <v-content>
       <v-container fluid>
@@ -147,13 +137,6 @@ export default {
           title: "Repayment Schedules",
           subtitle: "Repayment Schedule list",
           to: "/schedule",
-          iconClass: "info lighten-1 white--text"
-        },
-        {
-          icon: "mdi-calculator-variant",
-          title: "Calculator",
-          subtitle: "Repayment Schedule generator",
-          to: "/calculator",
           iconClass: "info lighten-1 white--text"
         }
       ],

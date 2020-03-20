@@ -1,26 +1,38 @@
 <template>
-  <v-app class="app">
-    <v-container fluid>
-      <v-card>
-        <v-tabs show-arrows grow v-model="tab" background-color="primary" dark>
-          <v-tab v-for="item in items" :key="item.tab">{{ item.tab }}</v-tab>
-
-          <v-tab-item>
-            <v-card flat>
-              <item class="content"></item>
-            </v-card>
-          </v-tab-item>
-        </v-tabs>
-      </v-card>
-    </v-container>
-  </v-app>
+  <section class="user-profile">
+    <v-card>
+      <v-toolbar flat class="green lighten-2" dark>
+        <v-toolbar-title>DATA LIST</v-toolbar-title>
+      </v-toolbar>
+      <v-tabs horizontal hide-slider center-active>
+        <v-tab color="indigo" centered:true v-for="(item, index) in items" :key="index">
+          <p class="overline font-weight-medium">{{item.title}}</p>
+        </v-tab>
+        <v-tab-item>
+          <v-card flat>
+            <news-component></news-component>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <indicators-component></indicators-component>
+        </v-tab-item>
+        <v-tab-item>
+          <sectors-component></sectors-component>
+        </v-tab-item>
+      </v-tabs>
+    </v-card>
+  </section>
 </template>
 
 <script>
-import NewsComponent from "../pages/schedule/index";
+import IndicatorsComponent from "~/components/indicators.component.vue";
+import NewsComponent from "~/components/news.component.vue";
+import SectorsComponent from "~/components/sectors.component.vue";
 export default {
   components: {
-    NewsComponent
+    "news-component": NewsComponent,
+    "indicators-component": IndicatorsComponent,
+    "sectors-component": SectorsComponent
   },
   data() {
     return {
@@ -41,16 +53,9 @@ export default {
         { day: "Thursday", icon: "mdi-cloud", temp: "25\xB0/15\xB0" }
       ],
       items: [
-        { tab: "One", content: "Tab 1 Content" },
-        { tab: "Dissaggregations", content: NewsComponent },
-        { tab: "Dissaggregations values", content: "Tab 3 Content" },
-        { tab: "Indicators", content: "Tab 4 Content" },
-        { tab: "Indicator Category", content: "Tab 5 Content" },
-        { tab: "Indicators Source", content: "Tab 6 Content" },
-        { tab: "Indicators Values", content: "Tab 7 Content" },
-        { tab: "Mainland", content: "Tab 8 Content" },
-        { tab: "News ", content: "Tab 9 Content" },
-        { tab: "Period Types", content: "Tab 10 Content" }
+        { title: "News", icon: "news-component" },
+        { title: "Indicators", icon: "mdi-eye" },
+        { title: "Sectors", icon: "mdi-eye" }
       ]
     };
   },

@@ -50,7 +50,8 @@ const actions = {
     commit(mutation.REPAYMENT_SCHEDULES);
     await this.$api.$get(`news/`)
       .then(response => {
-        commit(mutation.REPAYMENT_SCHEDULES_SUCCESS, response.results);
+      console.log(response)
+        commit(mutation.REPAYMENT_SCHEDULES_SUCCESS, response);
 
 
       }).catch(error => {
