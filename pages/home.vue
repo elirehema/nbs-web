@@ -152,7 +152,7 @@ export default {
         { title: "Logins", icon: "mdi-eye" },
         { title: "Main Land", icon: "mdi-eye" },
         { title: "Period Type", icon: "mdi-eye" },
-        { title: "Publicatgions", icon: "mdi-eye" },
+        { title: "Publications", icon: "mdi-eye" },
         { title: "Privilage", icon: "mdi-eye" },
         { title: "Rural", icon: "mdi-eye" },
         { title: "Total Females", icon: "mdi-eye" }

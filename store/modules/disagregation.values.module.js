@@ -9,32 +9,32 @@ const state = () => ({
 });
 
 const mutations = {
-  [mutation.GET_DISAGGREGATIONS_VALUES_ERROR](state) {
+  [mutation.GET_DISAGGREGATIONS_VALUES](state) {
     state.isLoggedIn = true;
   },
-  [mutation.GET_DISAGGREGATIONS_VALUES_ERROR_SUCCESS](state, payload) {
+  [mutation.GET_DISAGGREGATIONS_VALUES_SUCCESS](state, payload) {
     state.isLoading = false;
     state.disaggregationvalues = payload;
   },
-  [mutation.GET_DISAGGREGATIONS_VALUES_ERROR_FAILLED](state) {
+  [mutation.GET_DISAGGREGATIONS_VALUES_FAILLED](state) {
     state.isLoading = false;
   },
-  [mutation.GET_DISAGGREGATIONS_VALUES_ERROR_ERROR](state) {
+  [mutation.GET_DISAGGREGATIONS_VALUES_ERROR](state) {
     state.isLoading = false;
   }
 };
 const actions = {
-  async getAlldisaggregationvaluess({
+  async getAlldisaggregationvalues({
     commit
   }) {
-    commit(mutation.GET_DISAGGREGATIONS_VALUES_ERROR);
+    commit(mutation.GET_DISAGGREGATIONS_VALUES);
     await this.$api.$get(`disaggregationvalues/`)
       .then(response => {
-        commit(mutation.GET_DISAGGREGATIONS_VALUES_ERROR_SUCCESS, response);
+        commit(mutation.GET_DISAGGREGATIONS_VALUES_SUCCESS, response);
 
 
       }).catch(error => {
-        commit(mutation.GET_DISAGGREGATIONS_VALUES_ERROR_ERROR);
+        commit(mutation.GET_DISAGGREGATIONS_VALUES_ERROR);
         console.log(error);
 
       });

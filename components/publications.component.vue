@@ -24,10 +24,16 @@ export default {
                     sortable: false,
                     value: 'id',
                   },
-                  { text: 'Published ?', value: 'published' },
-                  { text: 'Disaggregation Type ID', value: 'disaggregationtypeid' },
-                  { text: 'Disaggregation Name', value: 'disaggregationname' },
-
+                
+                  { text: 'Title', value: 'title' },
+                  { text: 'Publication Type', value: 'publicationtype' },
+                  { text: 'Description', value: 'description' },
+                  { text: 'Release Date', value: 'releasedate'},
+                  { text: 'Publication Contents', value: '"publicationcontent'},
+                  { text: 'Content Type', value:'contenttype'},
+                  {text:'Publication Address', value:'publicationaddress'},
+                  {text:'Publication Size', value: 'publicationsize'},
+                  {text: 'Recorder', value:'recorder'},
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
                 ],
@@ -35,7 +41,7 @@ export default {
   },
    created: function () {
     let vm = this;
-    vm.$store.dispatch('getAllPublications');
+    vm.$store.dispatch('getAllpublications');
 
   },
    computed: {

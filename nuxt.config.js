@@ -9,9 +9,9 @@ export default {
   /**
   * Dotenv enviroment
   **/
-   env: {
-      baseUrl: process.env.BASE_URL || 'http://localhost:8080/api/'
-    },
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:8080/api/'
+  },
   /*
    ** Headers of the page
    */
