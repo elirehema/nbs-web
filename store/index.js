@@ -7,6 +7,9 @@ import Repayments from "./modules/repayments";
 import Profile from "./modules/profile";
 import IndicatorModule from "./modules/indicators.module";
 import SectorsModule from "./modules/sectors.module";
+import IndicatorSourceModule from "./modules/indicator.source.module";
+import CurrentReleasesModule from "./modules/current.release.module";
+import DisaggregationModule from "./modules/disaggregation.module";
 
 Vue.use(Vuex);
 
@@ -22,7 +25,10 @@ const store = () => {
       Repayments,
       Profile,
       IndicatorModule,
-      SectorsModule
+      SectorsModule,
+      IndicatorSourceModule,
+      CurrentReleasesModule,
+      DisaggregationModule
 
     }
   });

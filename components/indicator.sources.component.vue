@@ -16,38 +16,25 @@ export default {
                     sortable: false,
                     value: 'id',
                   },
-                  { text: 'Title', value: 'title' },
-                  { text: 'Source ', value: 'source' },
-                  { text: 'URL', value: 'url' },
+                  { text: 'Source ID', value: 'sourceid' },
+                  { text: 'Source Name', value: 'sourcename' },
+                  { text: 'Short Name', value: 'shortname' },
+                  {text: 'Source Group', value:'sourcegroup'},
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
                 ],
     };
   },
-  created: function () {
+   created: function () {
     let vm = this;
-    vm.$store.dispatch('getSchedules');
+    vm.$store.dispatch('getAllIndicatorsSources');
 
   },
-  methods: {
-    getSchedule: function (id) {
-      var data = this.$store.getters.getterschedule(id);
-
-      this.$router.push('/schedule/' + id);
-      return data;
-    }
-
-  },
-  beforeMount: function () {
-
-  },
-  computed: {
+   computed: {
     datalist() {
-      return this.$store.getters.schedulesdata;
+      return this.$store.getters.indicatorsourcesdata;
     }
-
-  }
+   }
 
 };
-
 </script>

@@ -51,7 +51,7 @@ export default {
   },
   beforeMount() {
     if (localStorage.getItem("qAccessToken") != null) {
-      this.$router.push("/homepage");
+      this.$router.push("/home");
     }
   }
 };
