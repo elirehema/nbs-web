@@ -14,19 +14,29 @@
           </v-card>
         </v-tab-item>
         <v-tab-item>
-          <indicators-component></indicators-component>
+          <v-card text>
+            <indicators-component></indicators-component>
+          </v-card>
         </v-tab-item>
         <v-tab-item>
-          <sectors-component></sectors-component>
+          <v-card text>
+            <sectors-component></sectors-component>
+          </v-card>
         </v-tab-item>
         <v-tab-item>
-          <indicatorsource-component></indicatorsource-component>
+          <v-card text>
+            <indicatorsource-component></indicatorsource-component>
+          </v-card>
         </v-tab-item>
         <v-tab-item>
-          <currentrelease-component></currentrelease-component>
+          <v-card text>
+            <currentrelease-component></currentrelease-component>
+          </v-card>
         </v-tab-item>
         <v-tab-item>
-          <disaggregations-component></disaggregations-component>
+          <v-card text>
+            <disaggregations-component></disaggregations-component>
+          </v-card>
         </v-tab-item>
       </v-tabs>
     </v-card>

@@ -1,12 +1,15 @@
  <template>
   <v-app class="app">
     <v-container>
-     <v-data-table
-        :headers="headers"
-        :items="datalist"
-        :items-per-page="5"
-        class="elevation-1"
-      ></v-data-table>
+      <v-row>
+        <v-col cols="12" md="11"></v-col>
+        <v-col cols="6" md="1">
+          <v-btn class="mx-2" fab dark color="green lighten-2">
+            <v-icon dark>mdi-plus</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
+      <v-data-table :headers="headers" :items="datalist" :items-per-page="5" class="elevation-1"></v-data-table>
     </v-container>
   </v-app>
 </template>
