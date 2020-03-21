@@ -9,7 +9,7 @@
           <p class="overline font-weight-medium">{{item.title}}</p>
         </v-tab>
         <v-tab-item>
-          <v-card flat>
+          <v-card text>
             <news-component></news-component>
           </v-card>
         </v-tab-item>
@@ -19,21 +19,40 @@
         <v-tab-item>
           <sectors-component></sectors-component>
         </v-tab-item>
+        <v-tab-item>
+          <indicatorsource-component></indicatorsource-component>
+        </v-tab-item>
+        <v-tab-item>
+          <currentrelease-component></currentrelease-component>
+        </v-tab-item>
+        <v-tab-item>
+          <disaggregations-component></disaggregations-component>
+        </v-tab-item>
       </v-tabs>
     </v-card>
   </section>
 </template>
 
 <script>
+import ChapterDetails from "@/assets/data/chapterDetails.json";
+import FooterData from "@/assets/data/footer.json";
+import FooterComponent from "~/components/footer/FooterComponent.vue";
 import IndicatorsComponent from "~/components/indicators.component.vue";
 import NewsComponent from "~/components/news.component.vue";
 import SectorsComponent from "~/components/sectors.component.vue";
+import IndicatorSourceComponent from "~/components/indicator.sources.component.vue";
+import CurrentReleasesComponent from "~/components/current.releases.component.vue";
+import DisaggregationsComponent from "~/components/disaggregation.component.vue";
 export default {
   components: {
     "news-component": NewsComponent,
     "indicators-component": IndicatorsComponent,
-    "sectors-component": SectorsComponent
+    "sectors-component": SectorsComponent,
+    "indicatorsource-component": IndicatorSourceComponent,
+    "currentrelease-component": CurrentReleasesComponent,
+    "disaggregations-component": DisaggregationsComponent
   },
+
   data() {
     return {
       labels: ["SU", "MO", "TU", "WED", "TH", "FR", "SA"],
@@ -55,7 +74,10 @@ export default {
       items: [
         { title: "News", icon: "news-component" },
         { title: "Indicators", icon: "mdi-eye" },
-        { title: "Sectors", icon: "mdi-eye" }
+        { title: "Sectors", icon: "mdi-eye" },
+        { title: "Indicator Source", icon: "mdi-eye" },
+        { title: "Current Release", icon: "mdi-eye" },
+        { title: "Disaggregations", icon: "mdi-eye" }
       ]
     };
   },

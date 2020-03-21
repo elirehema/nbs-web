@@ -24,30 +24,16 @@ export default {
                 ],
     };
   },
-  created: function () {
+   created: function () {
     let vm = this;
-    vm.$store.dispatch('getSchedules');
+    vm.$store.dispatch('getAllCurrentReleases');
 
   },
-  methods: {
-    getSchedule: function (id) {
-      var data = this.$store.getters.getterschedule(id);
-
-      this.$router.push('/schedule/' + id);
-      return data;
-    }
-
-  },
-  beforeMount: function () {
-
-  },
-  computed: {
+   computed: {
     datalist() {
-      return this.$store.getters.schedulesdata;
+      return this.$store.getters.currentreleasesdata;
     }
-
-  }
+   }
 
 };
-
 </script>
