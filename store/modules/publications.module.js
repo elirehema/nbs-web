@@ -28,7 +28,7 @@ const actions = {
     commit
   }) {
     commit(mutation.GET_PUBLICATIONS_VALUES);
-    await this.$api.$get(`releases/`)
+    await this.$api.$get(`publications/`)
       .then(response => {
         commit(mutation.GET_PUBLICATIONS_VALUES_SUCCESS, response);
 

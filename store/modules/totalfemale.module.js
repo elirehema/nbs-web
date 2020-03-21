@@ -24,7 +24,7 @@ const mutations = {
   }
 };
 const actions = {
-  async getAlltotalfemaless({
+  async getAlltotalfemales({
     commit
   }) {
     commit(mutation.GET_TOTALFEMALE_VALUES);
@@ -42,7 +42,7 @@ const actions = {
 
 };
 const getters = {
-  totalfemalessdata: function (state) {
+  totalfemalesdata: function (state) {
     return state.totalfemales;
   }
 

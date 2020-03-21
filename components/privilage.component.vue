@@ -24,9 +24,8 @@ export default {
                     sortable: false,
                     value: 'id',
                   },
-                  { text: 'Published ?', value: 'published' },
-                  { text: 'Disaggregation Type ID', value: 'disaggregationtypeid' },
-                  { text: 'Disaggregation Name', value: 'disaggregationname' },
+                  { text: 'Privilege', value: 'privilage_id' },
+                  { text: 'Privilege ID', value: 'privilage' },
 
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
@@ -35,12 +34,12 @@ export default {
   },
    created: function () {
     let vm = this;
-    vm.$store.dispatch('getAllPrivilages');
+    vm.$store.dispatch('getAllprivileges');
 
   },
    computed: {
     datalist() {
-      return this.$store.getters.privilagesdata;
+      return this.$store.getters.privilegesdata;
     }
    }
 

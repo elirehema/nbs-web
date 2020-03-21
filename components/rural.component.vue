@@ -23,13 +23,20 @@ export default {
                     align: 'start',
                     sortable: false,
                     value: 'id',
-                  },
-                  { text: 'Published ?', value: 'published' },
-                  { text: 'Disaggregation Type ID', value: 'disaggregationtypeid' },
-                  { text: 'Disaggregation Name', value: 'disaggregationname' },
-
-                  { text: 'Updated At', value: 'createdAt' },
-                  { text: 'Created At', value: 'updatedAt' },
+                  },      
+       
+       
+                  { text: 'Email', value: 'published' },
+                  { text: 'Indicator ID', value: 'indicatorid' },
+                  { text: 'Disag ID', value: 'disaggregationid' },
+                     { text: 'Second Disag', value: 'seconddisaggregation' },
+                        { text: 'Period ID', value: 'periodid' },
+                           { text: 'Reporting Period ID', value: 'reportingperiod' },
+                              { text: 'Source Group', value: 'sourcegroup' },
+                                 { text: 'Value', value: 'value' },
+                                 {text:'Value ID', value:'valueid'},
+                  { text: 'Created At', value: 'createdAt' },
+                  { text: 'Updated At', value: 'updatedAt' },
                 ],
     };
   },

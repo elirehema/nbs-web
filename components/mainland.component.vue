@@ -24,18 +24,20 @@ export default {
                     sortable: false,
                     value: 'id',
                   },
-                  { text: 'Published ?', value: 'published' },
-                  { text: 'Disaggregation Type ID', value: 'disaggregationtypeid' },
-                  { text: 'Disaggregation Name', value: 'disaggregationname' },
+                  { text: 'Value ID?', value: 'valueid' },
+                  { text: 'Indicator ID', value: 'indicatorid' },
+                  { text: 'Period ID', value: 'periodid' },
+                   { text: 'Value', value: 'value' },
+                   { text: 'Reporting Period', value: 'reporting_period' },
 
-                  { text: 'Updated At', value: 'createdAt' },
-                  { text: 'Created At', value: 'updatedAt' },
+                  { text: 'Created At', value: 'createdAt' },
+                  { text: 'Updated At', value: 'updatedAt' },
                 ],
     };
   },
    created: function () {
     let vm = this;
-    vm.$store.dispatch('getAllMainlands');
+    vm.$store.dispatch('getAllmainlands');
 
   },
    computed: {

@@ -24,18 +24,17 @@ export default {
                     sortable: false,
                     value: 'id',
                   },
-                  { text: 'Published ?', value: 'published' },
-                  { text: 'Disaggregation Type ID', value: 'disaggregationtypeid' },
-                  { text: 'Disaggregation Name', value: 'disaggregationname' },
-
-                  { text: 'Updated At', value: 'createdAt' },
-                  { text: 'Created At', value: 'updatedAt' },
+                  { text: 'Period ID', value: 'periodid' },
+                  { text: 'Period Name', value: 'periodname' },
+                  { text: 'PeriodCode', value: 'periodcode' },
+                  { text: 'Created At', value: 'createdAt' },
+                  { text: 'Updated At', value: 'updatedAt' },
                 ],
     };
   },
    created: function () {
     let vm = this;
-    vm.$store.dispatch('getAllPeriodTypes');
+    vm.$store.dispatch('getAllperiodtypes');
 
   },
    computed: {
