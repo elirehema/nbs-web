@@ -28,7 +28,7 @@ export default function ({
   });
 
   // Set baseURL to something different
-  api.setBaseURL('http://localhost:8080/api/');
+  api.setBaseURL(process.env.baseUrl);
 
   // Inject to context as $api
   inject('api', api);
