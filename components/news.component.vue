@@ -12,7 +12,7 @@
             </template>
             <v-card>
               <v-card-title>
-                <span class="headline">Add News (To be implemented)</span>
+                <span class="headline">Add News</span>
               </v-card-title>
               <v-card-text>
                 <v-container>

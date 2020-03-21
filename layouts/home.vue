@@ -5,7 +5,7 @@
       <v-row class="hidden-md-and-up">
         <v-col cols="4" sm="4" class="d-flex child-flex"></v-col>
         <v-col cols="4" sm="4" class="d-flex child-flex">
-          <img :src="require('~/assets/images/logo_gold.png')" alt="NBS" />
+          <img :src="require('~/assets/images/logo.png')" alt="NBS" />
         </v-col>
         <v-col cols="4" sm="4" class="d-flex child-flex"></v-col>
       </v-row>
