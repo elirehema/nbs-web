@@ -28,7 +28,7 @@ export default function ({
   });
 
   // Set baseURL to something different
-  api.setBaseURL('https://nbsapi.herokuapp.com/');
+  api.setBaseURL("https://nbsapi.herokuapp.com/api/");
 
   // Inject to context as $api
   inject('api', api);
