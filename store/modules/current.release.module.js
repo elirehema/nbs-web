@@ -16,7 +16,7 @@ const mutations = {
     state.isLoading = false;
     state.currentreleases = payload;
   },
-  [mutation.GET_CURRENT_RELEASES_FAILED](state) {
+  [mutation.GET_CURRENT_RELEASES_FAILLED](state) {
     state.isLoading = false;
   },
   [mutation.GET_CURRENT_RELEASES_ERROR](state) {

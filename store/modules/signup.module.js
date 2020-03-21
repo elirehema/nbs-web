@@ -21,13 +21,16 @@ const mutations = {
   }
 };
 const actions = {
-  async register({
+  async signup({
     commit
   }, payload) {
     commit(mutation.REGISTER);
-    await this.$api.$post(`register/`, payload)
+    await this.$api.$post(`auth/signup/`, payload)
       .then(response => {
-        commit(mutation.REGISTER_SUCCESS, response);
+        if (response.message != null) {
+          commit(mutation.REGISTER_SUCCESS, response);
+          this.$router.push('/signin');
+        }
 
 
       }).catch(error => {
