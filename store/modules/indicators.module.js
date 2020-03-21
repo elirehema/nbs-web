@@ -1,8 +1,8 @@
 import * as mutation from './mutation-types';
 const state = () => ({
   count: null,
-  new: {},
-  news: [],
+  indicator: {},
+  indicators: [],
   isLoading: Boolean,
   authToken: true
 
@@ -14,7 +14,7 @@ const mutations = {
   },
   [mutation.GET_INDICATORS_SUCCESS](state, payload) {
     state.isLoading = false;
-    state.news = payload;
+    state.indicators = payload;
   },
   [mutation.GET_INDICATORS_FAILED](state) {
     state.isLoading = false;
@@ -43,7 +43,7 @@ const actions = {
 };
 const getters = {
   indicatorsdata: function (state) {
-    return state.news;
+    return state.indicators;
   }
 
 
