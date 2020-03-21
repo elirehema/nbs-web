@@ -16,7 +16,7 @@ const mutations = {
     state.isLoading = false;
     state.disaggregations = payload;
   },
-  [mutation.GET_DISAGGREGATIONS_FAILED](state) {
+  [mutation.GET_DISAGGREGATIONS_FAILLED](state) {
     state.isLoading = false;
   },
   [mutation.GET_DISAGGREGATIONS_ERROR](state) {
