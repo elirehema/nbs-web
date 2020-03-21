@@ -11,6 +11,16 @@ import IndicatorSourceModule from "./modules/indicator.source.module";
 import CurrentReleasesModule from "./modules/current.release.module";
 import DisaggregationModule from "./modules/disaggregation.module";
 
+import LoginsModule from "./modules/logins.module";
+import DisaggregationValuesModule from "./modules/disagregation.values.module";
+import MainlandModule from "./modules/mainland.module";
+import PeriodTypeModule from "./modules/period.type.module";
+import PrivilegeModule from "./modules/privilege.module";
+import PublicationsModule from "./modules/publications.module";
+import RuralsModule from "./modules/rural.module";
+import TotalFemaleModule from "./modules/totalfemale.module";
+
+
 Vue.use(Vuex);
 
 const store = () => {
@@ -28,7 +38,8 @@ const store = () => {
       SectorsModule,
       IndicatorSourceModule,
       CurrentReleasesModule,
-      DisaggregationModule
+      DisaggregationModule, LoginsModule, DisaggregationValuesModule, MainlandModule, PeriodTypeModule, PrivilegeModule,
+      PublicationsModule, RuralsModule, TotalFemaleModule
 
     }
   });
