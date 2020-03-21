@@ -1,7 +1,6 @@
-# NBS [![Build Status](https://travis-ci.com/finspointa/kopasmart-webapp.svg?branch=master)](https://travis-ci.com/finspointa/kopasmart-webapp)
+# NBS Administrator Dashboard [![Build Status](https://travis-ci.com/finspointa/kopasmart-webapp.svg?branch=master)](https://travis-ci.com/finspointa/kopasmart-webapp)
 
-> Kopasmart Web Application
-
+> National Bureau of Statistics Administrator Dashboard
 ## Build Setup
 
 ``` bash
