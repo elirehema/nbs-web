@@ -38,6 +38,46 @@
             <disaggregations-component></disaggregations-component>
           </v-card>
         </v-tab-item>
+        <v-tab-item>
+          <v-card>
+            <disaggregationsvalue-component></disaggregationsvalue-component>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card>
+            <logins-component></logins-component>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card>
+            <mainland-component></mainland-component>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card>
+            <periodtype-component></periodtype-component>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card>
+            <publications-component></publications-component>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card>
+            <privilage-component></privilage-component>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card>
+            <rural-component></rural-component>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card>
+            <totalfemale-component></totalfemale-component>
+          </v-card>
+        </v-tab-item>
       </v-tabs>
     </v-card>
   </section>
@@ -53,6 +93,16 @@ import SectorsComponent from "~/components/sectors.component.vue";
 import IndicatorSourceComponent from "~/components/indicator.sources.component.vue";
 import CurrentReleasesComponent from "~/components/current.releases.component.vue";
 import DisaggregationsComponent from "~/components/disaggregation.component.vue";
+
+import DisaggregationsValueComponent from "~/components/disaggregation.value.component.vue";
+import LoginsComponent from "~/components/logins.component.vue";
+import MainlandComponent from "~/components/mainland.component.vue";
+import PeriodTypeComponent from "~/components/period.type.component.vue";
+import PrivilageComponent from "~/components/privilage.component.vue";
+import PublicationsComponent from "~/components/publications.component.vue";
+import RuralComponent from "~/components/rural.component.vue";
+import TotalFemaleComponent from "~/components/totalfemale.component.vue";
+
 export default {
   components: {
     "news-component": NewsComponent,
@@ -60,7 +110,16 @@ export default {
     "sectors-component": SectorsComponent,
     "indicatorsource-component": IndicatorSourceComponent,
     "currentrelease-component": CurrentReleasesComponent,
-    "disaggregations-component": DisaggregationsComponent
+    "disaggregations-component": DisaggregationsComponent,
+
+    "disaggregationsvalue-component": DisaggregationsValueComponent,
+    "logins-component": LoginsComponent,
+    "mainland-component": MainlandComponent,
+    "periodtype-component": PeriodTypeComponent,
+    "publications-component": PublicationsComponent,
+    "privilage-component": PrivilageComponent,
+    "rural-component": RuralComponent,
+    "totalfemale-component": TotalFemaleComponent
   },
 
   data() {
@@ -87,7 +146,16 @@ export default {
         { title: "Sectors", icon: "mdi-eye" },
         { title: "Indicator Source", icon: "mdi-eye" },
         { title: "Current Release", icon: "mdi-eye" },
-        { title: "Disaggregations", icon: "mdi-eye" }
+        { title: "Disaggregations", icon: "mdi-eye" },
+
+        { title: "Disaggregations Value", icon: "mdi-eye" },
+        { title: "Logins", icon: "mdi-eye" },
+        { title: "Main Land", icon: "mdi-eye" },
+        { title: "Period Type", icon: "mdi-eye" },
+        { title: "Publicatgions", icon: "mdi-eye" },
+        { title: "Privilage", icon: "mdi-eye" },
+        { title: "Rural", icon: "mdi-eye" },
+        { title: "Total Females", icon: "mdi-eye" }
       ]
     };
   },

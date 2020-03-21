@@ -6,6 +6,12 @@ export default {
     base: process.env.NODE_ENV === 'production' ? '/nbs-web/' : '/',
     routerNameSplitter: '/',
   },
+  /**
+  * Dotenv enviroment
+  **/
+   env: {
+      baseUrl: process.env.BASE_URL || 'http://localhost:8080/api/'
+    },
   /*
    ** Headers of the page
    */
