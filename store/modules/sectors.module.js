@@ -21,12 +21,24 @@ const mutations = {
   },
   [mutation.GET_SECTORS_ERROR](state) {
     state.isLoading = false;
-  }
+  },
+  [mutation.CREATE_SECTOR](state) {
+      state.isLoggedIn = true;
+    },
+    [mutation.CREATE_SECTOR_SUCCESS](state, payload) {
+      state.isLoading = false;
+      state.sector = payload;
+    },
+    [mutation.CREATE_SECTOR_FAILED](state) {
+      state.isLoading = false;
+    },
+    [mutation.CREATE_SECTOR_ERROR](state) {
+      state.isLoading = false;
+    }
+
 };
 const actions = {
-  async getAllSectors({
-    commit
-  }) {
+  async getAllSectors({commit}) {
     commit(mutation.GET_SECTORS);
     await this.$api.$get(`sectors/`)
       .then(response => {
@@ -39,6 +51,24 @@ const actions = {
 
       });
   },
+    async postsector({commit}, payload) {
+      commit(mutation.CREATE_SECTOR);
+      await this.$api.$post(`sectors/`, payload)
+        .then(response => {
+          if (response.id != null) {
+            commit(mutation.CREATE_SECTOR_SUCCESS, response);
+            //window.location.reload(true)
+
+            //this.$router.push('/home');
+          }
+
+
+        }).catch(error => {
+          commit(mutation.CREATE_SECTOR_FAILED);
+
+
+        });
+    }
 
 };
 const getters = {

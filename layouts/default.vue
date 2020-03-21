@@ -134,7 +134,7 @@ import DisaggregationsComponent from "~/components/disaggregation.component.vue"
 
 export default {
   async fetch({ store, params }) {
-    await this.$store.dispatch("getProfile");
+   // await this.$store.dispatch("getProfile");
   },
   components: {
     FooterComponent,

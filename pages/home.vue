@@ -166,7 +166,7 @@ export default {
   },
   created: function() {
     let vm = this;
-    vm.$store.dispatch("getProfile");
+    //vm.$store.dispatch("getProfile");
   }
 };
 </script>

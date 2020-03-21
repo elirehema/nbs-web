@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import SignIn from "./modules/signin";
 import SignUp from "./modules/signup.module";
-import Schedules from "./modules/schedule";
+import Schedules from "./modules/news.module";
 import Repayments from "./modules/repayments";
 import Profile from "./modules/profile";
 import IndicatorModule from "./modules/indicators.module";

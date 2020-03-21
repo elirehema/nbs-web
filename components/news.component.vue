@@ -90,7 +90,7 @@ export default {
   },
   created: function () {
     let vm = this;
-    vm.$store.dispatch('getSchedules');
+    vm.$store.dispatch('getnews');
 
   },
   methods: {
@@ -107,7 +107,7 @@ export default {
   },
   computed: {
     datalist() {
-      return this.$store.getters.schedulesdata;
+      return this.$store.getters.newsdata;
     }
 
   }
