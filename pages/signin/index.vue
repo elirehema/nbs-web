@@ -6,8 +6,12 @@
           <v-row align="center" justify="center">
             <v-col cols="12" sm="8" md="4">
               <v-card class="elevation-12">
-                <v-toolbar prominent src="@/assets/img/reg_pannel_background.jpg" flat>
-                  <v-toolbar-title>Login form</v-toolbar-title>
+                <v-toolbar
+                  dark
+                  prominent
+                  src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+                >
+                  <v-toolbar-title>Login forma</v-toolbar-title>
                   <v-spacer></v-spacer>
                 </v-toolbar>
                 <v-card-text>
@@ -37,7 +41,7 @@
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn v-on:click="nativateToHere('signup')">Register</v-btn>
+                  <v-btn v-on:click="nativateToHere('signup')">Registr</v-btn>
                   <v-spacer></v-spacer>
                   <v-btn
                     color="primary"
