@@ -21,7 +21,21 @@ const mutations = {
   },
   [mutation.GET_PUBLICATIONS_VALUES_ERROR](state) {
     state.isLoading = false;
-  }
+  },
+    [mutation.POST_PUBLICATION_VALUE](state) {
+      state.isLoggedIn = true;
+    },
+    [mutation.POST_PUBLICATION_VALUE_SUCCESS](state, payload) {
+      state.isLoading = false;
+      state.publication = payload;
+      state.publications.push(payload);
+    },
+    [mutation.POST_PUBLICATION_VALUE_FAILED](state) {
+      state.isLoading = false;
+    },
+    [mutation.POST_PUBLICATION_VALUE_ERROR](state) {
+      state.isLoading = false;
+    }
 };
 const actions = {
   async getAllpublications({
@@ -39,6 +53,20 @@ const actions = {
 
       });
   },
+    async postpublications({commit}, payload) {
+      commit(mutation.POST_PUBLICATION_VALUE);
+      await this.$api.$post(`publications/`, payload)
+        .then(response => {
+          if(response.id != null){
+          commit(mutation.POST_PUBLICATION_VALUE_SUCCESS, response);
+          }
+        }).catch(error => {
+          commit(mutation.POST_PUBLICATION_VALUE_ERROR);
+          console.log(error);
+
+        });
+    },
+
 
 };
 const getters = {

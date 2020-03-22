@@ -21,7 +21,21 @@ const mutations = {
   },
   [mutation.GET_INDICATORS_SOURCE_ERROR](state) {
     state.isLoading = false;
-  }
+  },
+    [mutation.POST_INDICATOR_SOURCE_VALUE](state) {
+      state.isLoggedIn = true;
+    },
+    [mutation.POST_INDICATOR_SOURCE_VALUE_SUCCESS](state, payload) {
+      state.isLoading = false;
+      state.indicatorsource = payload;
+      state.indicatorsources.push(payload);
+    },
+    [mutation.POST_INDICATOR_SOURCE_VALUE_FAILED](state) {
+      state.isLoading = false;
+    },
+    [mutation.POST_INDICATOR_SOURCE_VALUE_ERROR](state) {
+      state.isLoading = false;
+    }
 };
 const actions = {
   async getAllIndicatorsSources({
@@ -39,7 +53,19 @@ const actions = {
 
       });
   },
+  async postindicatorources({commit},payload) {
+    commit(mutation.POST_INDICATOR_SOURCE_VALUE);
+    await this.$api.$post(`indicatorsources/`, payload)
+      .then(response => {
+      if(response.id != null){
+        commit(mutation.POST_INDICATOR_SOURCE_VALUE_SUCCESS, response);
+      }
+      }).catch(error => {
+        commit(mutation.POST_INDICATOR_SOURCE_VALUE_ERROR);
+        console.log(error);
 
+      });
+  },
 };
 const getters = {
   indicatorsourcesdata: function (state) {
