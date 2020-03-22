@@ -18,7 +18,7 @@
         </v-flex>
       </v-layout>
 
-      <v-layout wrap justify-center row>
+      <!--<v-layout wrap justify-center row>
         <v-flex xs12 md10 lg10>
           <v-container fluid fill-height grid-list-md text-xs-center>
             <v-layout wrap align-center row class="my-2">
@@ -81,10 +81,10 @@
             outlined
             class="ml-1 info lighten-1 font-weight-light white--text"
             style="text-transform: capitalize"
-            flat
+            text
           >{{ item.LinkName }}</v-btn>
         </v-flex>
-      </v-layout>
+      </v-layout>-->
     </v-container>
   </v-footer>
 </template>

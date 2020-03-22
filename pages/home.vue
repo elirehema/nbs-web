@@ -1,85 +1,55 @@
 <template>
   <section class="user-profile">
-    <v-card>
-      <v-toolbar flat class="green lighten-2" dark>
-        <v-toolbar-title>DATA LIST</v-toolbar-title>
-      </v-toolbar>
-      <v-tabs horizontal hide-slider center-active>
-        <v-tab color="indigo" centered:true v-for="(item, index) in items" :key="index">
-          <p class="overline font-weight-medium">{{item.title}}</p>
-        </v-tab>
-        <v-tab-item>
-          <v-card text>
-            <news-component></news-component>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card text>
-            <indicators-component></indicators-component>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card text>
-            <sectors-component></sectors-component>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card text>
-            <indicatorsource-component></indicatorsource-component>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card text>
-            <currentrelease-component></currentrelease-component>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card text>
-            <disaggregations-component></disaggregations-component>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card>
-            <disaggregationsvalue-component></disaggregationsvalue-component>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card>
-            <logins-component></logins-component>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card>
-            <mainland-component></mainland-component>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card>
-            <periodtype-component></periodtype-component>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card>
-            <publications-component></publications-component>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card>
-            <privilage-component></privilage-component>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card>
-            <rural-component></rural-component>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card>
-            <totalfemale-component></totalfemale-component>
-          </v-card>
-        </v-tab-item>
-      </v-tabs>
-    </v-card>
+    <v-toolbar flat class="green lighten-2" dark>
+      <v-toolbar-title>DATA LIST</v-toolbar-title>
+    </v-toolbar>
+    <v-tabs horizontal hide-slider center-active>
+      <v-tab color="indigo" centered:true v-for="(item, index) in items" :key="index">
+        <p class="overline font-weight-medium">{{item.title}}</p>
+      </v-tab>
+      <v-tab-item>
+        <news-component></news-component>
+      </v-tab-item>
+      <v-tab-item>
+        <indicators-component></indicators-component>
+      </v-tab-item>
+      <v-tab-item>
+        <sectors-component></sectors-component>
+      </v-tab-item>
+      <v-tab-item>
+        <indicatorsource-component></indicatorsource-component>
+      </v-tab-item>
+      <v-tab-item>
+        <currentrelease-component></currentrelease-component>
+      </v-tab-item>
+      <v-tab-item>
+        <disaggregations-component></disaggregations-component>
+      </v-tab-item>
+      <v-tab-item>
+        <disaggregationsvalue-component></disaggregationsvalue-component>
+      </v-tab-item>
+      <v-tab-item>
+        <logins-component></logins-component>
+      </v-tab-item>
+      <v-tab-item>
+        <mainland-component></mainland-component>
+      </v-tab-item>
+      <v-tab-item>
+        <periodtype-component></periodtype-component>
+      </v-tab-item>
+      <v-tab-item>
+        <publications-component></publications-component>
+      </v-tab-item>
+      <v-tab-item>
+        <privilage-component></privilage-component>
+      </v-tab-item>
+      <v-tab-item>
+        <rural-component></rural-component>
+      </v-tab-item>
+      <v-tab-item>
+        <totalfemale-component></totalfemale-component>
+      </v-tab-item>
+    </v-tabs>
   </section>
 </template>
 
@@ -170,3 +140,5 @@ export default {
   }
 };
 </script>
+<style scoped>
+</style>

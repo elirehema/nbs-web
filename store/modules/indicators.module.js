@@ -21,12 +21,24 @@ const mutations = {
   },
   [mutation.GET_INDICATORS_ERROR](state) {
     state.isLoading = false;
-  }
+  },
+    [mutation.POST_INDICATOR_VALUE](state) {
+      state.isLoggedIn = true;
+    },
+    [mutation.POST_INDICATOR_VALUE_SUCCESS](state, payload) {
+      state.isLoading = false;
+      state.indicator = payload;
+      state.indicators.push(payload);
+    },
+    [mutation.POST_INDICATOR_VALUE_FAILED](state) {
+      state.isLoading = false;
+    },
+    [mutation.POST_INDICATOR_VALUE_ERROR](state) {
+      state.isLoading = false;
+    }
 };
 const actions = {
-  async getAllIndicators({
-    commit
-  }) {
+  async getAllIndicators({commit}) {
     commit(mutation.GET_INDICATORS);
     await this.$api.$get(`indicators/`)
       .then(response => {
@@ -39,6 +51,19 @@ const actions = {
 
       });
   },
+    async postindicatorvalue({commit}, payload) {
+        commit(mutation.POST_INDICATOR_VALUE);
+        await this.$api.$post(`indicators/`, payload)
+          .then(response => {
+          if(response.id  != null){
+            commit(mutation.POST_INDICATOR_VALUE_SUCCESS, response);
+          }
+          }).catch(error => {
+            commit(mutation.POST_INDICATOR_VALUE_FAILED);
+            console.log(error);
+
+          });
+      },
 
 };
 const getters = {

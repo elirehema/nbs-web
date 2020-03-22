@@ -21,6 +21,21 @@ const mutations = {
   },
   [mutation.GET_PRIVILEGE_VALUES_ERROR](state) {
     state.isLoading = false;
+  },
+
+  [mutation.POST_PRIVILEGE_VALUE](state) {
+    state.isLoading = true;
+  },
+  [mutation.POST_PRIVILEGE_VALUE_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.privilege = payload;
+    state.privileges.push(payload);
+  },
+  [mutation.POST_PRIVILEGE_VALUE_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.POST_PRIVILEGE_VALUE_ERROR](state) {
+    state.isLoading = false;
   }
 };
 const actions = {
@@ -31,10 +46,23 @@ const actions = {
     await this.$api.$get(`privilages/`)
       .then(response => {
         commit(mutation.GET_PRIVILEGE_VALUES_SUCCESS, response);
-
-
       }).catch(error => {
         commit(mutation.GET_PRIVILEGE_VALUES_ERROR);
+        console.log(error);
+
+      });
+  },
+
+  async postprivilegevalue({ commit }, payload) {
+    commit(mutation.POST_PRIVILEGE_VALUE);
+    await this.$api.$post(`privilages/`, payload)
+      .then(response => {
+        if (response.id != null) {
+          commit(mutation.POST_PRIVILEGE_VALUE_SUCCESS, response);
+
+        }
+      }).catch(error => {
+        commit(mutation.POST_PRIVILEGE_VALUE_FAILED);
         console.log(error);
 
       });

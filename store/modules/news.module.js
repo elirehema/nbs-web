@@ -38,17 +38,18 @@ const mutations = {
   [mutation.SAVE_NEWS_DATA_SUCCESS](state, payload) {
     state.isLoading = false;
     state.savenew = payload;
+    state.news.push(payload);
   },
   [mutation.SAVE_NEWS_DATA_FAILED](state) {
     state.isLoading = false;
   }
 };
 const actions = {
-  async getnews({commit}) {
+  async getnews({ commit }) {
     commit(mutation.NEWS_DATAS);
     await this.$api.$get(`news/`)
       .then(response => {
-      console.log(response)
+        console.log(response)
         commit(mutation.NEWS_DATAS_SUCCESS, response);
 
 
@@ -59,7 +60,7 @@ const actions = {
       });
   },
 
-  async savenew({
+  async savenews({
     commit
   }, payload) {
     console.log(payload);

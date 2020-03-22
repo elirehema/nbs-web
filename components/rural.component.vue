@@ -1,6 +1,5 @@
  <template>
-  <v-app class="app">
-    <v-container>
+<v-container class="greencontainer">
       <v-row>
         <v-col cols="12" md="11"></v-col>
         <v-col cols="6" md="1">
@@ -11,7 +10,7 @@
       </v-row>
       <v-data-table :headers="headers" :items="datalist" :items-per-page="5" class="elevation-1"></v-data-table>
     </v-container>
-  </v-app>
+
 </template>
 <script lang="js">
 export default {
@@ -23,9 +22,9 @@ export default {
                     align: 'start',
                     sortable: false,
                     value: 'id',
-                  },      
-       
-       
+                  },
+
+
                   { text: 'Email', value: 'published' },
                   { text: 'Indicator ID', value: 'indicatorid' },
                   { text: 'Disag ID', value: 'disaggregationid' },
