@@ -95,12 +95,11 @@ export default {
       const data = {title: this.title, source: this.source, url: this.url}
       this.$store.dispatch('savenews', data)
       this.dialog = false;
-      
+
        this.reload();
     },
     reload(){
-      this.$store.dispatch('getnews');
-    }
+   }
 
   },
   beforeMount: function () {

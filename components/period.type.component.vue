@@ -100,7 +100,6 @@ export default {
   },
    created: function () {
     let vm = this;
-    vm.$store.dispatch('getAllperiodtypes');
 
   },
    computed: {

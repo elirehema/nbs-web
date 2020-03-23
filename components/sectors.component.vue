@@ -88,7 +88,6 @@ export default {
   },
    created: function () {
     let vm = this;
-    vm.$store.dispatch('getAllSectors');
 
   },
    computed: {

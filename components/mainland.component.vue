@@ -36,8 +36,6 @@ export default {
   },
    created: function () {
     let vm = this;
-    vm.$store.dispatch('getAllmainlands');
-
   },
    computed: {
     datalist() {
