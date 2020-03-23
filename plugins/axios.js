@@ -28,8 +28,9 @@ export default function ({
   });
 
   // Set baseURL to something different
-  //https://nbsapi.herokuapp.com/
-  api.setBaseURL("https://nbsapi.herokuapp.com/api/");
+  const REMOTE_DATA = "https://nbsapi.herokuapp.com/api/";
+  const LOCAL_DATA = "http://192.168.43.191:8080/api/";
+  api.setBaseURL(REMOTE_DATA);
 
   // Inject to context as $api
   inject('api', api);

@@ -11,42 +11,43 @@
           </template>
           <v-card>
             <v-card-title>
-              <span class="headline">Add Indicator</span>
+              <span class="headline">Add Indicator Category</span>
             </v-card-title>
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="12" md="4">
                     <v-text-field
-                      label="Category ID *"
-                      hint="Category ID *"
+                      label="Category ID*"
                       type="number"
+                      hint="Indicator category ID"
                       persistent-hint
-                      required
                       single-line
+                      required
                       v-model="categoryid"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="12" md="4">
                     <v-text-field
-                      label="Period ID *"
-                      hint="Period ID"
+                      label="Name *"
+                      hint="Indicator Category Name Name *"
+                      type="text"
+                      persistent-hint
+                      required
+                      single-line
+                      v-model="name"
+                    ></v-text-field>
+                  </v-col>
+
+                  <v-col cols="12" sm="12" md="4">
+                    <v-text-field
+                      label="Sector ID*"
+                      hint="Indicator category sector ID"
                       persistent-hint
                       single-line
                       required
                       type="number"
-                      v-model="periodid"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Indicator Name *"
-                      hint="Indicator Name"
-                      persistent-hint
-                      single-line
-                      required
-                      type="text"
-                      v-model="indicatorname"
+                      v-model="sectorid"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -70,39 +71,52 @@ export default {
   data() {
     return {
     headers: [
-                  
-                  { text: 'Indicator ID', value: 'indicatorid' },
+                  {
+                    text: 'ID',
+                    align: 'start',
+                    sortable: false,
+                    value: 'id',
+                  },
                   { text: 'Category ID', value: 'categoryid' },
-                  { text: 'Period ID', value: 'periodid' },
-                  {text: 'Indicator Name', value:'indicatorname'},
+                  { text: 'Category Name', value: 'name' },
+                  { text: 'Sector ID', value: 'sectorid' },
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
                 ],
                 dialog: false,
-                indicatorname: null,
-                indicatorid: null,
-                periodid: null,
-                categoryid: null
-
+                categoryid: null,
+                name:null,
+                sectorid: null,
     };
-  },
-   created: function () {
-    let vm = this;
-    vm.$store.dispatch('getAllIndicators');
-
   },
   methods:{
     save: function(){
-      this.$store.dispatch('postindicatorvalue', {indicatorid: this.indicatorid, indicatorname: this.indicatorname, categoryid: this.categoryid, periodid: this.periodid});
+      const data = {
+        categoryid: this.categoryid,
+        name: this.name,
+        sectorid: this.sectorid
+      }
+      this.$store.dispatch('postindicatorcategory', data)
       this.dialog = false;
     }
 
   },
+   created: function () {
+    let vm = this;
+    vm.$store.dispatch('getAllIndicatorCategories');
+
+  },
    computed: {
     datalist() {
-      return this.$store.getters.indicatorsdata;
+      return this.$store.getters.indicatorcategoriesdata;
     }
    }
 
 };
 </script>
+<style >
+.greencontainer {
+  background-color: #81c784;
+}
+</style>
+

@@ -21,6 +21,8 @@
                       v-model="sectorid"
                       label="Sector id *"
                       hint="sector id"
+                      type="number"
+                      single-line
                       persistent-hint
                       required
                     ></v-text-field>
@@ -78,13 +80,9 @@ export default {
         sectorname: this.sectorname,
         sectorid: this.sectorid
       }
-      this.$store.dispatch('postsector', data).then(function(){
-
-           this.dialog = false;
-           this.$store.dispatch('getAllSectors');
-
-         })
-      }
+      this.$store.dispatch('postsector', data)
+      this.dialog = false;
+    }
 
 
   },

@@ -14,6 +14,9 @@
         <indicators-component></indicators-component>
       </v-tab-item>
       <v-tab-item>
+        <indicatorcategories-component></indicatorcategories-component>
+      </v-tab-item>
+      <v-tab-item>
         <sectors-component></sectors-component>
       </v-tab-item>
       <v-tab-item>
@@ -61,6 +64,7 @@ import IndicatorsComponent from "~/components/indicators.component.vue";
 import NewsComponent from "~/components/news.component.vue";
 import SectorsComponent from "~/components/sectors.component.vue";
 import IndicatorSourceComponent from "~/components/indicator.sources.component.vue";
+import IndicatorCategoriesComponent from "~/components/indicator.categories.component.vue";
 import CurrentReleasesComponent from "~/components/current.releases.component.vue";
 import DisaggregationsComponent from "~/components/disaggregation.component.vue";
 
@@ -81,7 +85,7 @@ export default {
     "indicatorsource-component": IndicatorSourceComponent,
     "currentrelease-component": CurrentReleasesComponent,
     "disaggregations-component": DisaggregationsComponent,
-
+    "indicatorcategories-component": IndicatorCategoriesComponent,
     "disaggregationsvalue-component": DisaggregationsValueComponent,
     "logins-component": LoginsComponent,
     "mainland-component": MainlandComponent,
@@ -113,6 +117,7 @@ export default {
       items: [
         { title: "News", icon: "news-component" },
         { title: "Indicators", icon: "mdi-eye" },
+        { title: "Indicator Categories", icon: "mdi-eye" },
         { title: "Sectors", icon: "mdi-eye" },
         { title: "Indicator Source", icon: "mdi-eye" },
         { title: "Current Release", icon: "mdi-eye" },
