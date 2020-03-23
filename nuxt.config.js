@@ -29,7 +29,7 @@ export default {
     link: [{
       rel: 'icon',
       type: 'image/x-icon',
-      href: 'favicon.ico?v2'
+      href: '/favicon.ico?v2',
     },
     {
       rel: 'stylesheet',
