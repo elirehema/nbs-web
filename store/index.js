@@ -10,7 +10,7 @@ import SectorsModule from "./modules/sectors.module";
 import IndicatorSourceModule from "./modules/indicator.source.module";
 import CurrentReleasesModule from "./modules/current.release.module";
 import DisaggregationModule from "./modules/disaggregation.module";
-
+import IndicatorCategoryModule from "./modules/indicator.categories.module";
 import LoginsModule from "./modules/logins.module";
 import DisaggregationValuesModule from "./modules/disagregation.values.module";
 import MainlandModule from "./modules/mainland.module";
@@ -39,7 +39,7 @@ const store = () => {
       IndicatorSourceModule,
       CurrentReleasesModule,
       DisaggregationModule, LoginsModule, DisaggregationValuesModule, MainlandModule, PeriodTypeModule, PrivilegeModule,
-      PublicationsModule, RuralsModule, TotalFemaleModule
+      PublicationsModule, RuralsModule, TotalFemaleModule, IndicatorCategoryModule
 
     }
   });
