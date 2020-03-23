@@ -117,7 +117,6 @@ export default {
   },
    created: function () {
     let vm = this;
-    vm.$store.dispatch('getAllIndicatorsSources');
 
   },
    computed: {

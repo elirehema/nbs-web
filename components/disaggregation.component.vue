@@ -90,7 +90,6 @@ export default {
   },
    created: function () {
     let vm = this;
-    vm.$store.dispatch('getAllDisaggregations');
 
   },
    computed: {

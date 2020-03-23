@@ -70,7 +70,7 @@ export default {
   data() {
     return {
     headers: [
-                  
+
                   { text: 'Indicator ID', value: 'indicatorid' },
                   { text: 'Category ID', value: 'categoryid' },
                   { text: 'Period ID', value: 'periodid' },
@@ -88,7 +88,6 @@ export default {
   },
    created: function () {
     let vm = this;
-    vm.$store.dispatch('getAllIndicators');
 
   },
   methods:{
