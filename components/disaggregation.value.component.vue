@@ -1,15 +1,15 @@
  <template>
-
-     <v-container style="background-color: #81C784;">
-      <v-row>
-        <v-col cols="12" md="11"></v-col>
-        <v-col cols="6" md="1">
-          <v-dialog v-model="dialog" persistent max-width="600px">
-            <template v-slot:activator="{ on }">
-              <v-btn class="mx-2" fab dark v-on="on" color="green lighten-2">
-                <v-icon dark>mdi-plus</v-icon>
-              </v-btn>
-            </template>
+  <v-container style="background-color: #81C784;">
+    <v-row>
+      <v-col cols="12" md="11"></v-col>
+      <v-col cols="6" md="1">
+        <v-dialog v-model="dialog" persistent max-width="600px">
+          <template v-slot:activator="{ on }">
+            <v-btn class="mx-2" fab dark v-on="on" color="green lighten-2">
+              <v-icon dark>mdi-plus</v-icon>
+            </v-btn>
+          </template>
+          <v-form ref="form">
             <v-card>
               <v-card-title>
                 <span class="headline">Create new disaggregations Value</span>
@@ -18,23 +18,25 @@
                 <v-container>
                   <v-row>
                     <v-col cols="12">
-                      <v-text-field
-                        label="Disaggregation Type ID*"
+                      <v-select
+                        v-model="selectdisagtype"
                         hint="Disaggregation Type id (required)"
-                        type="number"
+                        :items="disaggregationsdata"
+                        item-text="disaggregationname"
+                        item-value="disaggregationtypeid"
+                        label="Select disaggregation type"
+                        persistent-hint
+                        return-object
                         single-line
-                        hide-details
-                        v-model="disaggregationtypeid"
-                        required
-                      ></v-text-field>
+                      ></v-select>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
-                        label="Disaggregation Type Id*"
+                        label="Disaggregation Id*"
                         type="number"
                         single-line
                         hide-details
-                        hint="Disaggregation type id"
+                        hint="Disaggregation  id"
                         v-model="disaggregationid"
                         required
                       ></v-text-field>
@@ -58,12 +60,12 @@
                 <v-btn color="blue darken-1" text @click="save()">Save</v-btn>
               </v-card-actions>
             </v-card>
-          </v-dialog>
-        </v-col>
-      </v-row>
-      <v-data-table :headers="headers" :items="datalist" :items-per-page="5" class="elevation-1"></v-data-table>
-    </v-container>
-
+          </v-form>
+        </v-dialog>
+      </v-col>
+    </v-row>
+    <v-data-table :headers="headers" :items="datalist" :items-per-page="5" class="elevation-1"></v-data-table>
+  </v-container>
 </template>
 <script lang="js">
 export default {
@@ -86,17 +88,21 @@ export default {
                 dialog: false,
                 disaggregationid: null,
                 disaggregationtypeid: null,
-                disaggregationvalue: null
+                disaggregationvalue: null,
+                selectdisagtype: null,
     };
   },
   methods:{
   save(){
     const data = {
       disaggregationid: this.disaggregationid,
-      disaggregationtypeid: this.disaggregationtypeid,
+      disaggregationtypeid: this.selectdisagtype.disaggregationtypeid,
       disaggregationvalue: this.disaggregationvalue
     }
+    console.log(data)
     this.$store.dispatch('postdisaggregationvalue',data);
+    this.dialog = false;
+    this.$refs.form.reset();
 
   }
 
@@ -109,6 +115,9 @@ export default {
    computed: {
     datalist() {
       return this.$store.getters.disaggregationvaluesdata;
+    },
+    disaggregationsdata(){
+      return this.$store.getters.disaggregationdata;
     }
    }
 

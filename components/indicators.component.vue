@@ -17,26 +17,30 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Category ID *"
-                      hint="Category ID *"
-                      type="number"
+                    <v-select
+                      v-model="select"
+                      hint="Select Indicator category ID"
+                      :items="indicatorcategories"
+                      item-text="name"
+                      item-value="id"
+                      label="Select"
                       persistent-hint
-                      required
+                      return-object
                       single-line
-                      v-model="categoryid"
-                    ></v-text-field>
+                    ></v-select>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Period ID *"
-                      hint="Period ID"
-                      persistent-hint
-                      single-line
-                      required
-                      type="number"
+                    <v-select
                       v-model="periodid"
-                    ></v-text-field>
+                      hint="Select Period ID"
+                      :items="periodtypes"
+                      item-text="periodname"
+                      item-value="periodid"
+                      label="Select period id"
+                      persistent-hint
+                      return-object
+                      single-line
+                    ></v-select>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
@@ -79,6 +83,7 @@ export default {
                   { text: 'Created At', value: 'updatedAt' },
                 ],
                 dialog: false,
+                select: null,
                 indicatorname: null,
                 indicatorid: null,
                 periodid: null,
@@ -92,7 +97,8 @@ export default {
   },
   methods:{
     save: function(){
-      this.$store.dispatch('postindicatorvalue', {indicatorid: this.indicatorid, indicatorname: this.indicatorname, categoryid: this.categoryid, periodid: this.periodid});
+const data = { indicatorname: this.indicatorname, categoryid: this.select.categoryid, periodid: this.periodid.periodid};
+this.$store.dispatch('postindicatorvalue', data);
       this.dialog = false;
     }
 
@@ -100,6 +106,12 @@ export default {
    computed: {
     datalist() {
       return this.$store.getters.indicatorsdata;
+    },
+    indicatorcategories(){
+      return this.$store.getters.indicatorcategoriesdata;
+    },
+    periodtypes(){
+      return this.$store.getters.periodtypesdata;
     }
    }
 

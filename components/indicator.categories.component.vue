@@ -30,7 +30,7 @@
                   <v-col cols="12" sm="12" md="4">
                     <v-text-field
                       label="Name *"
-                      hint="Indicator Category Name Name *"
+                      hint="Indicator Category Name  *"
                       type="text"
                       persistent-hint
                       required
@@ -40,15 +40,27 @@
                   </v-col>
 
                   <v-col cols="12" sm="12" md="4">
-                    <v-text-field
+                    <!--<v-text-field
                       label="Sector ID*"
-                      hint="Indicator category sector ID"
+                      hint="Select indicator category Sector ID"
                       persistent-hint
                       single-line
                       required
                       type="number"
                       v-model="sectorid"
-                    ></v-text-field>
+                    ></v-text-field>-->
+
+                    <v-select
+                      v-model="sectorid"
+                      hint="Select indicator category Sector ID"
+                      :items="sectors"
+                      item-text="sectorname"
+                      item-value="sectorid"
+                      label="Select sector"
+                      persistent-hint
+                      return-object
+                      single-line
+                    ></v-select>
                   </v-col>
                 </v-row>
               </v-container>
@@ -94,7 +106,7 @@ export default {
       const data = {
         categoryid: this.categoryid,
         name: this.name,
-        sectorid: this.sectorid
+        sectorid: this.sectorid.sectorid
       }
       this.$store.dispatch('postindicatorcategory', data)
       this.dialog = false;
@@ -109,6 +121,9 @@ export default {
    computed: {
     datalist() {
       return this.$store.getters.indicatorcategoriesdata;
+    },
+    sectors(){
+      return this.$store.getters.sectordata;
     }
    }
 
