@@ -17,6 +17,9 @@
           <v-divider></v-divider>
         </v-flex>
       </v-layout>
+      <v-layout wrap justify-center row>
+        <p>Tanzania National Bureau of Statistics @2020</p>
+      </v-layout>
 
       <!--<v-layout wrap justify-center row>
         <v-flex xs12 md10 lg10>
