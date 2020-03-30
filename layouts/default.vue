@@ -16,11 +16,11 @@
 
       <v-spacer></v-spacer>
 
-      <v-menu bottom left>
+      <v-menu bottom transition="slide-y-transition">
         <template v-slot:activator="{ on }">
           <div class="text-center">
-            <v-btn v-on="on" class="mx-2" fab dark small color="warning">
-              <v-icon dark>mdi-power</v-icon>
+            <v-btn v-on="on" class="mx-2" fab dark small color="green lighten-2">
+              <v-icon dark>mdi-filter-variant</v-icon>
             </v-btn>
           </div>
 
@@ -31,8 +31,8 @@
 
         <v-list dense>
           <v-list-item v-for="(item, i) in actions" :key="i" @click="selectedItemAction(i)">
-            <v-list-item-avatar width="36" height="35">
-              <v-icon class="success white--text" v-text="item.icon"></v-icon>
+            <v-list-item-avatar width="24" height="24">
+              <v-icon v-text="item.icon"></v-icon>
             </v-list-item-avatar>
             <v-list-item-title class="font-weight-light">{{ item.title }}</v-list-item-title>
           </v-list-item>
@@ -137,6 +137,8 @@ export default {
       ],
       actions: [
         // { title: "View profile", icon: "mdi-account-circle" },
+        { title: "Settings", icon: "mdi-cog" },
+        { title: "Help", icon: "mdi-help" },
         { title: "Logout", icon: "mdi-logout-variant" }
       ],
       miniVariant: false,
@@ -152,9 +154,9 @@ export default {
     selectedItemAction: function(item) {
       switch (item) {
         case 0:
-          this.$router.push("/profile");
+          //this.$router.push("/profile");
           break;
-        case 1:
+        case 2:
           localStorage.removeItem("qAccessToken");
           localStorage.removeItem("uuId");
           this.$router.push("/");
