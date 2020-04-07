@@ -22,23 +22,23 @@ const mutations = {
   [mutation.GET_PERIODTYPES_VALUES_ERROR](state) {
     state.isLoading = false;
   },
-    [mutation.POST_INDICATOR_PERIOD_TYPE_VALUE](state) {
-      state.isLoggedIn = true;
-    },
-    [mutation.POST_INDICATOR_PERIOD_TYPE_VALUE_SUCCESS](state, payload) {
-      state.isLoading = false;
-      state.periodtype = payload;
-      state.periodtypes.push(payload);
-    },
-    [mutation.POST_INDICATOR_PERIOD_TYPE_VALUE_FAILED](state) {
-      state.isLoading = false;
-    },
-    [mutation.POST_INDICATOR_PERIOD_TYPE_VALUE_ERROR](state) {
-      state.isLoading = false;
-    }
+  [mutation.POST_INDICATOR_PERIOD_TYPE_VALUE](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.POST_INDICATOR_PERIOD_TYPE_VALUE_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.periodtype = payload;
+    state.periodtypes.push(payload);
+  },
+  [mutation.POST_INDICATOR_PERIOD_TYPE_VALUE_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.POST_INDICATOR_PERIOD_TYPE_VALUE_ERROR](state) {
+    state.isLoading = false;
+  }
 };
 const actions = {
-  async getAllperiodtypes({commit}) {
+  async getAllperiodtypes({ commit }) {
     commit(mutation.GET_PERIODTYPES_VALUES);
     await this.$api.$get(`periodtypes/`)
       .then(response => {
@@ -51,28 +51,31 @@ const actions = {
 
       });
   },
-   async postperiodtypevalue({commit}, payload, callback) {
-      commit(mutation.POST_INDICATOR_PERIOD_TYPE_VALUE);
-      await this.$api.$post(`periodtypes/`,payload)
-        .then(response => {
-        if(response.id != null){
+  async postperiodtypevalue({ commit }, payload, callback) {
+    commit(mutation.POST_INDICATOR_PERIOD_TYPE_VALUE);
+    await this.$api.$post(`periodtypes/`, payload)
+      .then(response => {
+        if (response.id != null) {
           commit(mutation.POST_INDICATOR_PERIOD_TYPE_VALUE_SUCCESS, response);
-          if(callback){
-          callback();
+          if (callback) {
+            callback();
           }
 
         }
-        }).catch(error => {
-          commit(mutation.POST_INDICATOR_PERIOD_TYPE_VALUE_ERROR);
-          console.log(error);
+      }).catch(error => {
+        commit(mutation.POST_INDICATOR_PERIOD_TYPE_VALUE_ERROR);
+        console.log(error);
 
-        });
-    },
+      });
+  },
 
 };
 const getters = {
   periodtypesdata: function (state) {
     return state.periodtypes;
+  },
+  periodtypesdatasize: function (state) {
+    return state.periodtypes.length;
   }
 
 
