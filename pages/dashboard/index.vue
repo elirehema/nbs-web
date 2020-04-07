@@ -1,20 +1,28 @@
 <template>
-  <v-row no-gutters>
-    <v-col
-      cols="12"
-      lg="3"
-      md="4"
-      sm="6"
-      xs="12"
-      class="pa-2"
-      xl="2"
-      wrap
-      v-for="(d, index) in datas"
-      :key="index"
-    >
-      <data-card :d="d"></data-card>
-    </v-col>
-  </v-row>
+  <v-img
+    height="100%"
+    width="100%"
+    fill-height
+    fill-width
+    src="https://media.nbclosangeles.com/2019/09/GettyImages-522872908.jpg"
+  >
+    <v-row class="pa-3" no-gutters>
+      <v-col
+        cols="12"
+        lg="3"
+        md="4"
+        sm="6"
+        xs="12"
+        class="pa-2"
+        xl="2"
+        wrap
+        v-for="(d, index) in datas"
+        :key="index"
+      >
+        <data-card :d="d"></data-card>
+      </v-col>
+    </v-row>
+  </v-img>
 </template>
 <script>
 import DataCard from "~/components/items/datacard.vue";
