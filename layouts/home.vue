@@ -11,7 +11,7 @@
       </v-row>
 
       <v-content>
-        <v-container class="container">
+        <v-container ma-0 pa-0 fluid>
           <nuxt />
         </v-container>
       </v-content>
