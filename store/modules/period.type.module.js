@@ -74,8 +74,8 @@ const getters = {
   periodtypesdata: function (state) {
     return state.periodtypes;
   },
-  periodtypesdatasize: function (state) {
-    return state.periodtypes.length;
+  periodtypescount: function (state, getters) {
+    return getters.periodtypesdata.length;
   }
 
 

@@ -59,7 +59,14 @@
       </v-col>
     </v-row>
 
-    <v-data-table :headers="headers" :items="datalist" :items-per-page="5" class="elevation-1"></v-data-table>
+    <v-data-table
+      :headers="headers"
+      :items="datalist"
+      :items-per-page="5"
+      class="elevation-1"
+      loading="true"
+      loading-text="No data available ...!"
+    ></v-data-table>
   </v-container>
 </template>
 <script lang="js">

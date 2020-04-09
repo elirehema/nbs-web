@@ -4,7 +4,7 @@
       <v-toolbar-title>DATA LIST</v-toolbar-title>
     </v-toolbar>
     <v-tabs horizontal hide-slider center-active>
-      <v-tab color="indigo" centered:true v-for="(item, index) in items" :key="index">
+      <v-tab color="indigo" centered:true v-for="(item, index) in items" :key="index" >
         <p class="overline font-weight-medium">{{item.title}}</p>
       </v-tab>
       <v-tab-item>

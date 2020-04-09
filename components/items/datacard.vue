@@ -1,5 +1,5 @@
 <template>
-  <v-card xs="12" color="blue" dark max-width="300">
+  <v-card xs="12" color="blue" dark>
     <v-list-item three-line>
       <v-list-item-avatar tile size="80">
         <v-card color="green lighten-2" dark max-width="100">
