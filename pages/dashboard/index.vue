@@ -25,6 +25,7 @@
   </v-img>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import DataCard from "~/components/items/datacard.vue";
 export default {
   components: {
@@ -33,7 +34,8 @@ export default {
   layout: "dashboard",
   data() {
     return {
-      gettet: this.$store.getters,
+      ptcount: "",
+      pvcount: this.$store.getters.periodtypesdata.length,
       datas: [
         {
           title: "Sectors",
@@ -43,20 +45,49 @@ export default {
         {
           title: "Time Periods",
           icon: "mdi-poll",
-          count: this.$store.getters.periodtypesdata.length
+          count: this.ptcount
         },
         {
-          title: "Privilages",
+          title: "Privilage's",
           icon: "mdi-poll",
-          count: this.$store.getters.privilegesdata.length
+          count: this.pvcount
         }
       ]
     };
   },
-  computed: {
-    periods: function() {
-      return this.$store.getters.periodtypesdata.length;
+  created() {
+    this.ptcount = this.$store.getters.periodtypesdata.length;
+    this.pvcount = this.$store.getters.periodtypesdata.length;
+  },
+  watch: {
+    ptcount() {
+      this.ptcount = this.$store.getters.periodtypescount;
+    },
+    pvcount() {
+      this.pvcount = this.$store.getters.periodtypesdata.length;
     }
+  },
+  beforeMount() {
+    const vm = this;
+    Promise.all([
+      vm.$store.dispatch("getAllIndicatorCategories"),
+      vm.$store.dispatch("getAllCurrentReleases"),
+      vm.$store.dispatch("getAllDisaggregations"),
+      vm.$store.dispatch("getAlldisaggregationvalues"),
+      vm.$store.dispatch("getAllIndicatorsSources"),
+      vm.$store.dispatch("getAllIndicators"),
+      vm.$store.dispatch("getAllLogins"),
+      vm.$store.dispatch("getAllmainlands"),
+      vm.$store.dispatch("getAllperiodtypes"),
+      vm.$store.dispatch("getAllprivileges"),
+      vm.$store.dispatch("getAllpublications"),
+      vm.$store.dispatch("getAllRurals"),
+      vm.$store.dispatch("getAllSectors"),
+      vm.$store.dispatch("getAlltotalfemales"),
+      vm.$store.dispatch("getnews")
+    ]).then(function() {
+      console.log("Loading complete...");
+    });
   }
 };
 </script>

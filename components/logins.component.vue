@@ -23,9 +23,10 @@ export default {
                     sortable: false,
                     value: 'id',
                   },
-                  { text: 'Published ?', value: 'published' },
-                  { text: 'Disaggregation Type ID', value: 'disaggregationtypeid' },
-                  { text: 'Disaggregation Name', value: 'disaggregationname' },
+                  { text: 'Username', value: 'username' },
+                  { text: 'Email ', value: 'email' },
+                  { text: 'Last Login', value: 'lastlogin' },
+                  { text: 'Last Logout', value: 'lastlogout' },
 
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },

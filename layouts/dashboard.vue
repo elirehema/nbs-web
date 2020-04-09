@@ -24,7 +24,7 @@ export default {
   },
   beforeMount: function() {
     const vm = this;
-    Promise.all([
+    /*Promise.all([
       vm.$store.dispatch("getAllIndicatorCategories"),
       vm.$store.dispatch("getAllCurrentReleases"),
       vm.$store.dispatch("getAllDisaggregations"),
@@ -43,6 +43,7 @@ export default {
     ]).then(function() {
       console.log("Loading complete...");
     });
+    */
   }
 };
 </script>

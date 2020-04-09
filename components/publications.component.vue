@@ -70,10 +70,10 @@ export default {
                   { text: 'Description', value: 'description' },
                   { text: 'Release Date', value: 'releasedate'},
                   { text: 'Publication Contents', value: '"publicationcontent'},
-                  { text: 'Content Type', value:'contenttype'},
+                  
                   {text:'Publication Address', value:'publicationaddress'},
-                  {text:'Publication Size', value: 'publicationsize'},
-                  {text: 'Recorder', value:'recorder'},
+                 
+                  
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
                 ],
