@@ -29,16 +29,6 @@
                   </v-col>
 
                   <v-col cols="12" sm="12" md="6">
-                    <!--<v-text-field
-                      label="Sector ID*"
-                      hint="Select indicator category Sector ID"
-                      persistent-hint
-                      single-line
-                      required
-                      type="number"
-                      v-model="sectorid"
-                    ></v-text-field>-->
-
                     <v-select
                       v-model="sectorid"
                       hint="Select indicator category Sector ID"

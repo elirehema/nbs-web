@@ -4,7 +4,7 @@
       <v-toolbar-title>DATA LIST</v-toolbar-title>
     </v-toolbar>
     <v-tabs horizontal hide-slider center-active>
-      <v-tab color="indigo" centered:true v-for="(item, index) in items" :key="index" >
+      <v-tab color="indigo" centered:true v-for="(item, index) in items" :key="index">
         <p class="overline font-weight-medium">{{item.title}}</p>
       </v-tab>
       <v-tab-item>
@@ -119,16 +119,16 @@ export default {
         { title: "Indicators", icon: "mdi-eye" },
         { title: "Indicator Categories", icon: "mdi-eye" },
         { title: "Sectors", icon: "mdi-eye" },
-        { title: "Indicator Source", icon: "mdi-eye" },
-        { title: "Current Release", icon: "mdi-eye" },
+        { title: "Indicator Sources", icon: "mdi-eye" },
+        { title: "Current Releases", icon: "mdi-eye" },
         { title: "Disaggregations", icon: "mdi-eye" },
 
-        { title: "Disaggregations Value", icon: "mdi-eye" },
+        { title: "Disaggregations Values", icon: "mdi-eye" },
         { title: "Logins", icon: "mdi-eye" },
         { title: "Main Land", icon: "mdi-eye" },
-        { title: "Period Type", icon: "mdi-eye" },
+        { title: "Period Types", icon: "mdi-eye" },
         { title: "Publications", icon: "mdi-eye" },
-        { title: "Privilage", icon: "mdi-eye" },
+        { title: "Privilages", icon: "mdi-eye" },
         { title: "Rural", icon: "mdi-eye" },
         { title: "Total Females", icon: "mdi-eye" }
       ]

@@ -16,7 +16,7 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12">
+                  <v-col cols="12" sm="12 " md="6">
                     <v-text-field
                       label="Title*"
                       hint="Release Title"
@@ -25,7 +25,7 @@
                       required
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12">
+                  <v-col cols="12" sm="12" md="6">
                     <v-text-field
                       label="Source*"
                       type="text"
@@ -34,12 +34,30 @@
                       required
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12">
+                  <v-col cols="12" sm="12" md="12">
                     <v-text-field
-                      label="Url*"
+                      label="Desriptions*"
+                      type="text"
+                      hint="Descriptions"
+                      v-model="description"
+                      required
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="6">
+                    <v-text-field
+                      label="Url/Link*"
                       type="text"
                       hint="Link to specific source"
                       v-model="url"
+                      required
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="6">
+                    <v-text-field
+                      label="Release Date*"
+                      type="text"
+                      hint="Release date e.g 12/09/1998"
+                      v-model="release_date"
                       required
                     ></v-text-field>
                   </v-col>
@@ -56,7 +74,26 @@
         </v-dialog>
       </v-col>
     </v-row>
-    <v-data-table :headers="headers" :items="datalist" :items-per-page="5" class="elevation-1"></v-data-table>
+    <v-card>
+      <v-card-title>
+        {{titles}}
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table
+        :headers="headers"
+        :items="datalist"
+        :items-per-page="5"
+        :search="search"
+        class="elevation-1"
+      ></v-data-table>
+    </v-card>
   </v-container>
 </template>
 <script lang="js">
@@ -64,14 +101,12 @@ export default {
   data() {
     return {
       dialog: false,
+      search: '',
+      titles: "Current Releases",
     headers: [
-                  {
-                    text: 'ID',
-                    align: 'start',
-                    sortable: false,
-                    value: 'id',
-                  },
-                  { text: 'Title', value: 'title' },
+                 
+                  { text: 'Title', value: 'title', align: 'start',
+                    sortable: false },
                   { text: 'Source ', value: 'source' },
                   { text: 'URL', value: 'url' },
                   { text: 'Updated At', value: 'createdAt' },
@@ -79,7 +114,9 @@ export default {
                 ],
                 source: null,
                 url: null,
-                title: null
+                title: null,
+                description: null,
+                release_date: null,
     };
   },
   methods:{
@@ -89,7 +126,9 @@ export default {
       const data = {
         title: this.title,
         source: this.source,
-        url: this.url
+        url: this.url,
+        description: this.description,
+        release_date: this.release_date
       }
       this.$store.dispatch('postcurrentrelease', data);
     }
