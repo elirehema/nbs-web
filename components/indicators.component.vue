@@ -66,20 +66,36 @@
         </v-dialog>
       </v-col>
     </v-row>
-    <v-data-table
-      :headers="headers"
-      :items="datalist"
-      :items-per-page="5"
-      class="elevation-1"
-      loading="true"
-      loading-text="No data available ...!"
-    ></v-data-table>
+    <v-card>
+      <v-card-title>
+        {{titlex}}
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table
+        :headers="headers"
+        :items="datalist"
+        :items-per-page="5"
+        :search="search"
+        class="elevation-1"
+        loading="true"
+        loading-text="No data available ...!"
+      ></v-data-table>
+    </v-card>
   </v-container>
 </template>
 <script lang="js">
 export default {
   data() {
     return {
+      search:'',
+      titlex:'Indicators',
     headers: [
 
                   { text: 'Indicator ID', value: 'indicatorid' },

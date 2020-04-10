@@ -47,13 +47,34 @@
         </v-dialog>
       </v-col>
     </v-row>
-    <v-data-table :headers="headers" :items="datalist" :items-per-page="5" class="elevation-1"></v-data-table>
+    <v-card>
+      <v-card-title>
+        {{titles}}
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table
+        :headers="headers"
+        :items="datalist"
+        :items-per-page="5"
+        :search="search"
+        class="elevation-1"
+      ></v-data-table>
+    </v-card>
   </v-container>
 </template>
 <script lang="js">
 export default {
   data() {
     return {
+      search: '',
+      title: 'Disaggregations',
     headers: [
                   { text: 'Disaggregation Type ID', align:'start', value: 'disaggregationtypeid',sortable: false, },
                   { text: 'Disaggregation Name', value: 'disaggregationname' },

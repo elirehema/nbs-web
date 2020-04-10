@@ -63,13 +63,34 @@
         </v-dialog>
       </v-col>
     </v-row>
-    <v-data-table :headers="headers" :items="datalist" :items-per-page="5" class="elevation-1"></v-data-table>
+    <v-card>
+      <v-card-title>
+        {{titlex}}
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table
+        :headers="headers"
+        :items="datalist"
+        :items-per-page="5"
+        :search="search"
+        class="elevation-1"
+      ></v-data-table>
+    </v-card>
   </v-container>
 </template>
 <script lang="js">
 export default {
   data() {
     return {
+      titlex: 'Indicator Sources',
+      search: '',
     headers: [
                 
                   { text: 'Source ID', value: 'sourceid', align: 'start',
