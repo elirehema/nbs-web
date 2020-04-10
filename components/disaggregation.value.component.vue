@@ -17,7 +17,17 @@
               <v-card-text>
                 <v-container>
                   <v-row>
-                    <v-col cols="12">
+                    <v-col cols="12" sm="12" md="6">
+                      <v-text-field
+                        label="Disaggregation value*"
+                        hint="Disaggregation value (required)"
+                        type="text"
+                        v-model="disaggregationvalue"
+                        required
+                      ></v-text-field>
+                    </v-col>
+
+                    <v-col cols="12" sm="12" md="6">
                       <v-select
                         v-model="selectdisagtype"
                         hint="Disaggregation Type id (required)"
@@ -29,26 +39,6 @@
                         return-object
                         single-line
                       ></v-select>
-                    </v-col>
-                    <v-col cols="12">
-                      <v-text-field
-                        label="Disaggregation Id*"
-                        type="number"
-                        single-line
-                        hide-details
-                        hint="Disaggregation  id"
-                        v-model="disaggregationid"
-                        required
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12">
-                      <v-text-field
-                        label="Disaggregation value*"
-                        hint="Disaggregation value (required)"
-                        type="text"
-                        v-model="disaggregationvalue"
-                        required
-                      ></v-text-field>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -72,13 +62,8 @@ export default {
   data() {
     return {
     headers: [
-                  {
-                    text: 'ID',
-                    align: 'start',
-                    sortable: false,
-                    value: 'id',
-                  },
-                  { text: 'Disaggregation ID', value: 'disaggregationid' },
+                 
+                  { text: 'Disaggregation ID', value: 'disaggregationid',align: 'start' },
                   { text: 'Disaggregation Type ID', value: 'disaggregationtypeid' },
                   { text: 'Disaggregation Value', value: 'disaggregationvalue' },
 
@@ -95,7 +80,6 @@ export default {
   methods:{
   save(){
     const data = {
-      disaggregationid: this.disaggregationid,
       disaggregationtypeid: this.selectdisagtype.disaggregationtypeid,
       disaggregationvalue: this.disaggregationvalue
     }

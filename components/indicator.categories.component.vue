@@ -16,18 +16,7 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="12" md="4">
-                    <v-text-field
-                      label="Category ID*"
-                      type="number"
-                      hint="Indicator category ID"
-                      persistent-hint
-                      single-line
-                      required
-                      v-model="categoryid"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="4">
+                  <v-col cols="12" sm="12" md="6">
                     <v-text-field
                       label="Name *"
                       hint="Indicator Category Name  *"
@@ -39,7 +28,7 @@
                     ></v-text-field>
                   </v-col>
 
-                  <v-col cols="12" sm="12" md="4">
+                  <v-col cols="12" sm="12" md="6">
                     <!--<v-text-field
                       label="Sector ID*"
                       hint="Select indicator category Sector ID"
@@ -106,13 +95,7 @@ export default {
       search: '',
       title:'Indicator Categories',
     headers: [
-                  {
-                    text: 'ID',
-                    align: 'start',
-                    sortable: false,
-                    value: 'id',
-                  },
-                  { text: 'Category ID', value: 'categoryid' },
+                  { text: 'Category ID', value: 'categoryid',align: 'start' },
                   { text: 'Category Name', value: 'name' },
                   { text: 'Sector ID', value: 'sectorid' },
                   { text: 'Updated At', value: 'createdAt' },
@@ -127,7 +110,6 @@ export default {
   methods:{
     save: function(){
       const data = {
-        categoryid: this.categoryid,
         name: this.name,
         sectorid: this.sectorid.sectorid
       }

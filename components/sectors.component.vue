@@ -16,18 +16,7 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field
-                      v-model="sectorid"
-                      label="Sector id *"
-                      hint="sector id"
-                      type="number"
-                      single-line
-                      persistent-hint
-                      required
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="6">
+                  <v-col cols="12" sm="12" md="12">
                     <v-text-field
                       v-model="sectorname"
                       label="Sector Name*"
@@ -60,13 +49,9 @@ export default {
       sectorid: null,
       sectorname: null,
        headers: [
-              {
-                text: 'ID',
-                align: 'start',
-                sortable: false,
-                value: 'id',
-              },
-              { text: 'Sector ID', value: 'sectorid' },
+             
+              { text: 'Sector ID', value: 'sectorid', align: 'start',
+                sortable: false,},
               { text: 'Sector Name', value: 'sectorname' },
               { text: 'Updated At', value: 'createdAt' },
               { text: 'Created At', value: 'updatedAt' },
@@ -77,8 +62,7 @@ export default {
   methods:{
     save(){
       const data  ={
-        sectorname: this.sectorname,
-        sectorid: this.sectorid
+        sectorname: this.sectorname
       }
       this.$store.dispatch('postsector', data)
       this.dialog = false;
