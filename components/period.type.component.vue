@@ -16,18 +16,7 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Period ID*"
-                      type="number"
-                      hint="Period ID"
-                      persistent-hint
-                      single-line
-                      required
-                      v-model="periodid"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="12" md="6">
                     <v-text-field
                       label="Period Code *"
                       hint="Period Code *"
@@ -38,7 +27,7 @@
                       v-model="periodcode"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="12" md="6">
                     <v-text-field
                       label="Period Name *"
                       hint="Period Name"
@@ -93,13 +82,8 @@ export default {
       title: 'Period types',
       search: '',
     headers: [
-                  {
-                    text: 'ID',
-                    align: 'start',
-                    sortable: false,
-                    value: 'id',
-                  },
-                  { text: 'Period ID', value: 'periodid' },
+                  { text: 'Period ID', value: 'periodid', align: 'start',
+                    sortable: false, },
                   { text: 'Period Name', value: 'periodname' },
                   { text: 'PeriodCode', value: 'periodcode' },
                   { text: 'Created At', value: 'createdAt' },
@@ -113,7 +97,7 @@ export default {
   },
   methods:{
     save: function(){
-      const data ={periodid:this.periodid, periodcode:this.periodcode,periodname:this.periodname};
+      const data ={ periodcode:this.periodcode,periodname:this.periodname};
       this.$store.dispatch('postperiodtypevalue', data);
       this.dialog = false;
     }

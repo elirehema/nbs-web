@@ -22,20 +22,20 @@ const mutations = {
   [mutation.GET_DISAGGREGATIONS_ERROR](state) {
     state.isLoading = false;
   },
-   [mutation.POST_DISAGGREGATION](state) {
-      state.isLoggedIn = true;
-    },
-    [mutation.POST_DISAGGREGATION_SUCCESS](state, payload) {
-      state.isLoading = false;
-      state.disaggregation = payload;
-      state.disaggregations.push(payload);
-    },
-    [mutation.POST_DISAGGREGATION_FAILED](state) {
-      state.isLoading = false;
-    },
-    [mutation.POST_DISAGGREGATION_ERROR](state) {
-      state.isLoading = false;
-    }
+  [mutation.POST_DISAGGREGATION](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.POST_DISAGGREGATION_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.disaggregation = payload;
+    state.disaggregations.push(payload);
+  },
+  [mutation.POST_DISAGGREGATION_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.POST_DISAGGREGATION_ERROR](state) {
+    state.isLoading = false;
+  }
 };
 const actions = {
   async getAllDisaggregations({
@@ -53,21 +53,21 @@ const actions = {
 
       });
   },
-    async postdisaggregation({ commit },payload) {
-      commit(mutation.POST_DISAGGREGATION);
-      await this.$api.$post(`disaggregations/`, payload)
-        .then(response => {
+  async postdisaggregation({ commit }, payload) {
+    commit(mutation.POST_DISAGGREGATION);
+    await this.$api.$post(`disaggregations/`, payload)
+      .then(response => {
         if (response.id != null) {
           commit(mutation.POST_DISAGGREGATION_SUCCESS, response);
-          }
+        }
 
 
-        }).catch(error => {
-          commit(mutation.POST_DISAGGREGATION_ERROR);
-          console.log(error);
+      }).catch(error => {
+        commit(mutation.POST_DISAGGREGATION_ERROR);
+        console.log(error);
 
-        });
-    },
+      });
+  },
 
 };
 const getters = {

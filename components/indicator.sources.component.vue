@@ -18,17 +18,6 @@
                 <v-row>
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field
-                      label="Source ID*"
-                      type="number"
-                      hint="Source ID"
-                      persistent-hint
-                      single-line
-                      required
-                      v-model="sourceid"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field
                       label="Source Name *"
                       hint="Source Name *"
                       type="text"
@@ -82,13 +71,9 @@ export default {
   data() {
     return {
     headers: [
-                  {
-                    text: 'ID',
-                    align: 'start',
-                    sortable: false,
-                    value: 'id',
-                  },
-                  { text: 'Source ID', value: 'sourceid' },
+                
+                  { text: 'Source ID', value: 'sourceid', align: 'start',
+                    sortable: false, },
                   { text: 'Source Name', value: 'sourcename' },
                   { text: 'Short Name', value: 'shortname' },
                   {text: 'Source Group', value:'sourcegroup'},
@@ -106,7 +91,7 @@ export default {
     save: function(){
       const data = {
         sourcegroup: this.sourcegroup,
-        sourceid: this.sourceid,
+       
         sourcename: this.sourcename,
         shortname: this.shortname
       }

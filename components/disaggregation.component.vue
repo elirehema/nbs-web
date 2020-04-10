@@ -25,7 +25,7 @@
                       required
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12">
+                  <!--<v-col cols="12">
                     <v-text-field
                       label="Disaggregation Type Id*"
                       type="number"
@@ -33,10 +33,7 @@
                       v-model="disaggregationtypeid"
                       required
                     ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-switch v-model="published" :label="`Published ?: ${published.toString()}`"></v-switch>
-                  </v-col>
+                  </v-col>-->
                 </v-row>
               </v-container>
               <small>*indicates required field</small>
@@ -57,14 +54,8 @@
 export default {
   data() {
     return {
-    headers: [{
-                    text: 'ID',
-                    align: 'start',
-                    sortable: false,
-                    value: 'id',
-                  },
-                  { text: 'Published ?', value: 'published' },
-                  { text: 'Disaggregation Type ID', value: 'disaggregationtypeid' },
+    headers: [
+                  { text: 'Disaggregation Type ID', align:'start', value: 'disaggregationtypeid',sortable: false, },
                   { text: 'Disaggregation Name', value: 'disaggregationname' },
 
                   { text: 'Updated At', value: 'createdAt' },
@@ -80,9 +71,7 @@ export default {
   methods:{
     save(){
       const data = {
-        disaggregationname: this.disaggregationname,
-        disaggregationtypeid: this.disaggregationtypeid,
-        published: this.published
+        disaggregationname: this.disaggregationname     
       }
       this.$store.dispatch('postdisaggregation',data);
       this.dialog = false;
