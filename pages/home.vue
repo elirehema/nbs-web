@@ -8,23 +8,26 @@
         <p class="overline font-weight-medium">{{item.title}}</p>
       </v-tab>
       <v-tab-item>
-        <news-component></news-component>
+        <sectors-component></sectors-component>
       </v-tab-item>
       <v-tab-item>
-        <indicators-component></indicators-component>
+        <periodtype-component></periodtype-component>
       </v-tab-item>
       <v-tab-item>
         <indicatorcategories-component></indicatorcategories-component>
       </v-tab-item>
+
       <v-tab-item>
-        <sectors-component></sectors-component>
+        <indicators-component></indicators-component>
       </v-tab-item>
+
       <v-tab-item>
         <indicatorsource-component></indicatorsource-component>
       </v-tab-item>
       <v-tab-item>
-        <currentrelease-component></currentrelease-component>
+        <indicator-values-component></indicator-values-component>
       </v-tab-item>
+
       <v-tab-item>
         <disaggregations-component></disaggregations-component>
       </v-tab-item>
@@ -38,7 +41,10 @@
         <mainland-component></mainland-component>
       </v-tab-item>
       <v-tab-item>
-        <periodtype-component></periodtype-component>
+        <currentrelease-component></currentrelease-component>
+      </v-tab-item>
+      <v-tab-item>
+        <news-component></news-component>
       </v-tab-item>
       <v-tab-item>
         <publications-component></publications-component>
@@ -67,7 +73,7 @@ import IndicatorSourceComponent from "~/components/indicator.sources.component.v
 import IndicatorCategoriesComponent from "~/components/indicator.categories.component.vue";
 import CurrentReleasesComponent from "~/components/current.releases.component.vue";
 import DisaggregationsComponent from "~/components/disaggregation.component.vue";
-
+import IndicatorsValuesComponent from "~/components/indicator.values.component.vue";
 import DisaggregationsValueComponent from "~/components/disaggregation.value.component.vue";
 import LoginsComponent from "~/components/logins.component.vue";
 import MainlandComponent from "~/components/mainland.component.vue";
@@ -84,6 +90,7 @@ export default {
     "sectors-component": SectorsComponent,
     "indicatorsource-component": IndicatorSourceComponent,
     "currentrelease-component": CurrentReleasesComponent,
+    "indicator-values-component": IndicatorsValuesComponent,
     "disaggregations-component": DisaggregationsComponent,
     "indicatorcategories-component": IndicatorCategoriesComponent,
     "disaggregationsvalue-component": DisaggregationsValueComponent,
@@ -115,18 +122,22 @@ export default {
         { day: "Thursday", icon: "mdi-cloud", temp: "25\xB0/15\xB0" }
       ],
       items: [
-        { title: "News", icon: "news-component" },
-        { title: "Indicators", icon: "mdi-eye" },
-        { title: "Indicator Categories", icon: "mdi-eye" },
         { title: "Sectors", icon: "mdi-eye" },
+        { title: "Period Types", icon: "mdi-eye" },
+        { title: "Indicator Categories", icon: "mdi-eye" },
+
+        { title: "Indicators", icon: "mdi-eye" },
+
         { title: "Indicator Sources", icon: "mdi-eye" },
-        { title: "Current Releases", icon: "mdi-eye" },
+        { title: "Indicator Values", icon: "mdi-eye" },
+
         { title: "Disaggregations", icon: "mdi-eye" },
 
         { title: "Disaggregations Values", icon: "mdi-eye" },
         { title: "Logins", icon: "mdi-eye" },
         { title: "Main Land", icon: "mdi-eye" },
-        { title: "Period Types", icon: "mdi-eye" },
+        { title: "Current Releases", icon: "mdi-eye" },
+        { title: "News", icon: "news-component" },
         { title: "Publications", icon: "mdi-eye" },
         { title: "Privilages", icon: "mdi-eye" },
         { title: "Rural", icon: "mdi-eye" },

@@ -25,17 +25,8 @@ export default {
       name: 'description',
       content: process.env.npm_package_description || ''
     }
-    ],
-    link: [{
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicon.ico?v2',
-    },
-    {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css?family=Montserrat&display=swap"'
-    }
     ]
+
   },
   /*
    ** Customize the progress-bar color
@@ -50,10 +41,12 @@ export default {
   css: [
     // Load a Node.js module directly (here it's a Sass file)
     'bulma',
-    // CSS file in the project
-    '@/assets/css/main.css',
+
     // SCSS file in the project
+    '@/assets/fonts/montserrat.css',
+    '@/assets/fonts/molengo.css',
     '@/assets/css/main.scss'
+
   ],
   /*
    ** Plugins to load before mounting the App

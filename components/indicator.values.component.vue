@@ -16,38 +16,88 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field
-                      label="Source Name *"
-                      hint="Source Name *"
-                      type="text"
+                  <v-col cols="12" sm="12" md="6">
+                    <v-select
+                      v-model="periodid"
+                      hint="Select Indicator "
+                      :items="indicators"
+                      item-text="indicatorname"
+                      item-value="indicatorid"
+                      label="Select indicator id"
                       persistent-hint
-                      required
+                      return-object
                       single-line
-                      v-model="sourcename"
-                    ></v-text-field>
+                    ></v-select>
                   </v-col>
-                  <v-col cols="12" sm="6" md="6">
+                  <v-col cols="12" sm="12" md="6">
+                    <v-select
+                      v-model="periodid"
+                      hint="Select Disaggregations "
+                      :items="disaggregations"
+                      item-text="disaggregationname"
+                      item-value="disaggregationtypeid"
+                      label="Select disaggregation id"
+                      persistent-hint
+                      return-object
+                      single-line
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="6">
+                    <v-select
+                      v-model="periodid"
+                      hint="Select Period ID"
+                      :items="periodtypes"
+                      item-text="periodname"
+                      item-value="periodid"
+                      label="Select period id"
+                      persistent-hint
+                      return-object
+                      single-line
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="6">
                     <v-text-field
-                      label="Short Name *"
-                      hint="Short Name"
+                      label="Second Disaggregations *"
+                      hint="Second Disaggregations"
                       persistent-hint
                       single-line
                       required
                       type="text"
                       autocomplete="false"
-                      v-model="shortname"
+                      v-model="seconddisaggregation"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="6">
+                  <v-col cols="12" sm="12" md="6">
                     <v-text-field
-                      label="Source Group *"
-                      hint="Source Group"
+                      label="Value *"
+                      hint="Value *"
+                      type="text"
+                      persistent-hint
+                      required
+                      single-line
+                      v-model="value"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="6">
+                    <v-text-field
+                      label="Reporting period *"
+                      hint="Reporting period"
                       persistent-hint
                       single-line
                       required
                       type="text"
-                      v-model="sourcegroup"
+                      v-model="reportingperiod"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="6">
+                    <v-text-field
+                      label="Source ID *"
+                      hint="Source ID"
+                      persistent-hint
+                      single-line
+                      required
+                      type="text"
+                      v-model="sourceid"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -105,8 +155,10 @@ export default {
                 dialog: false,
                 sourcegroup: null,
                 sourceid: null,
-                sourcename: null,
+                value: null,
                 shortname: null,
+                seconddisaggregation: null,
+                reportingperiod: null,
     };
   },
   methods:{
@@ -129,6 +181,15 @@ export default {
    computed: {
     datalist() {
       return this.$store.getters.indicatorsourcesdata;
+    },
+     periodtypes(){
+      return this.$store.getters.periodtypesdata;
+    },
+     indicators() {
+      return this.$store.getters.indicatorsdata;
+    },
+     disaggregations() {
+      return this.$store.getters.disaggregationdata;
     }
    }
 

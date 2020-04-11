@@ -1,8 +1,13 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
 .app {
   padding: 0;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .app .mx-auto .padding {
