@@ -19,6 +19,8 @@ import PrivilegeModule from "./modules/privilege.module";
 import PublicationsModule from "./modules/publications.module";
 import RuralsModule from "./modules/rural.module";
 import TotalFemaleModule from "./modules/totalfemale.module";
+import SourceGroupModel from "./modules/source.groups.module";
+import IndicatorValuesModel from "./modules/indicator.values.module";
 
 
 Vue.use(Vuex);
@@ -39,7 +41,7 @@ const store = () => {
       IndicatorSourceModule,
       CurrentReleasesModule,
       DisaggregationModule, LoginsModule, DisaggregationValuesModule, MainlandModule, PeriodTypeModule, PrivilegeModule,
-      PublicationsModule, RuralsModule, TotalFemaleModule, IndicatorCategoryModule
+      PublicationsModule, RuralsModule, TotalFemaleModule, IndicatorCategoryModule, SourceGroupModel,IndicatorValuesModel
 
     }
   });

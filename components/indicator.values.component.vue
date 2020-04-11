@@ -18,7 +18,7 @@
                 <v-row>
                   <v-col cols="12" sm="12" md="6">
                     <v-select
-                      v-model="periodid"
+                      v-model="indicatorid"
                       hint="Select Indicator "
                       :items="indicators"
                       item-text="indicatorname"
@@ -31,12 +31,13 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="6">
                     <v-select
-                      v-model="periodid"
+                      v-model="disaggregationid"
                       hint="Select Disaggregations "
                       :items="disaggregations"
                       item-text="disaggregationname"
                       item-value="disaggregationtypeid"
                       label="Select disaggregation id"
+                      type="number"
                       persistent-hint
                       return-object
                       single-line
@@ -50,6 +51,7 @@
                       item-text="periodname"
                       item-value="periodid"
                       label="Select period id"
+                      type="number"
                       persistent-hint
                       return-object
                       single-line
@@ -62,7 +64,7 @@
                       persistent-hint
                       single-line
                       required
-                      type="text"
+                      type="number"
                       autocomplete="false"
                       v-model="seconddisaggregation"
                     ></v-text-field>
@@ -71,7 +73,7 @@
                     <v-text-field
                       label="Value *"
                       hint="Value *"
-                      type="text"
+                      type="number"
                       persistent-hint
                       required
                       single-line
@@ -85,20 +87,23 @@
                       persistent-hint
                       single-line
                       required
-                      type="text"
+                      type="number"
                       v-model="reportingperiod"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="12" md="6">
-                    <v-text-field
-                      label="Source ID *"
-                      hint="Source ID"
-                      persistent-hint
-                      single-line
-                      required
-                      type="text"
+                    <v-select
                       v-model="sourceid"
-                    ></v-text-field>
+                      hint="Select Source ID *"
+                      :items="sourcegroups"
+                      item-text="sourcename"
+                      item-value="sourceid"
+                      label="Select source id"
+                      required
+                      persistent-hint
+                      return-object
+                      single-line
+                    ></v-select>
                   </v-col>
                 </v-row>
               </v-container>
@@ -140,16 +145,19 @@
 export default {
   data() {
     return {
-      titlex: 'Indicator Sources',
+      titlex: 'Indicator values',
       search: '',
     headers: [
                 
-                  { text: 'Source ID', value: 'sourceid', align: 'start',
+                  { text: 'Value ID', value: 'valueid', align: 'start',
                     sortable: false, },
-                  { text: 'Source Name', value: 'sourcename' },
-                  { text: 'Short Name', value: 'shortname' },
-                  {text: 'Source Group', value:'sourcegroup'},
-                  { text: 'Updated At', value: 'createdAt' },
+                  { text: 'Email', value: 'email' },
+                  { text: 'IndicatorID', value: 'indicatorid' },
+                  {text: 'Disag ID', value:'disaggregationid'},
+                   {text: 'Second ID', value:'seconddisaggregation'},
+                   {text: 'Period ID', value:'periodid'},
+                   {text: 'Source ID', value: 'sourceid'},
+                    {text: 'Value', value: 'value'},
                   { text: 'Created At', value: 'updatedAt' },
                 ],
                 dialog: false,
@@ -157,6 +165,9 @@ export default {
                 sourceid: null,
                 value: null,
                 shortname: null,
+                periodid:null,
+                indicatorid: null,
+                disaggregationid: null,
                 seconddisaggregation: null,
                 reportingperiod: null,
     };
@@ -164,12 +175,20 @@ export default {
   methods:{
     save: function(){
       const data = {
-        sourcegroup: this.sourcegroup,
+        email : localStorage.getItem("mmail"),
+        indicatorid: this.indicatorid.indicatorid,
+        disaggregationid: this.disaggregationid.disaggregationtypeid,
+        seconddisaggregation:  parseInt(this.seconddisaggregation),
+        periodid: this.periodid.periodid,
+         reportingperiod: parseInt(this.reportingperiod),
+         sourceid: this.sourceid.sourceid,
+        
+        value: this.value,
+        
        
-        sourcename: this.sourcename,
-        shortname: this.shortname
       }
-      this.$store.dispatch('postindicatorources', data)
+      console.log(data);
+      this.$store.dispatch('postindicatorvalues', data)
       this.dialog = false;
     }
 
@@ -180,7 +199,7 @@ export default {
   },
    computed: {
     datalist() {
-      return this.$store.getters.indicatorsourcesdata;
+      return this.$store.getters.indicatorvaluesdata;
     },
      periodtypes(){
       return this.$store.getters.periodtypesdata;
@@ -190,6 +209,9 @@ export default {
     },
      disaggregations() {
       return this.$store.getters.disaggregationdata;
+    },
+     sourcegroups() {
+      return this.$store.getters.sourcegroupsdata;
     }
    }
 
