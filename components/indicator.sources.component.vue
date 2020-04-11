@@ -80,7 +80,7 @@
         :items="datalist"
         :items-per-page="5"
         :search="search"
-        class="caption font-weight-light"
+        class="regular"
         dense
       ></v-data-table>
     </v-card>

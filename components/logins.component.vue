@@ -41,7 +41,7 @@ export default {
                     text: 'ID',
                     align: 'start',
                     sortable: false,
-                    value: 'id',
+                    value: 'loginid',
                   },
                   { text: 'Username', value: 'username' },
                   { text: 'Email ', value: 'email' },
