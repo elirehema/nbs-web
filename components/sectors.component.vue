@@ -134,13 +134,8 @@ export default {
      },
      deleteItem (item) {
         const index = this.sectors.indexOf(item)
-
         if (window.confirm("Are you sure you want to delete this item?")) {
-    this.$store.dispatch('sectordelete', item)
-}
-
-        //confirm('Are you sure you want to delete this item?') &&
-
+          this.$store.dispatch('sectordelete', item)}
      },
       close: function () {
         this.dialog = false

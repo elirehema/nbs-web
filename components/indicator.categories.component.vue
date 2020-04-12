@@ -71,8 +71,8 @@
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="green lighten-1" text @click="dialog = false">Close</v-btn>
-                    <v-btn color="green lighten-1 pa-1" small @click="save()">Save</v-btn>
+                    <v-btn color="warning" @click="dialog = false">Cancel</v-btn>
+                    <v-btn color="success" :disabled="!valid" @click="save()">Save</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-form>
