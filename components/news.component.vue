@@ -66,7 +66,12 @@
       class="elevation-1"
       loading="true"
       loading-text="No data available ...!"
-    ></v-data-table>
+    >
+      <template v-slot:item.actions="{ item }">
+              <v-icon small class="mr-2" @click="editItem(item)" color="primary">mdi-pencil</v-icon>
+              <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+            </template>
+    </v-data-table>
   </v-container>
 </template>
 <script lang="js">
@@ -74,6 +79,7 @@ export default {
   data() {
     return {
     dialog: false,
+    editedIndex: -1,
     headers: [
                   {
                     text: 'ID',
@@ -86,6 +92,7 @@ export default {
                   { text: 'URL', value: 'url' },
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
+                  { text: 'Actions', value: 'actions', sortable: false },
                 ],
                 title: null,
                 source: null,

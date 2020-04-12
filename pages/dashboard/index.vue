@@ -35,11 +35,13 @@ export default {
   data() {
     return {
       ptcount: "",
-      datas: []
+      datas: [],
+      timer: ""
     };
   },
   created() {
     this.initialize();
+    this.timer = setInterval(this.initialize, 3000);
   },
   watch: {
     ptcount() {
@@ -54,83 +56,89 @@ export default {
       this.datas = [
         {
           title: "Sectors",
-          icon: "mdi-poll",
+          icon: "mdi-blur",
           visible: true,
           count: this.$store.getters.sectordata.length
         },
         {
           title: "Indicators",
-          icon: "mdi-poll",
+          icon: "mdi-blur",
           visible: true,
           count: this.$store.getters.indicatorsdata.length
         },
         {
           title: "Disaggregations",
-          icon: "mdi-poll",
+          icon: "mdi-blur",
           visible: true,
           count: this.$store.getters.disaggregationdata.length
         },
 
         {
           title: "News",
-          icon: "mdi-poll",
+          icon: "mdi-newspaper",
           visible: true,
           count: this.$store.getters.newsdata.length
         },
         {
           title: "Period Types",
-          icon: "mdi-poll",
+          icon: "mdi-clock-outline",
           visible: true,
           count: this.$store.getters.periodtypesdata.length
         },
         {
           title: "Indicator Sources",
-          icon: "mdi-poll",
+          icon: "mdi-blur",
           visible: true,
           count: this.$store.getters.indicatorsourcesdata.length
         },
         {
           title: "Disaggregation Values",
-          icon: "mdi-poll",
+          icon: "mdi-bullseye",
           visible: true,
           count: this.$store.getters.disaggregationvaluesdata.length
         },
 
         {
           title: "Current Releases",
-          icon: "mdi-poll",
+          icon: "mdi-blur",
           visible: true,
           count: this.$store.getters.currentreleasesdata.length
         },
         {
           title: "Source groups",
-          icon: "mdi-poll",
+          icon: "mdi-blur",
           visible: true,
           count: this.$store.getters.sourcegroupsdata.length
         },
 
         {
           title: "Indicator values",
-          icon: "mdi-poll",
+          icon: "mdi-file-find",
           visible: true,
           count: this.$store.getters.indicatorvaluesdata.length
         },
 
         {
           title: "Logins",
-          icon: "mdi-poll",
+          icon: "mdi-login-variant",
           visible: localStorage.getItem("mroles").includes("ROLE_ADMIN"),
           count: this.$store.getters.loginsdata.length
         },
 
         {
           title: "Publications",
-          icon: "mdi-poll",
+          icon: "mdi-earth",
           visible: true,
           count: this.$store.getters.publicationsdata.length
         }
       ];
+    },
+    cancelAutoUpdate() {
+      clearInterval(this.timer);
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
   },
   beforeMount() {}
 };

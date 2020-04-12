@@ -36,6 +36,7 @@ export default {
     return {
       search:'',
       titlex: 'Login Histories',
+      editedIndex: -1,
     headers: [
                   {
                     text: 'ID',
@@ -50,6 +51,7 @@ export default {
 
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
+
                 ],
     };
   },

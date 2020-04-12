@@ -1,59 +1,5 @@
  <template>
   <v-container class="greencontainer">
-    <v-row>
-      <v-col cols="12" md="11"></v-col>
-      <v-col cols="6" md="1">
-        <v-dialog v-model="dialog" persistent max-width="600px">
-          <template v-slot:activator="{ on }">
-            <v-btn class="mx-2" fab dark v-on="on" color="green lighten-2">
-              <v-icon dark>mdi-plus</v-icon>
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="headline">Add Indicator Category</span>
-            </v-card-title>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="12" md="6">
-                    <v-text-field
-                      label="Name *"
-                      hint="Indicator Category Name  *"
-                      type="text"
-                      persistent-hint
-                      required
-                      single-line
-                      v-model="name"
-                    ></v-text-field>
-                  </v-col>
-
-                  <v-col cols="12" sm="12" md="6">
-                    <v-select
-                      v-model="sectorid"
-                      hint="Select indicator category Sector ID"
-                      :items="sectors"
-                      item-text="sectorname"
-                      item-value="sectorid"
-                      label="Select sector"
-                      persistent-hint
-                      return-object
-                      single-line
-                    ></v-select>
-                  </v-col>
-                </v-row>
-              </v-container>
-              <small>*indicates required field</small>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="green lighten-1" text @click="dialog = false">Close</v-btn>
-              <v-btn color="green lighten-1 pa-1" small @click="save()">Save</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-col>
-    </v-row>
     <v-card>
       <v-card-title>
         {{title}}
@@ -74,7 +20,70 @@
         :sort-desc="[false, true]"
         :search="search"
         class="elevation-1"
-      ></v-data-table>
+      >
+        <template v-slot:top>
+          <v-toolbar flat color="white">
+            <v-spacer></v-spacer>
+            <v-dialog v-model="dialog" max-width="500px">
+              <template v-slot:activator="{ on }">
+                <div class="my-2">
+                  <v-btn color="green" fab x-small dark v-on="on">
+                    <v-icon>mdi-plus</v-icon>
+                  </v-btn>
+                </div>
+              </template>
+              <v-form ref="form" v-model="valid" lazy-validation>
+                <v-card>
+                  <v-card-title>
+                    <span class="headline">{{formTitle}}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col cols="12" sm="12" md="6">
+                          <v-text-field
+                            label="Name *"
+                            hint="Indicator Category Name  *"
+                            type="text"
+                            persistent-hint
+                            required
+                            single-line
+                            v-model="name"
+                          ></v-text-field>
+                        </v-col>
+
+                        <v-col cols="12" sm="12" md="6">
+                          <v-select
+                            v-model="sectorid"
+                            hint="Select indicator category Sector ID"
+                            :items="sectors"
+                            item-text="sectorname"
+                            item-value="sectorid"
+                            label="Select sector"
+                            persistent-hint
+                            return-object
+                            single-line
+                          ></v-select>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                    <small>*indicates required field</small>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="green lighten-1" text @click="dialog = false">Close</v-btn>
+                    <v-btn color="green lighten-1 pa-1" small @click="save()">Save</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-form>
+            </v-dialog>
+          </v-toolbar>
+        </template>
+        <template v-slot:item.actions="{ item }">
+          <v-icon small class="mr-2" @click="editItem(item)" color="primary">mdi-pencil</v-icon>
+          <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+        </template>
+      </v-data-table>
     </v-card>
   </v-container>
 </template>
@@ -84,42 +93,81 @@ export default {
     return {
       search: '',
       title:'Indicator Categories',
+      editedIndex: -1,
+      valid: true,
+
     headers: [
                   { text: 'Category ID', value: 'categoryid',align: 'start' },
                   { text: 'Category Name', value: 'name' },
                   { text: 'Sector ID', value: 'sectorid' },
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
+                  { text: 'Actions', value: 'actions', sortable: false },
                 ],
                 dialog: false,
                 categoryid: null,
                 name:null,
                 sectorid: null,
+
     };
   },
   methods:{
     save: function(){
-      const data = {
-        name: this.name,
-        sectorid: this.sectorid.sectorid
-      }
-      this.$store.dispatch('postindicatorcategory', data)
-      this.dialog = false;
-    }
+
+      const data = {categoryid: this.categoryid, name: this.name,sectorid: this.sectorid.sectorid};
+       if (this.editedIndex > -1) {
+          Object.assign(this.datalist[this.editedIndex], this.editedItem)
+          console.log(data);
+      this.$store.dispatch('editindicatorcategory', data)
+       } else {
+         this.$store.dispatch('postindicatorcategory', data)
+        }
+      this.close();
+    },
+      close: function () {
+        this.dialog = false
+        setTimeout(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.sectorid = this.sectorid;
+          this.editedIndex = -1
+          this.$refs.form.reset()
+        }, 300)
+      },
+    editItem:function (item) {
+        this.editedIndex = this.datalist.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.categoryid = item.categoryid;
+        this.name = item.name;
+        this.dialog = true;
+     },
+     deleteItem:function (item) {
+      const index = this.datalist.indexOf(item)
+      if (window.confirm("Are you sure you want to delete "+ item.name +"?")) {
+        this.$store.dispatch('deleteindicatorcategory', item);
+        }
+     }
 
   },
    created: function () {
     let vm = this;
-    
+
 
   },
+   watch: {
+      dialog (val) {
+        val || this.close()
+      },
+    },
    computed: {
     datalist() {
       return this.$store.getters.indicatorcategoriesdata;
     },
     sectors(){
       return this.$store.getters.sectordata;
-    }
+    },
+     formTitle () {
+        return this.editedIndex === -1 ? 'New Indicator Category' : 'Edit Category'
+      },
    }
 
 };

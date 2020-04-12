@@ -4,7 +4,7 @@
       <v-list-item-avatar tile size="80">
         <v-card color="green lighten-2" dark max-width="100">
           <v-card-title>
-            <v-icon large>{{d.icon ? d.icon : 'mdi-poll'}}</v-icon>
+            <v-icon color="blue" large>{{d.icon ? d.icon : 'mdi-poll'}}</v-icon>
           </v-card-title>
         </v-card>
       </v-list-item-avatar>

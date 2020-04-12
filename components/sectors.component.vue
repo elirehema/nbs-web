@@ -30,32 +30,36 @@
                   </v-btn>
                 </div>
               </template>
-              <v-card>
-                <v-card-title>
-                  <span class="headline">Add new Sector</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col cols="12" sm="12" md="12">
-                        <v-text-field
-                          v-model="sectorname"
-                          label="Sector Name*"
-                          hint="sector name"
-                          persistent-hint
-                          required
-                        ></v-text-field>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                  <small>*indicates required field</small>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                  <v-btn color="blue darken-1" text @click="save()">Save</v-btn>
-                </v-card-actions>
-              </v-card>
+              <v-form ref="form" v-model="valid" lazy-validation>
+                <v-card>
+                  <v-card-title>
+                    <span class="headline">Add new Sector</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col cols="12" sm="12" md="12">
+                          <v-text-field
+                            v-model="sectorname"
+                            label="Sector Name*"
+                            hint="sector name"
+                            persistent-hint
+                            :counter="5"
+                            :rules="nameRules"
+                            required
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                    <small>*indicates required field</small>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="warning" @click="dialog = false">Cancel</v-btn>
+                    <v-btn color="success" :disabled="!valid" @click="save()">Save</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-form>
             </v-dialog>
           </v-toolbar>
         </template>
@@ -75,19 +79,25 @@ export default {
       sectorid: null,
       sectorname: null,
       search: '',
+      valid: true,
       titlex: 'Sectors',
+         nameRules: [
+        v => !!v || 'Sector name  is required',
+        v => (v && v.length > 5) || 'Sector Name must be less than 5 characters',
+      ],
       editedIndex: -1,
-         editedItem: {sectorname: '',
+         editedItem: {
+         sectorname: '',
          sectorid: '',
          createdAt: '',
          updatedAt : ''},
-      defaultItem: 
+      defaultItem:
       {sectorname: '',
          sectorid: '',
          createdAt: '',
          updatedAt: ''},
        headers: [
-             
+
               { text: 'Sector ID', value: 'sectorid', align: 'start',
                 sortable: false,},
               { text: 'Sector Name', value: 'sectorname' },
@@ -99,44 +109,45 @@ export default {
     };
   },
   methods:{
-    
+
     save(){
        if (this.editedIndex > -1) {
           Object.assign(this.sectors[this.editedIndex], this.editedItem)
-           
+
            this.$store.dispatch('sectoredit', {
         sectorname: this.sectorname,
         sectorid: this.sectorid
       })
         } else {
       this.$store.dispatch('postsector', {sectorname: this.sectorname})
-    
+
         }
         this.close();
     },
      editItem (item) {
         this.editedIndex = this.sectors.indexOf(item)
         this.editedItem = Object.assign({}, item)
-        console.log(this.editedIndex);
+
         this.sectorid = item.sectorid;
         this.sectorname = item.sectorname;
         this.dialog = true
      },
      deleteItem (item) {
         const index = this.sectors.indexOf(item)
-        console.log(item);
-        if (window.confirm("Are you sure you want to delete this item?")) { 
-   this.sectors.splice(index, 1) && this.$store.dispatch('sectordelete', item.sectorid)
+
+        if (window.confirm("Are you sure you want to delete this item?")) {
+    this.$store.dispatch('sectordelete', item)
 }
-        
+
         //confirm('Are you sure you want to delete this item?') &&
-  
+
      },
-      close () {
+      close: function () {
         this.dialog = false
         setTimeout(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
           this.editedIndex = -1
+          this.$refs.form.reset()
         }, 300)
       },
 

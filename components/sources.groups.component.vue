@@ -59,7 +59,12 @@
         :search="search"
         class="caption font-weight-light"
         dense
-      ></v-data-table>
+      >
+        <template v-slot:item.actions="{ item }">
+                <v-icon small class="mr-2" @click="editItem(item)" color="primary">mdi-pencil</v-icon>
+                <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+              </template>
+      </v-data-table>
     </v-card>
   </v-container>
 </template>
@@ -69,14 +74,15 @@ export default {
     return {
       titlex: 'Source Groups',
       search: '',
+      editedIndex: -1,
     headers: [
-                
+
                   { text: 'Source ID', value: 'sourceid', align: 'start',
                     sortable: false, },
                   { text: 'Source Name', value: 'sourcename' },
-               
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
+                  { text: 'Actions', value: 'actions', sortable: false },
                 ],
                 dialog: false,
                 sourcename: null
@@ -84,7 +90,7 @@ export default {
   },
   methods:{
     save: function(){
-      const data = 
+      const data =
       this.$store.dispatch('postsourcegroupvalue', {sourcename: this.sourcename})
       this.dialog = false;
     }
