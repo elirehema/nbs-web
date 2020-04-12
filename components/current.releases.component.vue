@@ -92,7 +92,12 @@
         :items-per-page="5"
         :search="search"
         class="elevation-1"
-      ></v-data-table>
+      >
+       <template v-slot:item.actions="{ item }">
+                <v-icon small class="mr-2" @click="editItem(item)" color="primary">mdi-pencil</v-icon>
+                <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+              </template>
+      </v-data-table>
     </v-card>
   </v-container>
 </template>
@@ -103,14 +108,17 @@ export default {
       dialog: false,
       search: '',
       titles: "Current Releases",
+      editedIndex: -1,
     headers: [
-                 
+
                   { text: 'Title', value: 'title', align: 'start',
                     sortable: false },
                   { text: 'Source ', value: 'source' },
                   { text: 'URL', value: 'url' },
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
+
+              { text: 'Actions', value: 'actions', sortable: false },
                 ],
                 source: null,
                 url: null,

@@ -4,10 +4,11 @@
     <v-app-bar
       color="blue"
       dark
-      hide-on-scroll="true"
       src="https://media.nbclosangeles.com/2019/09/GettyImages-522872908.jpg"
     >
-      <v-toolbar-title>{{pagetitle }}</v-toolbar-title>
+      <v-toolbar-title>
+        <p class="font-weight-bold">{{pagetitle }}</p>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
 
       <v-btn icon>

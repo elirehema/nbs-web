@@ -36,34 +36,36 @@ const mutations = {
   [mutation.CREATE_SECTOR_ERROR](state) {
     state.isLoading = false;
   },
-   [mutation.DELETE_SECTOR](state) {
-      state.isLoggedIn = true;
-    },
-    [mutation.DELETE_SECTOR_SUCCESS](state, payload) {
-      state.isLoading = false;
-      state.sector = payload;
-      state.sectors.push(payload);
-    },
-    [mutation.DELETE_SECTOR_FAILED](state) {
-      state.isLoading = false;
-    },
-    [mutation.DELETE_SECTOR_ERROR](state) {
-      state.isLoading = false;
-    },
-     [mutation.EDIT_SECTOR](state) {
-          state.isLoggedIn = true;
-        },
-        [mutation.EDIT_SECTOR_SUCCESS](state, payload) {
-          state.isLoading = false;
-          state.sector = payload;
-          state.sectors.push(payload);
-        },
-        [mutation.EDIT_SECTOR_FAILED](state) {
-          state.isLoading = false;
-        },
-        [mutation.EDIT_SECTOR_ERROR](state) {
-          state.isLoading = false;
-        }
+  [mutation.DELETE_SECTOR](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.DELETE_SECTOR_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.sector = payload;
+    state.sectors.splice(state.sectors.indexOf(payload));
+
+  },
+  [mutation.DELETE_SECTOR_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.DELETE_SECTOR_ERROR](state) {
+    state.isLoading = false;
+  },
+  [mutation.EDIT_SECTOR](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.EDIT_SECTOR_SUCCESS](state, valueToReplace, payload) {
+    state.isLoading = false;
+    state.sector = payload;
+    state.sectors.push(payload);
+    state.sectors.splice(state.sectors.indexOf(valueToReplace), 1, payload);
+  },
+  [mutation.EDIT_SECTOR_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.EDIT_SECTOR_ERROR](state) {
+    state.isLoading = false;
+  }
 
 
 };
@@ -83,36 +85,35 @@ const actions = {
     commit(mutation.CREATE_SECTOR);
     await this.$api.$post(`sectors/`, payload)
       .then(response => {
-        if (response.id != null) {
+        if (response.sectorid != null) {
           commit(mutation.CREATE_SECTOR_SUCCESS, response);
         }
       }).catch(error => {
         commit(mutation.CREATE_SECTOR_FAILED);
       });
   },
-  async sectordelete({commit}, payload){
-   commit(mutation.DELETE_SECTOR);
-      await this.$api.$delete(`sectors/${payload}`)
-        .then(response => {
-        console.log(response);
-          if (response.status  === 200) {
-            commit(mutation.DELETE_SECTOR_SUCCESS, response);
-          }
-        }).catch(error => {
-          commit(mutation.DELETE_SECTOR_FAILED);
-        });
+  async sectordelete({ commit }, payload) {
+    commit(mutation.DELETE_SECTOR);
+    await this.$api.$delete(`sectors/${payload.sectorid}`)
+      .then(response => {
+        if (response != null) {
+          commit(mutation.DELETE_SECTOR_SUCCESS, payload);
+        }
+      }).catch(error => {
+        commit(mutation.DELETE_SECTOR_FAILED);
+      });
   },
-   async sectoredit({ commit },payload) {
-      commit(mutation.EDIT_SECTOR);
-      await this.$api.$put(`sectors/${payload.sectorid}`, payload)
-        .then(response => {
-          if (response.id != null) {
-            commit(mutation.EDIT_SECTOR_SUCCESS, response);
-          }
-        }).catch(error => {
-          commit(mutation.EDIT_SECTOR_FAILED);
-        });
-    },
+  async sectoredit({ commit }, payload) {
+    commit(mutation.EDIT_SECTOR);
+    await this.$api.$put(`sectors/${payload.sectorid}`, payload)
+      .then(response => {
+        if (response.id != null) {
+          commit(mutation.EDIT_SECTOR_SUCCESS, response);
+        }
+      }).catch(error => {
+        commit(mutation.EDIT_SECTOR_FAILED);
+      });
+  },
 
 };
 const getters = {

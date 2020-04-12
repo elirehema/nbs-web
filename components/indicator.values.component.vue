@@ -135,9 +135,14 @@
         :items="datalist"
         :items-per-page="5"
         :search="search"
-        class="caption font-weight-light"
+        class="elevation-1"
         dense
-      ></v-data-table>
+      >
+        <template v-slot:item.actions="{ item }">
+                <v-icon small class="mr-2" @click="editItem(item)" color="primary">mdi-pencil</v-icon>
+                <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+              </template>
+      </v-data-table>
     </v-card>
   </v-container>
 </template>
@@ -147,8 +152,9 @@ export default {
     return {
       titlex: 'Indicator values',
       search: '',
+      editedIndex: -1,
     headers: [
-                
+
                   { text: 'Value ID', value: 'valueid', align: 'start',
                     sortable: false, },
                   { text: 'Email', value: 'email' },
@@ -159,6 +165,7 @@ export default {
                    {text: 'Source ID', value: 'sourceid'},
                     {text: 'Value', value: 'value'},
                   { text: 'Created At', value: 'updatedAt' },
+                  { text: 'Actions', value: 'actions', sortable: false },
                 ],
                 dialog: false,
                 sourcegroup: null,
@@ -182,10 +189,10 @@ export default {
         periodid: this.periodid.periodid,
          reportingperiod: parseInt(this.reportingperiod),
          sourceid: this.sourceid.sourceid,
-        
+
         value: this.value,
-        
-       
+
+
       }
       console.log(data);
       this.$store.dispatch('postindicatorvalues', data)

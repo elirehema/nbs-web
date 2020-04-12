@@ -65,7 +65,12 @@
         :items-per-page="5"
         :search="search"
         class="elevation-1"
-      ></v-data-table>
+      >
+       <template v-slot:item.actions="{ item }">
+                <v-icon small class="mr-2" @click="editItem(item)" color="primary">mdi-pencil</v-icon>
+                <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+              </template>
+      </v-data-table>
     </v-card>
   </v-container>
 </template>
@@ -75,12 +80,14 @@ export default {
     return {
       search: '',
       title: 'Disaggregations',
+      editedIndex: -1,
     headers: [
                   { text: 'Disaggregation Type ID', align:'start', value: 'disaggregationtypeid',sortable: false, },
                   { text: 'Disaggregation Name', value: 'disaggregationname' },
 
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
+              { text: 'Actions', value: 'actions', sortable: false },
                 ],
                 dialog: false,
                 published: true,
@@ -92,7 +99,7 @@ export default {
   methods:{
     save(){
       const data = {
-        disaggregationname: this.disaggregationname     
+        disaggregationname: this.disaggregationname
       }
       this.$store.dispatch('postdisaggregation',data);
       this.dialog = false;

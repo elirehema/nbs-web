@@ -86,7 +86,12 @@
         class="elevation-1"
         loading="true"
         loading-text="No data available ...!"
-      ></v-data-table>
+      >
+        <template v-slot:item.actions="{ item }">
+                <v-icon small class="mr-2" @click="editItem(item)" color="primary">mdi-pencil</v-icon>
+                <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+              </template>
+      </v-data-table>
     </v-card>
   </v-container>
 </template>
@@ -96,6 +101,7 @@ export default {
     return {
       search:'',
       titlex:'Indicators',
+      editedIndex: -1,
     headers: [
 
                   { text: 'Indicator ID', value: 'indicatorid' },
@@ -104,6 +110,7 @@ export default {
                   {text: 'Indicator Name', value:'indicatorname'},
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
+                  { text: 'Actions', value: 'actions', sortable: false },
                 ],
                 dialog: false,
                 select: null,
