@@ -35,7 +35,35 @@ const mutations = {
   },
   [mutation.POST_PUBLICATION_VALUE_ERROR](state) {
     state.isLoading = false;
-  }
+  },
+  [mutation.DELETE_PUBLICATION](state) {
+                 state.isLoggedIn = true;
+               },
+               [mutation.DELETE_PUBLICATION_SUCCESS](state, payload) {
+                 state.isLoading = false;
+                 state.publication = payload;
+                 state.publications.splice(state.publications.indexOf(payload));
+
+               },
+               [mutation.DELETE_PUBLICATION_FAILED](state) {
+                 state.isLoading = false;
+               },
+               [mutation.DELETE_PUBLICATION_ERROR](state) {
+                 state.isLoading = false;
+               },
+               [mutation.EDIT_PUBLICATION](state) {
+                 state.isLoggedIn = true;
+               },
+               [mutation.EDIT_PUBLICATION_SUCCESS](state, payload) {
+                 state.isLoading = false;
+                 state.publication = payload;
+               },
+               [mutation.EDIT_PUBLICATION_FAILED](state) {
+                 state.isLoading = false;
+               },
+               [mutation.EDIT_PUBLICATION_ERROR](state) {
+                 state.isLoading = false;
+               }
 };
 const actions = {
   async getAllpublications({
@@ -66,6 +94,28 @@ const actions = {
 
       });
   },
+
+     async deletepublications({ commit }, payload) {
+                commit(mutation.DELETE_PUBLICATION);
+                await this.$api.$delete(`publications/${payload.pubid}`)
+                  .then(response => {
+                    if (response != null) {
+                      commit(mutation.DELETE_PUBLICATION_SUCCESS, payload);
+                    }
+                  }).catch(error => {
+                    commit(mutation.DELETE_PUBLICATION_FAILED);
+                  });
+              },
+              async editpublications({ commit }, payload) {
+                commit(mutation.EDIT_PUBLICATION);
+                await this.$api.$patch(`publications/${payload.pubid}`, payload)
+                  .then(response => {
+                      commit(mutation.EDIT_PUBLICATION_SUCCESS, response);
+
+                  }).catch(error => {
+                    commit(mutation.EDIT_PUBLICATION_FAILED);
+                  });
+              },
 
 
 };
