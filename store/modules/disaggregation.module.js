@@ -35,7 +35,35 @@ const mutations = {
   },
   [mutation.POST_DISAGGREGATION_ERROR](state) {
     state.isLoading = false;
-  }
+  },
+     [mutation.DELETE_DISAGGREGATION](state) {
+       state.isLoggedIn = true;
+     },
+     [mutation.DELETE_DISAGGREGATION_SUCCESS](state, payload) {
+       state.isLoading = false;
+       state.disaggregation = payload;
+       state.disaggregations.splice(state.disaggregations.indexOf(payload));
+
+     },
+     [mutation.DELETE_DISAGGREGATION_FAILED](state) {
+       state.isLoading = false;
+     },
+     [mutation.DELETE_DISAGGREGATION_ERROR](state) {
+       state.isLoading = false;
+     },
+     [mutation.EDIT_DISAGGREGATION](state) {
+       state.isLoggedIn = true;
+     },
+     [mutation.EDIT_DISAGGREGATION_SUCCESS](state, payload) {
+       state.isLoading = false;
+       state.disaggregation = payload;
+     },
+     [mutation.EDIT_DISAGGREGATION_FAILED](state) {
+       state.isLoading = false;
+     },
+     [mutation.EDIT_DISAGGREGATION_ERROR](state) {
+       state.isLoading = false;
+     }
 };
 const actions = {
   async getAllDisaggregations({
@@ -68,6 +96,27 @@ const actions = {
 
       });
   },
+    async deletedisaggregations({ commit }, payload) {
+      commit(mutation.DELETE_DISAGGREGATION);
+      await this.$api.$delete(`disaggregations/${payload.disaggregationtypeid}`)
+        .then(response => {
+          if (response != null) {
+            commit(mutation.DELETE_DISAGGREGATION_SUCCESS, payload);
+          }
+        }).catch(error => {
+          commit(mutation.DELETE_DISAGGREGATION_FAILED);
+        });
+    },
+    async editdisaggregation({ commit }, payload) {
+      commit(mutation.EDIT_DISAGGREGATION);
+      await this.$api.$patch(`disaggregations/${payload.disaggregationtypeid}`, payload)
+        .then(response => {
+            commit(mutation.EDIT_DISAGGREGATION_SUCCESS, response);
+
+        }).catch(error => {
+          commit(mutation.EDIT_DISAGGREGATION_FAILED);
+        });
+    },
 
 };
 const getters = {
