@@ -1,71 +1,5 @@
  <template>
   <v-container class="greencontainer">
-    <v-row>
-      <v-col cols="12" md="11"></v-col>
-      <v-col cols="6" md="1">
-        <v-dialog v-model="dialog" persistent max-width="600px">
-          <template v-slot:activator="{ on }">
-            <v-btn class="mx-2" fab dark v-on="on" color="green lighten-2">
-              <v-icon dark>mdi-plus</v-icon>
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="headline">Add Indicator</span>
-            </v-card-title>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-select
-                      v-model="select"
-                      hint="Select Indicator category ID"
-                      :items="indicatorcategories"
-                      item-text="name"
-                      item-value="id"
-                      label="Select"
-                      persistent-hint
-                      return-object
-                      single-line
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-select
-                      v-model="periodid"
-                      hint="Select Period ID"
-                      :items="periodtypes"
-                      item-text="periodname"
-                      item-value="periodid"
-                      label="Select period id"
-                      persistent-hint
-                      return-object
-                      single-line
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Indicator Name *"
-                      hint="Indicator Name"
-                      persistent-hint
-                      single-line
-                      required
-                      type="text"
-                      v-model="indicatorname"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-              <small>*indicates required field</small>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="green lighten-1" text @click="dialog = false">Close</v-btn>
-              <v-btn color="green lighten-1 pa-1" small @click="save()">Save</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-col>
-    </v-row>
     <v-card>
       <v-card-title>
         {{titlex}}
@@ -87,10 +21,80 @@
         loading="true"
         loading-text="No data available ...!"
       >
-        <template v-slot:item.actions="{ item }">
-                <v-icon small class="mr-2" @click="editItem(item)" color="primary">mdi-pencil</v-icon>
-                <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+        <template v-slot:top>
+          <v-toolbar flat color="white">
+            <v-spacer></v-spacer>
+            <v-dialog v-model="dialog" max-width="500px">
+              <template v-slot:activator="{ on }">
+                <div class="my-2">
+                  <v-btn color="green" fab x-small dark v-on="on">
+                    <v-icon>mdi-plus</v-icon>
+                  </v-btn>
+                </div>
               </template>
+              <v-form ref="form" v-model="valid" lazy-validation>
+                <v-card>
+                  <v-card-title>
+                    <span class="headline">{{formTitle}}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-select
+                            v-model="select"
+                            hint="Select Indicator category ID"
+                            :items="indicatorcategories"
+                            item-text="name"
+                            item-value="id"
+                            label="Select"
+                            persistent-hint
+                            return-object
+                            single-line
+                          ></v-select>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-select
+                            v-model="periodid"
+                            hint="Select Period ID"
+                            :items="periodtypes"
+                            item-text="periodname"
+                            item-value="periodid"
+                            label="Select period id"
+                            persistent-hint
+                            return-object
+                            single-line
+                          ></v-select>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            label="Indicator Name *"
+                            hint="Indicator Name"
+                            persistent-hint
+                            single-line
+                            required
+                            type="text"
+                            v-model="indicatorname"
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                    <small>*indicates required field</small>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="green lighten-1" text @click="dialog = false">Close</v-btn>
+                    <v-btn color="green lighten-1 pa-1" small @click="save()">Save</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-form>
+            </v-dialog>
+          </v-toolbar>
+        </template>
+        <template v-slot:item.actions="{ item }">
+          <v-icon small class="mr-2" @click="editItem(item)" color="primary">mdi-pencil</v-icon>
+          <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+        </template>
       </v-data-table>
     </v-card>
   </v-container>
@@ -102,6 +106,7 @@ export default {
       search:'',
       titlex:'Indicators',
       editedIndex: -1,
+      valid: true,
     headers: [
 
                   { text: 'Indicator ID', value: 'indicatorid' },
@@ -127,12 +132,48 @@ export default {
   },
   methods:{
     save: function(){
-const data = { indicatorname: this.indicatorname, categoryid: this.select.categoryid, periodid: this.periodid.periodid};
+const data = {indicatorid: this.indicatorid, indicatorname: this.indicatorname, categoryid: this.select.categoryid, periodid: this.periodid.periodid};
+ if (this.editedIndex > -1) {
+          Object.assign(this.datalist[this.editedIndex], this.editedItem)
+          
+          this.$store.dispatch('editindicator', data)
+       } else {
+
 this.$store.dispatch('postindicatorvalue', data);
-      this.dialog = false;
-    }
+      }
+      this.close();
+    },
+          close: function () {
+        this.dialog = false
+        setTimeout(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.indicatorid = this.indicatorid;
+          this.editedIndex = -1
+          this.$refs.form.reset()
+        }, 300)
+      },
+    editItem:function (item) {
+        this.editedIndex = this.datalist.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.indicatorid = item.indicatorid;
+        this.periodid = this.periodid;
+        this.categoryid = this.categoryid;
+        this.indicatorname = item.indicatorname;
+        this.dialog = true;
+     },
+     deleteItem:function (item) {
+      const index = this.datalist.indexOf(item)
+      if (window.confirm("Are you sure you want to delete "+ item.indicatorname +"?")) {
+        this.$store.dispatch('deleteindicator', item);
+        }
+     }
 
   },
+  watch: {
+      dialog (val) {
+        val || this.close()
+      },
+    },
    computed: {
     datalist() {
       return this.$store.getters.indicatorsdata;
@@ -142,7 +183,10 @@ this.$store.dispatch('postindicatorvalue', data);
     },
     periodtypes(){
       return this.$store.getters.periodtypesdata;
-    }
+    },
+    formTitle () {
+        return this.editedIndex === -1 ? 'New Indicator ' : 'Edit Indicator'
+      },
    }
 
 };

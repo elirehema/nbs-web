@@ -35,7 +35,35 @@ const mutations = {
   },
   [mutation.POST_INDICATOR_VALUE_ERROR](state) {
     state.isLoading = false;
-  }
+  },
+        [mutation.DELETE_INDICATOR](state) {
+          state.isLoggedIn = true;
+        },
+        [mutation.DELETE_INDICATOR_SUCCESS](state, payload) {
+          state.isLoading = false;
+          state.indicator = payload;
+          state.indicators.splice(state.indicators.indexOf(payload));
+
+        },
+        [mutation.DELETE_INDICATOR_FAILED](state) {
+          state.isLoading = false;
+        },
+        [mutation.DELETE_INDICATOR_ERROR](state) {
+          state.isLoading = false;
+        },
+        [mutation.EDIT_INDICATOR](state) {
+          state.isLoggedIn = true;
+        },
+        [mutation.EDIT_INDICATOR_SUCCESS](state, payload) {
+          state.isLoading = false;
+          state.indicator = payload;
+        },
+        [mutation.EDIT_INDICATOR_FAILED](state) {
+          state.isLoading = false;
+        },
+        [mutation.EDIT_INDICATOR_ERROR](state) {
+          state.isLoading = false;
+        }
 };
 const actions = {
   async getAllIndicators({ commit }) {
@@ -64,6 +92,28 @@ const actions = {
 
       });
   },
+
+   async deleteindicator({ commit }, payload) {
+        commit(mutation.DELETE_INDICATOR);
+        await this.$api.$delete(`indicators/${payload.indicatorid}`)
+          .then(response => {
+            if (response != null) {
+              commit(mutation.DELETE_INDICATOR_SUCCESS, payload);
+            }
+          }).catch(error => {
+            commit(mutation.DELETE_INDICATOR_FAILED);
+          });
+      },
+      async editindicator({ commit }, payload) {
+        commit(mutation.EDIT_INDICATOR);
+        await this.$api.$patch(`indicators/${payload.indicatorid}`, payload)
+          .then(response => {
+              commit(mutation.EDIT_INDICATOR_SUCCESS, response);
+
+          }).catch(error => {
+            commit(mutation.EDIT_INDICATOR_FAILED);
+          });
+      },
 
 };
 const getters = {
