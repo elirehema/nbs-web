@@ -21,7 +21,7 @@ import RuralsModule from "./modules/rural.module";
 import TotalFemaleModule from "./modules/totalfemale.module";
 import SourceGroupModel from "./modules/source.groups.module";
 import IndicatorValuesModel from "./modules/indicator.values.module";
-
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -41,9 +41,12 @@ const store = () => {
       IndicatorSourceModule,
       CurrentReleasesModule,
       DisaggregationModule, LoginsModule, DisaggregationValuesModule, MainlandModule, PeriodTypeModule, PrivilegeModule,
-      PublicationsModule, RuralsModule, TotalFemaleModule, IndicatorCategoryModule, SourceGroupModel,IndicatorValuesModel
+      PublicationsModule, RuralsModule, TotalFemaleModule, IndicatorCategoryModule, SourceGroupModel, IndicatorValuesModel
 
-    }
+    },
+    plugins: [createPersistedState({
+      storage: window.sessionStorage,
+    })]
   });
 };
 

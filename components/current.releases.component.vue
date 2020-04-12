@@ -139,8 +139,10 @@ export default {
 
   },
    computed: {
-    datalist() {
+    datalist: {
+      get(){
       return this.$store.getters.currentreleasesdata;
+      }
     }
    }
 

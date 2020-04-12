@@ -159,6 +159,7 @@ export default {
         case 2:
           localStorage.removeItem("qAccessToken");
           localStorage.removeItem("uuId");
+          sessionStorage.clear();
           this.$router.push("/");
           break;
       }
@@ -180,7 +181,6 @@ export default {
       vm.$store.dispatch("getAllLogins"),
       vm.$store.dispatch("getAllmainlands"),
       vm.$store.dispatch("getAllperiodtypes"),
-      vm.$store.dispatch("getAllprivileges"),
       vm.$store.dispatch("getAllpublications"),
       vm.$store.dispatch("getAllRurals"),
       vm.$store.dispatch("getAllSectors"),

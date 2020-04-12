@@ -2,6 +2,13 @@
   <section class="user-profile">
     <v-toolbar flat class="green lighten-2" dark>
       <v-toolbar-title>DATA LIST</v-toolbar-title>
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <NuxtLink to="/dashboard">
+          <v-icon color="white">mdi-view-dashboard</v-icon>
+        </NuxtLink>
+      </v-btn>
     </v-toolbar>
     <v-tabs horizontal hide-slider center-active>
       <v-tab color="indigo" centered:true v-for="(item, index) in items" :key="index">

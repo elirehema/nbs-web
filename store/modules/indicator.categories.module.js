@@ -57,7 +57,7 @@ const actions = {
     commit(mutation.POST_INDICATOR_CATEGORY_VALUE);
     await this.$api.$post(`indicatorcategories/`, payload)
       .then(response => {
-        if (response.id != null) {
+        if (response.categoryid != null) {
           commit(mutation.POST_INDICATOR_CATEGORY_VALUE_SUCCESS, response);
         }
       }).catch(error => {

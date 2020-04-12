@@ -68,8 +68,6 @@ const actions = {
     await this.$api.$post(`news/`, payload)
       .then(response => {
         commit(mutation.SAVE_NEWS_DATA_SUCCESS, response);
-        this.$router.push('/home');
-
 
       }).catch(error => {
         commit(mutation.SAVE_NEWS_DATA_FAILED);

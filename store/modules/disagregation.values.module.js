@@ -22,20 +22,20 @@ const mutations = {
   [mutation.GET_DISAGGREGATIONS_VALUES_ERROR](state) {
     state.isLoading = false;
   },
-    [mutation.POST_DISAGGREGATION_VALUE](state) {
-      state.isLoading = true;
-    },
-    [mutation.POST_DISAGGREGATION_VALUE_SUCCESS](state, payload) {
-      state.isLoading = false;
-      state.disaggregationvalue = payload;
-      state.disaggregationvalues.push(payload);
-    },
-    [mutation.POST_DISAGGREGATION_VALUE_FAILED](state) {
-      state.isLoading = false;
-    },
-    [mutation.POST_DISAGGREGATION_VALUE_ERROR](state) {
-      state.isLoading = false;
-    }
+  [mutation.POST_DISAGGREGATION_VALUE](state) {
+    state.isLoading = true;
+  },
+  [mutation.POST_DISAGGREGATION_VALUE_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.disaggregationvalue = payload;
+    state.disaggregationvalues.push(payload);
+  },
+  [mutation.POST_DISAGGREGATION_VALUE_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.POST_DISAGGREGATION_VALUE_ERROR](state) {
+    state.isLoading = false;
+  }
 };
 const actions = {
   async getAlldisaggregationvalues({
@@ -53,19 +53,19 @@ const actions = {
 
       });
   },
-    async postdisaggregationvalue({commit}, payload) {
-      commit(mutation.POST_DISAGGREGATION_VALUE);
-      await this.$api.$post(`disaggregationvalues/`, payload)
-        .then(response => {
-        if(response.id  != null){
+  async postdisaggregationvalue({ commit }, payload) {
+    commit(mutation.POST_DISAGGREGATION_VALUE);
+    await this.$api.$post(`disaggregationvalues/`, payload)
+      .then(response => {
+        if (response.disaggregationid != null) {
           commit(mutation.POST_DISAGGREGATION_VALUE_SUCCESS, response);
         }
-        }).catch(error => {
-          commit(mutation.POST_DISAGGREGATION_VALUE_ERROR);
-          console.log(error);
+      }).catch(error => {
+        commit(mutation.POST_DISAGGREGATION_VALUE_ERROR);
+        console.log(error);
 
-        });
-    },
+      });
+  },
 
 };
 const getters = {
