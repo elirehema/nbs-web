@@ -55,7 +55,7 @@ const actions = {
     commit(mutation.POST_INDICATOR_PERIOD_TYPE_VALUE);
     await this.$api.$post(`periodtypes/`, payload)
       .then(response => {
-        if (response.id != null) {
+        if (response.periodid != null) {
           commit(mutation.POST_INDICATOR_PERIOD_TYPE_VALUE_SUCCESS, response);
           if (callback) {
             callback();

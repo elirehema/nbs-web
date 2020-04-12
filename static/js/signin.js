@@ -38,7 +38,7 @@ export default {
           this.$cookies.set("quser", user, cookie.exipires, true);
           this.$cookies.set("qAccessToken", response.accessToken, cookie.exipires, true);
           //this.$cookies.set("quuid", user.id, cookie.exipires, true);
-          this.$router.push('/home');
+          this.$router.push('/dashboard');
         }
       }, error => {
         //console.log(error.message);
@@ -51,7 +51,7 @@ export default {
   },
   beforeMount() {
     if (localStorage.getItem("qAccessToken") != null) {
-      this.$router.push("/home");
+      this.$router.push("/dashboard");
     }
     const vm = this;
     Promise.all([

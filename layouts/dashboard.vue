@@ -1,6 +1,22 @@
 
 <template>
   <v-app dark class="app">
+    <v-app-bar
+      color="blue"
+      dark
+      hide-on-scroll="true"
+      src="https://media.nbclosangeles.com/2019/09/GettyImages-522872908.jpg"
+    >
+      <v-toolbar-title>{{pagetitle }}</v-toolbar-title>
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <NuxtLink to="/home">
+          <v-icon color="white">mdi-home-analytics</v-icon>
+        </NuxtLink>
+      </v-btn>
+    </v-app-bar>
+
     <v-content>
       <v-container ma-0 pa-0 fluid>
         <nuxt />
@@ -14,6 +30,8 @@
 export default {
   data() {
     return {
+      drawer: false,
+      pagetitle: "Administrator Dashboard",
       locales: ["English", "Kiswahili"]
     };
   },

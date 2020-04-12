@@ -55,7 +55,7 @@ const actions = {
     commit(mutation.POST_SOURCE_GROUP);
     await this.$api.$post(`sourcegroups/`, payload)
       .then(response => {
-        if (response.sourcegroupid != null) {
+        if (response.sourceid != null) {
           commit(mutation.POST_SOURCE_GROUP_SUCCESS, response);
         }
       }).catch(error => {

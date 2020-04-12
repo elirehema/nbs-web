@@ -57,7 +57,7 @@ const actions = {
     commit(mutation.POST_INDICATOR_SOURCE_VALUE);
     await this.$api.$post(`indicatorsources/`, payload)
       .then(response => {
-        if (response.id != null) {
+        if (response.sourceid != null) {
           commit(mutation.POST_INDICATOR_SOURCE_VALUE_SUCCESS, response);
         }
       }).catch(error => {

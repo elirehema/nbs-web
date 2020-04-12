@@ -48,7 +48,7 @@ const actions = {
           localStorage.setItem('mroles', response.roles);
           localStorage.setItem('mmail', response.email);
           //localStorage.setItem('uuId', uuId);
-          this.$router.push('/home');
+          this.$router.push('/dashboard');
         }
 
 

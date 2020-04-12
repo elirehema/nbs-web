@@ -57,7 +57,7 @@ const actions = {
     commit(mutation.POST_DISAGGREGATION);
     await this.$api.$post(`disaggregations/`, payload)
       .then(response => {
-        if (response.id != null) {
+        if (response.disaggregationtypeid != null) {
           commit(mutation.POST_DISAGGREGATION_SUCCESS, response);
         }
 

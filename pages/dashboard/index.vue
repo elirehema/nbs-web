@@ -19,7 +19,7 @@
         v-for="(d, index) in datas"
         :key="index"
       >
-        <data-card :d="d"></data-card>
+        <data-card :d="d" v-if="d.visible"></data-card>
       </v-col>
     </v-row>
   </v-img>
@@ -35,29 +35,11 @@ export default {
   data() {
     return {
       ptcount: "",
-      pvcount: this.$store.getters.periodtypesdata.length,
-      datas: [
-        {
-          title: "Sectors",
-          icon: "mdi-poll",
-          count: this.$store.getters.periodtypesdata.length
-        },
-        {
-          title: "Time Periods",
-          icon: "mdi-poll",
-          count: this.ptcount
-        },
-        {
-          title: "Privilage's",
-          icon: "mdi-poll",
-          count: this.pvcount
-        }
-      ]
+      datas: []
     };
   },
   created() {
-    this.ptcount = this.$store.getters.periodtypesdata.length;
-    this.pvcount = this.$store.getters.periodtypesdata.length;
+    this.initialize();
   },
   watch: {
     ptcount() {
@@ -67,27 +49,89 @@ export default {
       this.pvcount = this.$store.getters.periodtypesdata.length;
     }
   },
-  beforeMount() {
-    const vm = this;
-    Promise.all([
-      vm.$store.dispatch("getAllIndicatorCategories"),
-      vm.$store.dispatch("getAllCurrentReleases"),
-      vm.$store.dispatch("getAllDisaggregations"),
-      vm.$store.dispatch("getAlldisaggregationvalues"),
-      vm.$store.dispatch("getAllIndicatorsSources"),
-      vm.$store.dispatch("getAllIndicators"),
-      vm.$store.dispatch("getAllLogins"),
-      vm.$store.dispatch("getAllmainlands"),
-      vm.$store.dispatch("getAllperiodtypes"),
-      vm.$store.dispatch("getAllprivileges"),
-      vm.$store.dispatch("getAllpublications"),
-      vm.$store.dispatch("getAllRurals"),
-      vm.$store.dispatch("getAllSectors"),
-      vm.$store.dispatch("getAlltotalfemales"),
-      vm.$store.dispatch("getnews")
-    ]).then(function() {
-      console.log("Loading complete...");
-    });
-  }
+  methods: {
+    initialize() {
+      this.datas = [
+        {
+          title: "Sectors",
+          icon: "mdi-poll",
+          visible: true,
+          count: this.$store.getters.sectordata.length
+        },
+        {
+          title: "Indicators",
+          icon: "mdi-poll",
+          visible: true,
+          count: this.$store.getters.indicatorsdata.length
+        },
+        {
+          title: "Disaggregations",
+          icon: "mdi-poll",
+          visible: true,
+          count: this.$store.getters.disaggregationdata.length
+        },
+
+        {
+          title: "News",
+          icon: "mdi-poll",
+          visible: true,
+          count: this.$store.getters.newsdata.length
+        },
+        {
+          title: "Period Types",
+          icon: "mdi-poll",
+          visible: true,
+          count: this.$store.getters.periodtypesdata.length
+        },
+        {
+          title: "Indicator Sources",
+          icon: "mdi-poll",
+          visible: true,
+          count: this.$store.getters.indicatorsourcesdata.length
+        },
+        {
+          title: "Disaggregation Values",
+          icon: "mdi-poll",
+          visible: true,
+          count: this.$store.getters.disaggregationvaluesdata.length
+        },
+
+        {
+          title: "Current Releases",
+          icon: "mdi-poll",
+          visible: true,
+          count: this.$store.getters.currentreleasesdata.length
+        },
+        {
+          title: "Source groups",
+          icon: "mdi-poll",
+          visible: true,
+          count: this.$store.getters.sourcegroupsdata.length
+        },
+
+        {
+          title: "Indicator values",
+          icon: "mdi-poll",
+          visible: true,
+          count: this.$store.getters.indicatorvaluesdata.length
+        },
+
+        {
+          title: "Logins",
+          icon: "mdi-poll",
+          visible: localStorage.getItem("mroles").includes("ROLE_ADMIN"),
+          count: this.$store.getters.loginsdata.length
+        },
+
+        {
+          title: "Publications",
+          icon: "mdi-poll",
+          visible: true,
+          count: this.$store.getters.publicationsdata.length
+        }
+      ];
+    }
+  },
+  beforeMount() {}
 };
 </script>

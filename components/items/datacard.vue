@@ -9,10 +9,22 @@
         </v-card>
       </v-list-item-avatar>
       <v-list-item-content>
-        <v-list-item-title class="headline font-weight-bold">{{d.title}}</v-list-item-title>
-        <v-list-item-subtitle
-          class="caption font-weight-regular"
-        >{{d.count ? d.count : '0'}} {{d.title}}</v-list-item-subtitle>
+        <v-list-item-title class="headline font-weight-bold">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <span v-on="on">{{d.title}}</span>
+            </template>
+            <span>{{d.title}}</span>
+          </v-tooltip>
+        </v-list-item-title>
+        <v-list-item-subtitle class="caption font-weight-regular">
+          <v-chip
+            x-small
+            outlined
+            color="green lighten-1"
+            text-color="white"
+          >{{d.count ? d.count : '0'}} {{d.title}}</v-chip>
+        </v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
 

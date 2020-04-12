@@ -28,7 +28,8 @@ const mutations = {
   [mutation.POST_CURRENT_RELEASES_SUCCESS](state, payload) {
     state.isLoading = false;
     state.currentrelease = payload;
-    state.currentreleases.push(payload)
+    console.log(payload);
+    state.currentreleases.push(payload);
   },
   [mutation.POST_CURRENT_RELEASES_FAILED](state) {
     state.isLoading = false;
@@ -55,7 +56,7 @@ const actions = {
     commit(mutation.POST_CURRENT_RELEASES);
     await this.$api.$post(`releases/`, payload)
       .then(response => {
-        if (response.id != null) {
+        if (response.releaseid != null) {
           commit(mutation.POST_CURRENT_RELEASES_SUCCESS, response);
         }
 
