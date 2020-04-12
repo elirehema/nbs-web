@@ -42,7 +42,35 @@ const mutations = {
   },
   [mutation.SAVE_NEWS_DATA_FAILED](state) {
     state.isLoading = false;
-  }
+  },
+  [mutation.DELETE_NEWS](state) {
+               state.isLoggedIn = true;
+             },
+             [mutation.DELETE_NEWS_SUCCESS](state, payload) {
+               state.isLoading = false;
+               state.new = payload;
+               state.news.splice(state.news.indexOf(payload));
+
+             },
+             [mutation.DELETE_NEWS_FAILED](state) {
+               state.isLoading = false;
+             },
+             [mutation.DELETE_NEWS_ERROR](state) {
+               state.isLoading = false;
+             },
+             [mutation.EDIT_NEWS](state) {
+               state.isLoggedIn = true;
+             },
+             [mutation.EDIT_NEWS_SUCCESS](state, payload) {
+               state.isLoading = false;
+               state.new = payload;
+             },
+             [mutation.EDIT_NEWS_FAILED](state) {
+               state.isLoading = false;
+             },
+             [mutation.EDIT_NEWS_ERROR](state) {
+               state.isLoading = false;
+             }
 };
 const actions = {
   async getnews({ commit }) {
@@ -75,6 +103,28 @@ const actions = {
 
       });
   },
+
+   async deletenews({ commit }, payload) {
+              commit(mutation.DELETE_NEWS);
+              await this.$api.$delete(`news/${payload.newsid}`)
+                .then(response => {
+                  if (response != null) {
+                    commit(mutation.DELETE_NEWS_SUCCESS, payload);
+                  }
+                }).catch(error => {
+                  commit(mutation.DELETE_NEWS_FAILED);
+                });
+            },
+            async editnews({ commit }, payload) {
+              commit(mutation.EDIT_NEWS);
+              await this.$api.$patch(`news/${payload.newsid}`, payload)
+                .then(response => {
+                    commit(mutation.EDIT_NEWS_SUCCESS, response);
+
+                }).catch(error => {
+                  commit(mutation.EDIT_NEWS_FAILED);
+                });
+            },
 };
 const getters = {
   newsdata: function (state) {
