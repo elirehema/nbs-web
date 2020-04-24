@@ -135,13 +135,13 @@
         :items="datalist"
         :items-per-page="5"
         :search="search"
-        class="elevation-1"
         dense
+        class="elevation-1"
       >
         <template v-slot:item.actions="{ item }">
-                <v-icon small class="mr-2" @click="editItem(item)" color="primary">mdi-pencil</v-icon>
-                <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
-              </template>
+          <v-icon small class="mr-2" @click="editItem(item)" color="primary">mdi-pencil</v-icon>
+          <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+        </template>
       </v-data-table>
     </v-card>
   </v-container>

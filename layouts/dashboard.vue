@@ -2,12 +2,12 @@
 <template>
   <v-app dark class="app">
     <v-app-bar
-      color="blue"
+      color="white"
       dark
       src="https://media.nbclosangeles.com/2019/09/GettyImages-522872908.jpg"
     >
       <v-toolbar-title>
-        <p class="font-weight-bold">{{pagetitle }}</p>
+        <p class="font-weight-normal">{{pagetitle }}</p>
       </v-toolbar-title>
       <v-spacer></v-spacer>
 

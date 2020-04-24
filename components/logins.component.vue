@@ -1,13 +1,5 @@
  <template>
   <v-container class="greencontainer">
-    <v-row>
-      <v-col cols="12" md="11"></v-col>
-      <v-col cols="6" md="1">
-        <v-btn class="mx-2" fab dark color="green lighten-2">
-          <v-icon dark>mdi-plus</v-icon>
-        </v-btn>
-      </v-col>
-    </v-row>
     <v-card>
       <v-card-title>
         {{titlex}}
@@ -25,6 +17,7 @@
         :items="datalist"
         :items-per-page="5"
         :search="search"
+        dense
         class="elevation-1"
       ></v-data-table>
     </v-card>

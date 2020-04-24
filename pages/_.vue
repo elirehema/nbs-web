@@ -1,13 +1,11 @@
 <template>
-  <v-app class="app">
-    <v-container fluid>
-      <v-card class="mx-auto center">
-        <v-img :src="require('~/assets/images/404.png')">
-          <v-btn class="center info" to="/">Take me back Home</v-btn>
-        </v-img>
-      </v-card>
-    </v-container>
-  </v-app>
+  <v-container fluid>
+    <v-card class="mx-auto center">
+      <v-img :src="require('~/assets/images/404.png')">
+        <v-btn class="center info" to="/">Take me back Home</v-btn>
+      </v-img>
+    </v-card>
+  </v-container>
 </template>
 
 <script>

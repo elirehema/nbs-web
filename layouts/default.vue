@@ -12,7 +12,7 @@
       shrink-on-scroll
       prominent
     >
-      <v-toolbar-title>Tanzania National Bureau of Statistics</v-toolbar-title>
+      <v-toolbar-title>National Bureau of Statistics</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -200,8 +200,7 @@ export default {
 };
 </script>
 <style>
-.app {
-  font-family: "Montserrat", sans-serif;
-  background-color: indianred;
+#app {
+  font-family: "Lato", sans-serif;
 }
 </style>
