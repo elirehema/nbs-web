@@ -17,6 +17,7 @@
         :items="datalist"
         :items-per-page="5"
         :search="search"
+        dense
         class="elevation-1"
       >
         <template v-slot:top>
@@ -119,7 +120,7 @@ export default {
                   { text: 'Title', value: 'title', align: 'start',
                     sortable: false },
                   { text: 'Source ', value: 'source' },
-                  { text: 'URL', value: 'url' },
+                 
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
 
@@ -158,6 +159,9 @@ export default {
         this.editedIndex = this.datalist.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.title = item.title;
+        this.source = item.source;
+        this.description = item.description;
+        this.url = item.url;
         this.releaseid = item.releaseid;
         this.dialog = true
      },

@@ -44,9 +44,9 @@
       <v-tab-item>
         <logins-component></logins-component>
       </v-tab-item>
-      <v-tab-item>
+      <!-- <v-tab-item>
         <mainland-component></mainland-component>
-      </v-tab-item>
+      </v-tab-item>-->
       <v-tab-item>
         <source-group-component></source-group-component>
       </v-tab-item>
@@ -60,7 +60,7 @@
       <v-tab-item>
         <publications-component></publications-component>
       </v-tab-item>
-      <v-tab-item>
+      <!-- <v-tab-item>
         <privilage-component></privilage-component>
       </v-tab-item>
       <v-tab-item>
@@ -68,7 +68,7 @@
       </v-tab-item>
       <v-tab-item>
         <totalfemale-component></totalfemale-component>
-      </v-tab-item>
+      </v-tab-item>-->
     </v-tabs>
   </section>
 </template>
@@ -148,14 +148,14 @@ export default {
 
         { title: "Disaggregations Values", icon: "mdi-eye" },
         { title: "Logins", icon: "mdi-eye" },
-        { title: "Main Land", icon: "mdi-eye" },
+        // { title: "Main Land", icon: "mdi-eye" },
         { title: "Source Groups", icon: "mdi-eye" },
         { title: "Current Releases", icon: "mdi-eye" },
         { title: "News", icon: "news-component" },
-        { title: "Publications", icon: "mdi-eye" },
-        { title: "Privilages", icon: "mdi-eye" },
-        { title: "Rural", icon: "mdi-eye" },
-        { title: "Total Females", icon: "mdi-eye" }
+        { title: "Publications", icon: "mdi-eye" }
+        // { title: "Privilages", icon: "mdi-eye" },
+        // { title: "Rural", icon: "mdi-eye" },
+        // { title: "Total Females", icon: "mdi-eye" }
       ]
     };
   },
@@ -171,4 +171,7 @@ export default {
 };
 </script>
 <style scoped>
+.user-profile {
+  font-family: "Lato", sans-serif;
+}
 </style>

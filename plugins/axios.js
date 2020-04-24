@@ -15,7 +15,10 @@ export default function ({
   });
   api.onRequest(config => {
     if (localStorage.getItem('qAccessToken') != null) {
-      api.setHeader('Authorization', 'Token ' + localStorage.getItem('qAccessToken'));
+      //api.setHeader('x-access-token', localStorage.getItem('qAccessToken'));
+      api.setHeader(
+        "Access-Control-Allow-Headers",
+        "x-access-token, Origin, Content-Type, Accept");
     }
     console.log('Making request to ' + config.url);
   });
@@ -29,8 +32,9 @@ export default function ({
 
   // Set baseURL to something different
   const REMOTE_DATA = "https://nbsapi.herokuapp.com/api/";
-  const LOCAL_DATA = "http://192.168.43.191:8080/api/";
-  api.setBaseURL(REMOTE_DATA);
+  const LOCAL_DATA = "http://192.168.43.193:8080/api/";
+  const LIVENBS_DATA = "http://192.168.0.3:8080/api/";
+  api.setBaseURL(LOCAL_DATA);
 
   // Inject to context as $api
   inject('api', api);

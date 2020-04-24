@@ -17,6 +17,7 @@
         :items="datalist"
         :items-per-page="5"
         :search="search"
+        dense
         class="elevation-1"
       >
         <template v-slot:top>
@@ -50,8 +51,8 @@
                         </v-col>
                         <v-col cols="12">
                           <v-text-field
-                            label="Description *"
-                            hint="Description *"
+                            label="Source Link*"
+                            hint="Source Link *"
                             type="text"
                             persistent-hint
                             required
@@ -93,17 +94,17 @@ export default {
                     text: 'ID',
                     align: 'start',
                     sortable: false,
-                    value: 'id',
+                    value: 'pubid',
                   },
 
                   { text: 'Title', value: 'title' },
-                  { text: 'Publication Type', value: 'publicationtype' },
-                  { text: 'Description', value: 'description' },
-                  { text: 'Release Date', value: 'releasedate'},
-                  { text: 'Publication Contents', value: '"publicationcontent'},
-                  {text:'Publication Address', value:'publicationaddress'},
+                  //{ text: 'Publication Type', value: 'publicationtype' },
+                  { text: 'Source Link', value: 'description' },
+                  //{ text: 'Release Date', value: 'releasedate'},
+                  //{ text: 'Publication Contents', value: '"publicationcontent'},
+                  //{ text:'Publication Address', value:'publicationaddress'},
                   { text: 'Updated At', value: 'createdAt' },
-                  { text: 'Created At', value: 'updatedAt' },
+                  //{ text: 'Created At', value: 'updatedAt' },
                   { text: 'Actions', value: 'actions', sortable: false },
                 ],
                 dialog: false,

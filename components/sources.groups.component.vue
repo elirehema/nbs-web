@@ -12,14 +12,7 @@
           hide-details
         ></v-text-field>
       </v-card-title>
-      <v-data-table
-        :headers="headers"
-        :items="datalist"
-        :items-per-page="5"
-        :search="search"
-        class="caption font-weight-light"
-        dense
-      >
+      <v-data-table :headers="headers" :items="datalist" :items-per-page="5" :search="search" dense>
         <template v-slot:top>
           <v-toolbar flat color="white">
             <v-spacer></v-spacer>

@@ -32,6 +32,10 @@ export default {
       rel: 'icon',
       type: 'image/x-icon',
       href: '/favicon.ico?v2',
+    },
+    {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css?family=Montserrat:400,700'
     }
     ]
 
@@ -49,11 +53,8 @@ export default {
   css: [
     // Load a Node.js module directly (here it's a Sass file)
     'bulma',
-
-    // SCSS file in the project
     '@/assets/fonts/montserrat.css',
-    '@/assets/fonts/molengo.css',
-    '@/assets/css/main.scss'
+    '@/assets/css/styles.css'
 
   ],
   /*

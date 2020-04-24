@@ -17,6 +17,7 @@
         :items="datalist"
         :items-per-page="5"
         :search="search"
+        dense
         class="regular"
       >
         <template v-slot:top>

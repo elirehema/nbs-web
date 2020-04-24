@@ -1,7 +1,7 @@
 {
   "name": "nbs",
   "version": "1.0.0",
-  "description": "Tanzania National Bureau Of Statistics Administrator Dashboard",
+  "description": "National Bureau Of Statistics Administrator Dashboard",
   "author": "=elirehema",
   "private": true,
   "scripts": {

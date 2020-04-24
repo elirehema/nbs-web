@@ -19,6 +19,7 @@
         :sort-by="['categoryid','sectorid']"
         :sort-desc="[false, true]"
         :search="search"
+        dense
         class="elevation-1"
       >
         <template v-slot:top>
