@@ -1,41 +1,33 @@
 <template>
-  <!--<v-card class="mt-4 mx-auto" max-width="400">-->
-  <v-sheet
+  <v-card
+    max-width="400"
     class="v-sheet--offset mx-auto pa-3"
     :class="{'card green': true == $vuetify.breakpoint.xs } "
     elevation="12"
-    max-width="calc(100% - 32px)"
   >
-    <v-list-item>
-      <v-list-item-avatar tile size="50">
-        <v-avatar>
-          <v-icon class="iconi" color="black" large>{{d.icon ? d.icon : 'mdi-poll'}}</v-icon>
-        </v-avatar>
-      </v-list-item-avatar>
-      <v-list-item-content>
-        <v-list-item-title class="overline font-weight-bold">
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on }">
-              <span v-on="on">{{d.count ? d.count : '0'}} {{d.title}}</span>
-            </template>
-            <span>{{d.title}}</span>
-          </v-tooltip>
-        </v-list-item-title>
-        <v-list-item-subtitle class="caption font-weight-regular">
-          <span x-small outlined color="white lighten-1" text-color="white">{{d.title}}</span>
-        </v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
-  </v-sheet>
-  <!--
     <v-card-text class="pt-0">
-      <!--   <div class="title font-weight-light mb-2">User Registrations</div>
-      <div class="subheading font-weight-light grey--text">Last Campaign Performance</div>--
-      <v-divider class="my-2"></v-divider>
-      <v-icon class="mr-2" small>mdi-clock</v-icon>
-      <span class="caption grey--text font-weight-light">last update: {{d.updates}}</span>
+      <v-list-item>
+        <v-list-item-avatar tile size="50">
+          <v-avatar>
+            <v-icon class="iconi" color="black" large>{{d.icon ? d.icon : 'mdi-poll'}}</v-icon>
+          </v-avatar>
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title class="overline font-weight-bold">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <span v-on="on">{{d.count ? d.count : '0'}} {{d.title}}</span>
+              </template>
+              <span>{{d.title}}</span>
+            </v-tooltip>
+          </v-list-item-title>
+          <v-list-item-subtitle class="caption font-weight-regular">
+            <span x-small outlined color="white lighten-1" text-color="white">{{d.title}}</span>
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
     </v-card-text>
-  </v-card>-->
+  </v-card>
   <!-- <v-card xs="12" color="blue" dark>
     <v-list-item three-line>
       <v-list-item-avatar tile size="80">
