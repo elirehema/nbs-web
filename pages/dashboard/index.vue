@@ -1,19 +1,13 @@
 <template>
-  <v-img
-    height="100%"
-    width="100%"
-    fill-height
-    fill-width
-    src="https://venngage-wordpress.s3.amazonaws.com/uploads/2018/09/Simple-White-Gradient-Background-Image.jpg"
-  >
-    <v-row class="pa-0 mt-7" no-gutters>
+  <v-container fluid>
+    <v-row class="pa-0 mt-0">
       <v-col
         cols="12"
         lg="3"
         md="4"
         sm="6"
         xs="12"
-        class="pa-1 mt-1"
+        class="pa-1 mt-0"
         xl="2"
         wrap
         v-for="(d, index) in datas"
@@ -22,7 +16,7 @@
         <data-card :d="d" v-if="d.visible"></data-card>
       </v-col>
     </v-row>
-  </v-img>
+  </v-container>
 </template>
 <script>
 import { mapGetters } from "vuex";

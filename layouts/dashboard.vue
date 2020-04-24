@@ -4,6 +4,7 @@
     <v-app-bar
       color="white"
       dark
+      app
       src="https://media.nbclosangeles.com/2019/09/GettyImages-522872908.jpg"
     >
       <v-toolbar-title>
@@ -67,7 +68,4 @@ export default {
 };
 </script>
 <style scoped>
-.container {
-  padding: 0%;
-}
 </style>

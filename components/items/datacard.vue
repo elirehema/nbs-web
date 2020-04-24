@@ -1,7 +1,7 @@
 <template>
   <v-card
     max-width="400"
-    class="v-sheet--offset mx-auto pa-3"
+    class="mx-auto pa-3"
     :class="{'card green': true == $vuetify.breakpoint.xs } "
     elevation="12"
   >
@@ -72,10 +72,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.v-sheet--offset {
-  top: -24px;
-  position: relative;
-}
 .card {
   width: 100%;
   box-sizing: border-box;
