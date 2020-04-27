@@ -30,9 +30,9 @@ export default {
         password: this.password
       };
       this.$store.dispatch('login', data).then(response => {
-        console.log(data);
+
         if (response != null && response.data.session != null) {
-          console.log(response.data);
+
           var user = response.data.user;
           const cookie = response.data.session.cookie;
           this.$cookies.set("quser", user, cookie.exipires, true);
@@ -41,7 +41,6 @@ export default {
           this.$router.push('/dashboard');
         }
       }, error => {
-        //console.log(error.message);
       });
 
     },

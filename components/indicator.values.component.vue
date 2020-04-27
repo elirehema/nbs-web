@@ -1,5 +1,5 @@
  <template>
-  <v-container class="greencontainer">
+  <v-container>
     <v-row>
       <v-col cols="12" md="11"></v-col>
       <v-col cols="6" md="1">
@@ -139,7 +139,7 @@
         class="elevation-1"
       >
         <template v-slot:item.actions="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)" color="primary">mdi-pencil</v-icon>
+          <v-icon small class="mr-2" @click="editItem(item)" color="info">mdi-lead-pencil</v-icon>
           <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
         </template>
       </v-data-table>
@@ -194,7 +194,6 @@ export default {
 
 
       }
-      console.log(data);
       this.$store.dispatch('postindicatorvalues', data)
       this.dialog = false;
     }

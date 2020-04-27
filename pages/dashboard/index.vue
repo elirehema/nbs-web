@@ -25,7 +25,7 @@ export default {
   components: {
     "data-card": DataCard
   },
-  layout: "dashboard",
+
   data() {
     return {
       ptcount: "",

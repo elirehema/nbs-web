@@ -1,66 +1,55 @@
 <template>
-  <section class="user-profile">
-    <v-toolbar flat class="green lighten-2" dark>
-      <v-toolbar-title>DATA LIST</v-toolbar-title>
-      <v-spacer></v-spacer>
+  <v-card elevation="0">
+    <v-tabs background-color="primary" v-model="tab" horizontal center-active show-arrows dark>
+      <v-tab v-for="(item, index) in items" :key="index" class="font-weight-medium">{{item.title}}</v-tab>
+      <v-tabs-items v-model="tab">
+        <v-tab-item>
+          <sectors-component></sectors-component>
+        </v-tab-item>
+        <v-tab-item>
+          <periodtype-component></periodtype-component>
+        </v-tab-item>
+        <v-tab-item>
+          <indicatorcategories-component></indicatorcategories-component>
+        </v-tab-item>
 
-      <v-btn icon>
-        <NuxtLink to="/dashboard">
-          <v-icon color="white">mdi-view-dashboard</v-icon>
-        </NuxtLink>
-      </v-btn>
-    </v-toolbar>
-    <v-tabs horizontal hide-slider center-active>
-      <v-tab color="indigo" centered:true v-for="(item, index) in items" :key="index">
-        <p class="overline font-weight-medium">{{item.title}}</p>
-      </v-tab>
-      <v-tab-item>
-        <sectors-component></sectors-component>
-      </v-tab-item>
-      <v-tab-item>
-        <periodtype-component></periodtype-component>
-      </v-tab-item>
-      <v-tab-item>
-        <indicatorcategories-component></indicatorcategories-component>
-      </v-tab-item>
+        <v-tab-item>
+          <indicators-component></indicators-component>
+        </v-tab-item>
 
-      <v-tab-item>
-        <indicators-component></indicators-component>
-      </v-tab-item>
+        <v-tab-item>
+          <indicatorsource-component></indicatorsource-component>
+        </v-tab-item>
+        <v-tab-item>
+          <indicator-values-component></indicator-values-component>
+        </v-tab-item>
 
-      <v-tab-item>
-        <indicatorsource-component></indicatorsource-component>
-      </v-tab-item>
-      <v-tab-item>
-        <indicator-values-component></indicator-values-component>
-      </v-tab-item>
-
-      <v-tab-item>
-        <disaggregations-component></disaggregations-component>
-      </v-tab-item>
-      <v-tab-item>
-        <disaggregationsvalue-component></disaggregationsvalue-component>
-      </v-tab-item>
-      <v-tab-item>
-        <logins-component></logins-component>
-      </v-tab-item>
-      <!-- <v-tab-item>
+        <v-tab-item>
+          <disaggregations-component></disaggregations-component>
+        </v-tab-item>
+        <v-tab-item>
+          <disaggregationsvalue-component></disaggregationsvalue-component>
+        </v-tab-item>
+        <v-tab-item>
+          <logins-component></logins-component>
+        </v-tab-item>
+        <!-- <v-tab-item>
         <mainland-component></mainland-component>
-      </v-tab-item>-->
-      <v-tab-item>
-        <source-group-component></source-group-component>
-      </v-tab-item>
-      <v-tab-item>
-        <currentrelease-component></currentrelease-component>
-      </v-tab-item>
+        </v-tab-item>-->
+        <v-tab-item>
+          <source-group-component></source-group-component>
+        </v-tab-item>
+        <v-tab-item>
+          <currentrelease-component></currentrelease-component>
+        </v-tab-item>
 
-      <v-tab-item>
-        <news-component></news-component>
-      </v-tab-item>
-      <v-tab-item>
-        <publications-component></publications-component>
-      </v-tab-item>
-      <!-- <v-tab-item>
+        <v-tab-item>
+          <news-component></news-component>
+        </v-tab-item>
+        <v-tab-item>
+          <publications-component></publications-component>
+        </v-tab-item>
+        <!-- <v-tab-item>
         <privilage-component></privilage-component>
       </v-tab-item>
       <v-tab-item>
@@ -68,9 +57,10 @@
       </v-tab-item>
       <v-tab-item>
         <totalfemale-component></totalfemale-component>
-      </v-tab-item>-->
+        </v-tab-item>-->
+      </v-tabs-items>
     </v-tabs>
-  </section>
+  </v-card>
 </template>
 
 <script>

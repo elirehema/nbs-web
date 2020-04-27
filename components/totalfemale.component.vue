@@ -1,5 +1,5 @@
  <template>
-  <v-container class="greencontainer">
+  <v-container>
     <v-row>
       <v-col cols="12" md="11"></v-col>
       <v-col cols="6" md="1">
