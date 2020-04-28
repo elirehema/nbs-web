@@ -1,4 +1,4 @@
-# NBS Administrator Dashboard [![Build Status](https://travis-ci.com/finspointa/kopasmart-webapp.svg?branch=master)](https://travis-ci.com/finspointa/kopasmart-webapp)
+# NBS Administrator Dashboard [![Build Status](https://travis-ci.com/elirehema/nbs-web.svg?branch=master)](https://travis-ci.com/elirehema/nbs-web)
 
 > National Bureau of Statistics Administrator Dashboard
 ## Build Setup
