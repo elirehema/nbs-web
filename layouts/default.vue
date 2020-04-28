@@ -39,7 +39,9 @@
     </v-navigation-drawer>
     <v-app-bar elevation="0" :clipped-left="clipped" color="primary" fixed app dark>
       <v-toolbar-title>
-        <span class="hidden-sm-and-down font-weight-bold default--text">{{ titles.title }}</span>
+        <span
+          class="hidden-sm-and-down font-weight-bold default--text"
+        >Welcome, {{ userdata.username }}</span>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -238,7 +240,7 @@ export default {
   },
   computed: {
     userdata() {
-      return this.$store.getters.userInfo;
+      return this.$store.getters.userInfos;
     },
     todayDate() {
       var objToday = new Date(),
