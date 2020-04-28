@@ -1,58 +1,94 @@
 <template>
   <v-app class="app">
-    <v-app-bar
-      elevation="0"
-      :clipped-left="clipped"
-      color="indigo lighten-2"
-      fixed
-      app
-      dark
-      src="https://ak1.picdn.net/shutterstock/videos/986371/thumb/1.jpg"
-      fade-img-on-scroll
-      shrink-on-scroll
-      prominent
-    >
-      <v-toolbar-title>National Bureau of Statistics</v-toolbar-title>
+    <!--NAVIGATION DRAWER-->
+    <v-navigation-drawer class="primary" elevation="0" v-model="drawer" width="180" app>
+      <v-toolbar color="primary" elevation="0">
+        <v-spacer></v-spacer>
+
+        <v-toolbar-items></v-toolbar-items>
+
+        <v-app-bar-nav-icon color="white" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      </v-toolbar>
+
+      <v-list nav dense class="mt-12 pa-0">
+        <v-list-item-group>
+          <v-list-item
+            v-for="(item, i) in items"
+            :key="`${i}-${item.route}`"
+            v-on:click="nativateToHere(item.route)"
+          >
+            <v-list-item-icon>
+              <v-icon color="default" v-text="item.icon"></v-icon>
+            </v-list-item-icon>&nbsp;&nbsp;
+            <v-list-item-content>
+              <v-list-item-title class="font-weight-bold default--text" v-text="item.text"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+      <template v-slot:append>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-subtitle class="subtitle white--text font-weight-bold">Light/Dark</v-list-item-subtitle>
+          </v-list-item-content>
+          <v-list-item-action>
+            <v-switch :value="true" @change="toggle($event !== null)"></v-switch>
+          </v-list-item-action>
+        </v-list-item>
+      </template>
+    </v-navigation-drawer>
+    <v-app-bar elevation="0" :clipped-left="clipped" color="primary" fixed app dark>
+      <v-toolbar-title>
+        <span class="hidden-sm-and-down font-weight-bold default--text">{{ titles.title }}</span>
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
-
-      <v-menu bottom transition="slide-y-transition">
+      <span class="default--text font-weight-bold hidden-sm-and-down">{{todayDate}}</span>
+      <v-tooltip
+        bottom
+        color="primary"
+        v-if="$vuetify.breakpoint.smAndUp"
+        open-on-hover
+        open-delay="500"
+      >
         <template v-slot:activator="{ on }">
-          <div class="text-center">
-            <v-btn v-on="on" class="mx-2" fab dark small color="green lighten-2">
-              <v-icon dark>mdi-filter-variant</v-icon>
-            </v-btn>
-          </div>
-
-          <!-- <v-btn dark icon v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>-->
+          <v-btn icon v-on="on">
+            <v-icon color="default">mdi-bell-outline</v-icon>
+          </v-btn>
         </template>
-
-        <v-list dense>
-          <v-list-item v-for="(item, i) in actions" :key="i" @click="selectedItemAction(i)">
-            <v-list-item-avatar width="24" height="24">
-              <v-icon v-text="item.icon"></v-icon>
-            </v-list-item-avatar>
-            <v-list-item-title class="font-weight-light">{{ item.title }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+        <span color="white">Notifications</span>
+      </v-tooltip>
+      <v-tooltip
+        bottom
+        color="primary"
+        v-if="$vuetify.breakpoint.smAndUp"
+        open-on-hover
+        open-delay="500"
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon color="default">mdi-cog</v-icon>
+          </v-btn>
+        </template>
+        <span>Settings Configuration</span>
+      </v-tooltip>
+      <v-tooltip bottom color="primary" open-on-hover open-delay="500">
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon color="default" @click="logoutsession">mdi-logout-variant</v-icon>
+          </v-btn>
+        </template>
+        <span>Click to logout</span>
+      </v-tooltip>
     </v-app-bar>
 
     <v-content>
-      <div class="green lighten-1">
+      <div color="primary">
         <v-container>
           <nuxt />
         </v-container>
       </div>
     </v-content>
-
-    <footer-component
-      class="hidden-sm-and-down"
-      v-bind:ChapterDetails="ChapterDetails"
-      v-bind:FooterData="FooterData"
-    ></footer-component>
   </v-app>
 </template>
 
@@ -85,7 +121,7 @@ export default {
       ChapterDetails: ChapterDetails,
       FooterData: FooterData,
       clipped: false,
-      drawer: false,
+      drawer: true,
       fixed: false,
       picture: true,
       dark: false,
@@ -97,42 +133,34 @@ export default {
         { title: "Current Release", icon: "mdi-eye" },
         { title: "Disaggregations", icon: "mdi-eye" }
       ],
+      titles: {
+        title: "National Bureau of Statistics"
+      },
 
       items: [
         {
-          icon: "mdi-home-circle-outline",
-          title: "Home",
-          subtitle: "Go to Home Page",
-          to: "/home",
-          iconClass: "info lighten-1 white--text"
+          text: "Dashboard",
+          icon: "mdi-view-dashboard",
+          route: "dashboard",
+          subtitle: "Lorem ipsum dolor sit de amet.."
         },
         {
-          icon: "mdi-help-circle-outline",
-          title: "Help",
-          subtitle: "Are you in need of help ?",
-          to: "/help",
-          iconClass: "info lighten-1 white--text"
+          text: "Home",
+          icon: "mdi-home-variant",
+          route: "home",
+          subtitle: "Lorem ipsum dolor sit de amet.."
         },
         {
-          icon: "mdi-information-outline",
-          title: "About Us",
-          subtitle: "Read more about us",
-          to: "/about",
-          iconClass: "info lighten-1 white--text"
+          text: "Documents",
+          icon: "mdi-file",
+          route: "home",
+          subtitle: "Lorem ipsum dolor sit de amet ..."
         },
         {
-          icon: "mdi-alpha-c-circle-outline",
-          title: "Contact Us",
-          subtitle: "Contact kopasmart team/community",
-          to: "/contacts",
-          iconClass: "info lighten-1 white--text"
-        },
-        {
-          icon: "mdi-format-list-text",
-          title: "Repayment Schedules",
-          subtitle: "Repayment Schedule list",
-          to: "/schedule",
-          iconClass: "info lighten-1 white--text"
+          text: "Help",
+          icon: "mdi-help-circle",
+          route: "home",
+          subtitle: "Lorem ipsum dolor sit de amet ..."
         }
       ],
       actions: [
@@ -164,9 +192,25 @@ export default {
           break;
       }
     },
+    logoutsession: function() {
+      localStorage.removeItem("qAccessToken");
+      localStorage.removeItem("uuId");
+      sessionStorage.clear();
+      this.$router.push("/");
+    },
     changemode: function() {
       this.dark = !this.dark;
       this.$vuetify.theme.dark = this.dark;
+    },
+    nativateToHere(id) {
+      this.$router.push("/" + id);
+    },
+    toggle(value) {
+      if (`${value}` === "true") {
+        this.$vuetify.theme.dark = true;
+      } else {
+        this.$vuetify.theme.dark = false;
+      }
     }
   },
   beforeMount: function() {
@@ -195,6 +239,68 @@ export default {
   computed: {
     userdata() {
       return this.$store.getters.userInfo;
+    },
+    todayDate() {
+      var objToday = new Date(),
+        weekday = new Array(
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ),
+        dayOfWeek = weekday[objToday.getDay()],
+        domEnder = (function() {
+          var a = objToday;
+          if (/1/.test(parseInt((a + "").charAt(0)))) return "th";
+          a = parseInt((a + "").charAt(1));
+          return 1 == a ? "st" : 2 == a ? "nd" : 3 == a ? "rd" : "th";
+        })(),
+        dayOfMonth =
+          today + (objToday.getDate() < 10)
+            ? "0" + objToday.getDate() + domEnder
+            : objToday.getDate() + domEnder,
+        months = new Array(
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December"
+        ),
+        curMonth = months[objToday.getMonth()],
+        curYear = objToday.getFullYear(),
+        curMinute =
+          objToday.getMinutes() < 10
+            ? "0" + objToday.getMinutes()
+            : objToday.getMinutes(),
+        curSeconds =
+          objToday.getSeconds() < 10
+            ? "0" + objToday.getSeconds()
+            : objToday.getSeconds(),
+        curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
+      var today =
+        dayOfWeek +
+        " " +
+        dayOfMonth +
+        " of " +
+        curMonth +
+        ", " +
+        curYear +
+        curMinute +
+        "." +
+        curSeconds +
+        curMeridiem +
+        " ";
+      return today;
     }
   }
 };
@@ -202,5 +308,18 @@ export default {
 <style>
 #app {
   font-family: "Lato", sans-serif;
+}
+
+.drawer .item:hover {
+  color: #01242f;
+  margin-left: 2px;
+  background-color: white;
+  border-radius: 20px 0px 0px 20px;
+}
+.drawer .item:active {
+  color: #01242f;
+  margin-left: 2px;
+  background-color: white;
+  border-radius: 20px 0px 0px 20px;
 }
 </style>

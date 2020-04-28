@@ -1,5 +1,5 @@
  <template>
-  <v-container class="greencontainer">
+  <v-container>
     <v-card>
       <v-card-title>
         {{titlex}}
@@ -14,12 +14,12 @@
       </v-card-title>
       <v-data-table :headers="headers" :items="datalist" :items-per-page="5" :search="search" dense>
         <template v-slot:top>
-          <v-toolbar flat color="white">
+          <v-toolbar flat color="transparent">
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on }">
                 <div class="my-2">
-                  <v-btn color="green" fab x-small dark v-on="on">
+                  <v-btn color="info" fab x-small dark v-on="on">
                     <v-icon>mdi-plus</v-icon>
                   </v-btn>
                 </div>
@@ -58,7 +58,7 @@
           </v-toolbar>
         </template>
         <template v-slot:item.actions="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)" color="primary">mdi-pencil</v-icon>
+          <v-icon small class="mr-2" @click="editItem(item)" color="info">mdi-lead-pencil</v-icon>
           <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
         </template>
       </v-data-table>

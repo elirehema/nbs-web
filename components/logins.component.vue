@@ -1,5 +1,5 @@
  <template>
-  <v-container class="greencontainer">
+  <v-container app>
     <v-card>
       <v-card-title>
         {{titlex}}

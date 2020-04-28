@@ -38,7 +38,6 @@ const actions = {
     commit(mutation.LOGIN);
     await this.$api.$post(`auth/signin`, payload)
       .then(response => {
-        console.log(payload);
         if (response.accessToken != null) {
 
           commit(mutation.LOGIN_SUCCESS, response);

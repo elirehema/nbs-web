@@ -28,7 +28,7 @@ const mutations = {
   [mutation.POST_CURRENT_RELEASES_SUCCESS](state, payload) {
     state.isLoading = false;
     state.currentrelease = payload;
-    console.log(payload);
+
     state.currentreleases.push(payload);
   },
   [mutation.POST_CURRENT_RELEASES_FAILED](state) {
@@ -38,33 +38,33 @@ const mutations = {
     state.isLoading = false;
   },
   [mutation.DELETE_CURRENT_RELEASE](state) {
-             state.isLoggedIn = true;
-           },
-           [mutation.DELETE_CURRENT_RELEASE_SUCCESS](state, payload) {
-             state.isLoading = false;
-             state.currentrelease = payload;
-             state.currentreleases.splice(state.currentreleases.indexOf(payload));
+    state.isLoggedIn = true;
+  },
+  [mutation.DELETE_CURRENT_RELEASE_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.currentrelease = payload;
+    state.currentreleases.splice(state.currentreleases.indexOf(payload));
 
-           },
-           [mutation.DELETE_CURRENT_RELEASE_FAILED](state) {
-             state.isLoading = false;
-           },
-           [mutation.DELETE_CURRENT_RELEASE_ERROR](state) {
-             state.isLoading = false;
-           },
-           [mutation.EDIT_CURRENT_RELEASE](state) {
-             state.isLoggedIn = true;
-           },
-           [mutation.EDIT_CURRENT_RELEASE_SUCCESS](state, payload) {
-             state.isLoading = false;
-             state.currentrelease = payload;
-           },
-           [mutation.EDIT_CURRENT_RELEASE_FAILED](state) {
-             state.isLoading = false;
-           },
-           [mutation.EDIT_CURRENT_RELEASE_ERROR](state) {
-             state.isLoading = false;
-           }
+  },
+  [mutation.DELETE_CURRENT_RELEASE_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.DELETE_CURRENT_RELEASE_ERROR](state) {
+    state.isLoading = false;
+  },
+  [mutation.EDIT_CURRENT_RELEASE](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.EDIT_CURRENT_RELEASE_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.currentrelease = payload;
+  },
+  [mutation.EDIT_CURRENT_RELEASE_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.EDIT_CURRENT_RELEASE_ERROR](state) {
+    state.isLoading = false;
+  }
 };
 const actions = {
   async getAllCurrentReleases({ commit }) {
@@ -95,27 +95,27 @@ const actions = {
 
       });
   },
-       async deletecurrentrelease({ commit }, payload) {
-            commit(mutation.DELETE_CURRENT_RELEASE);
-            await this.$api.$delete(`releases/${payload.releaseid}`)
-              .then(response => {
-                if (response != null) {
-                  commit(mutation.DELETE_CURRENT_RELEASE_SUCCESS, payload);
-                }
-              }).catch(error => {
-                commit(mutation.DELETE_CURRENT_RELEASE_FAILED);
-              });
-          },
-          async editdicurrentrelease({ commit }, payload) {
-            commit(mutation.EDIT_CURRENT_RELEASE);
-            await this.$api.$patch(`releases/${payload.releaseid}`, payload)
-              .then(response => {
-                  commit(mutation.EDIT_CURRENT_RELEASE_SUCCESS, response);
+  async deletecurrentrelease({ commit }, payload) {
+    commit(mutation.DELETE_CURRENT_RELEASE);
+    await this.$api.$delete(`releases/${payload.releaseid}`)
+      .then(response => {
+        if (response != null) {
+          commit(mutation.DELETE_CURRENT_RELEASE_SUCCESS, payload);
+        }
+      }).catch(error => {
+        commit(mutation.DELETE_CURRENT_RELEASE_FAILED);
+      });
+  },
+  async editdicurrentrelease({ commit }, payload) {
+    commit(mutation.EDIT_CURRENT_RELEASE);
+    await this.$api.$patch(`releases/${payload.releaseid}`, payload)
+      .then(response => {
+        commit(mutation.EDIT_CURRENT_RELEASE_SUCCESS, response);
 
-              }).catch(error => {
-                commit(mutation.EDIT_CURRENT_RELEASE_FAILED);
-              });
-          },
+      }).catch(error => {
+        commit(mutation.EDIT_CURRENT_RELEASE_FAILED);
+      });
+  },
 
 };
 const getters = {
