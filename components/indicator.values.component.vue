@@ -52,6 +52,7 @@
                       item-value="periodid"
                       label="Select period id"
                       type="number"
+                      @change="onChange($event)"
                       persistent-hint
                       return-object
                       single-line
@@ -69,10 +70,33 @@
                       v-model="seconddisaggregation"
                     ></v-text-field>
                   </v-col>
+
+                  <v-col v-if="mf" cols="12" sm="12" md="6">
+                    <v-text-field
+                      label="Male "
+                      hint="Male"
+                      type="number"
+                      persistent-hint
+                      single-line
+                      v-model="malevalue"
+                    ></v-text-field>
+                  </v-col>
+
+                  <v-col v-if="mf" cols="12" sm="12" md="6">
+                    <v-text-field
+                      label="Female"
+                      hint="Female"
+                      type="number"
+                      persistent-hint
+                      single-line
+                      v-model="femalevalue"
+                    ></v-text-field>
+                  </v-col>
+
                   <v-col cols="12" sm="12" md="6">
                     <v-text-field
-                      label="Value *"
-                      hint="Value *"
+                      label="Total/Value *"
+                      hint="Value/Total *"
                       type="number"
                       persistent-hint
                       required
@@ -80,6 +104,7 @@
                       v-model="value"
                     ></v-text-field>
                   </v-col>
+
                   <v-col cols="12" sm="12" md="6">
                     <v-text-field
                       label="Reporting period *"
@@ -177,9 +202,22 @@ export default {
                 disaggregationid: null,
                 seconddisaggregation: null,
                 reportingperiod: null,
+                malevalue: null,
+                femalevalue:null,
+                mf: false,
     };
   },
   methods:{
+     onChange(event) {
+       if(event.periodcode != 'YYYY'){
+         this.malevalue = null;
+         this.femalevalue = null;
+this.mf = true;
+       }else{
+         this.mf = false;
+       }
+            
+        },
     save: function(){
       const data = {
         email : localStorage.getItem("mmail"),
@@ -187,6 +225,8 @@ export default {
         disaggregationid: this.disaggregationid.disaggregationtypeid,
         seconddisaggregation:  parseInt(this.seconddisaggregation),
         periodid: this.periodid.periodid,
+        male: this.malevalue,
+        female: this.femalevalue,
          reportingperiod: parseInt(this.reportingperiod),
          sourceid: this.sourceid.sourceid,
 

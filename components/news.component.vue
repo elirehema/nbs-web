@@ -57,6 +57,15 @@
                           v-model="url"
                         ></v-text-field>
                       </v-col>
+                      <v-col cols="12" sm="12" md="12">
+                        <v-text-field
+                          label="Descriptions"
+                          hint="Descriptions"
+                          persistent-hint
+                          required
+                          v-model="description"
+                        ></v-text-field>
+                      </v-col>
                     </v-row>
                   </v-container>
                   <small>*indicates required field</small>
@@ -102,13 +111,14 @@ export default {
                 title: null,
                 source: null,
                 url: null,
+                description: null,
                 newsid: null
     };
   },
  
   methods: {
     save: function(){
-      const data = {newsid: this.newsid, title: this.title, source: this.source, url: this.url}
+      const data = {newsid: this.newsid, description: this.description, title: this.title, source: this.source, url: this.url}
      
        if (this.editedIndex > -1) {
           Object.assign(this.datalist[this.editedIndex], this.editedItem)
@@ -126,6 +136,7 @@ export default {
         this.title = item.title;
         this.newsid = item.newsid;
         this.source = item.source;
+        this.description = item.description;
         this.url = item.url;
         this.dialog = true
      },

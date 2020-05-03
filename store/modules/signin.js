@@ -32,9 +32,7 @@ const mutations = {
   },
 };
 const actions = {
-  async login({
-    commit
-  }, payload) {
+  async login({ commit }, payload) {
     commit(mutation.LOGIN);
     await this.$api.$post(`auth/signin`, payload)
       .then(response => {
@@ -46,7 +44,7 @@ const actions = {
           localStorage.setItem('qAccessToken', token);
           localStorage.setItem('mroles', response.roles);
           localStorage.setItem('mmail', response.email);
-          //localStorage.setItem('uuId', uuId);
+          localStorage.setItem('uuId', response.id);
           this.$router.push('/dashboard');
         }
 
@@ -54,10 +52,21 @@ const actions = {
       }).catch(error => {
         commit(mutation.LOGIN_ERROR);
         localStorage.removeItem('qAccessToken');
-        localStorage.removeItem('uuId', uuId);
+        localStorage.removeItem('uuId');
+        localStorage.removeItem('mmail');
+        localStorage.removeItem('mroles');
         console.log(error);
 
       });
+  },
+  logout({ commit }) {
+    commit(mutation.LOGOUT);
+    localStorage.removeItem('qAccessToken');
+    localStorage.removeItem('uuId');
+    localStorage.removeItem('mmail');
+    localStorage.removeItem('mroles');
+    sessionStorage.clear();
+    this.$router.push('/');
   }
 };
 const getters = {

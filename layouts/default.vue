@@ -195,10 +195,7 @@ export default {
       }
     },
     logoutsession: function() {
-      localStorage.removeItem("qAccessToken");
-      localStorage.removeItem("uuId");
-      sessionStorage.clear();
-      this.$router.push("/");
+      this.$store.dispatch("logout");
     },
     changemode: function() {
       this.dark = !this.dark;
