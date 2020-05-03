@@ -39,7 +39,7 @@
                   <v-card-text>
                     <v-container>
                       <v-row>
-                        <v-col cols="12">
+                        <v-col cols="6" sm="12">
                           <v-text-field
                             label="Publication Title*"
                             type="text"
@@ -49,10 +49,20 @@
                             v-model="title"
                           ></v-text-field>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="6" sm="12">
                           <v-text-field
                             label="Source Link*"
                             hint="Source Link *"
+                            type="text"
+                            persistent-hint
+                            required
+                            v-model="link"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-text-field
+                            label="Description"
+                            hint="Descriptions *"
                             type="text"
                             persistent-hint
                             required
@@ -132,6 +142,7 @@ export default {
                 publicationtype: this.publicationtype,
                 description:this.description,
                 releasedate: new Date(Date.now()),
+                link: this.link,
                 publicationcontent: this.publicationcontent,
                 contenttype: this.contenttype,
                 publicationaddress: this.publicationaddress,
@@ -155,6 +166,7 @@ export default {
         this.editedItem = Object.assign({}, item)
         this.pubid = item.pubid;
         this.title = item.title;
+        this.link = item.link;
         this.description = item.description;
         this.dialog = true
      },
