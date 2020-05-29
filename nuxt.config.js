@@ -1,10 +1,14 @@
 import colors from 'vuetify/es5/util/colors';
-
+require('dotenv').config();
 export default {
   mode: 'spa',
   router: {
     base: process.env.NODE_ENV === 'production' ? '/nbs-web/' : '/',
     routerNameSplitter: '/',
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:8080/api/',
+    localUrl: process.env.LOCAL_URL || 'http://localhost:8080/api/'
   },
 
   /*

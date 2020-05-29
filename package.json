@@ -5,7 +5,7 @@
   "author": "=elirehema",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "NODE_ENV=dev nuxt",
     "build": "NODE_ENV=dev nuxt build ",
     "start": "nuxt start",
     "generate": "NODE_ENV=production nuxt generate "
@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.11.0",
+    "dotenv": "^8.2.0",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2"
   }
