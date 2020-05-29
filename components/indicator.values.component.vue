@@ -59,16 +59,17 @@
                     ></v-select>
                   </v-col>
                   <v-col cols="12" sm="12" md="6">
-                    <v-text-field
-                      label="Second Disaggregations *"
-                      hint="Second Disaggregations"
-                      persistent-hint
-                      single-line
-                      required
-                      type="number"
-                      autocomplete="false"
+                    <v-select
                       v-model="seconddisaggregation"
-                    ></v-text-field>
+                      hint="Second Disaggregations"
+                      :items="seconddisaggregationvalues"
+                      item-text="disaggregationvalue"
+                      item-value="disaggregationid"
+                      label="Select Second Disaggregations *"
+                      persistent-hint
+                      return-object
+                      single-line
+                    ></v-select>
                   </v-col>
 
                   <v-col v-if="mf" cols="12" sm="12" md="6">
@@ -258,7 +259,10 @@ this.mf = true;
     },
      sourcegroups() {
       return this.$store.getters.sourcegroupsdata;
-    }
+    },
+     seconddisaggregationvalues() {
+      return this.$store.getters.disaggregationvaluesdata;
+    },
    }
 
 };
