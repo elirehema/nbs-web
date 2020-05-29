@@ -102,6 +102,22 @@
           <v-icon small class="mr-2" @click="editItem(item)" color="info">mdi-lead-pencil</v-icon>
           <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
         </template>
+        <template v-slot:item.title="{ item }">
+          <v-chip class="mt-1">
+            <v-avatar left class="primary lighten-2 mt-1 mb-1">{{ item.releaseid }}</v-avatar>
+            <a :href="item.url" target="_blank" color="info">{{ item.title }}</a>
+          </v-chip>
+        </template>
+        <template v-slot:item.description="{ item }">
+          <v-tooltip top color="primary" max-width="35%" nudge-width="5" open-delay="4">
+            <template v-slot:activator="{ on }">
+              <v-btn class="mt-1" v-on="on" color="primary lighten-2" fab x-small dark>
+                <v-icon color="white">mdi-help</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ item.description }}</span>
+          </v-tooltip>
+        </template>
       </v-data-table>
     </v-card>
   </v-container>
@@ -120,7 +136,7 @@ export default {
                   { text: 'Title', value: 'title', align: 'start',
                     sortable: false },
                   { text: 'Source ', value: 'source' },
-                 
+                 { text: 'Descriptions', value: 'description' },
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
 
