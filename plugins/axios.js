@@ -36,7 +36,6 @@ export default function ({
   const LIVENBS_DATA = "http://192.168.0.3:8081/api/";
   console.log(process.env.isDev ? process.env.baseUrl : process.env.localUrl);
   api.setBaseURL(process.env.isDev ? process.env.baseUrl : process.env.localUrl);
-
   // Inject to context as $api
   inject('api', api);
 }
