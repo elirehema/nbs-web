@@ -7,8 +7,8 @@ export default {
     routerNameSplitter: '/',
   },
   env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:8080/api/',
-    localUrl: process.env.LOCAL_URL || 'http://localhost:8080/api/'
+    baseUrl: process.env.BASE_URL,
+    localUrl: process.env.LOCAL_URL
   },
 
   /*
@@ -126,7 +126,7 @@ export default {
     //proxyHeaders: false
   },
   server: {
-    port: 8000, // default: 3000
+    port: process.env.NODE_ENV === 'production' ? 8000 : 4000, // default: 3000
     host: '0.0.0.0', // default: localhost
   },
 };
