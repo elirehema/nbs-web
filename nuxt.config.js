@@ -7,7 +7,7 @@ export default {
     routerNameSplitter: '/',
   },
   env: {
-    baseUrl: process.env.BASE_URL,
+    baseUrl: process.env.BASE_URL || "https://nbsapi.herokuapp.com/api/",
     localUrl: process.env.LOCAL_URL
   },
 
