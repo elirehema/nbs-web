@@ -9,11 +9,8 @@
         </v-col>
         <v-col cols="4" sm="4" class="d-flex child-flex"></v-col>
       </v-row>
-
       <v-content>
-        <v-container ma-0 pa-0 fluid>
-          <nuxt />
-        </v-container>
+        <nuxt />
       </v-content>
     </v-container>
   </v-app>
