@@ -1,6 +1,13 @@
 
 <template>
-  <v-app class="aspire">
+  <v-app
+    class="aspire"
+    style="
+    background: #3A1C71;
+    background: -webkit-linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71);
+    background: linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71);
+  "
+  >
     <v-content>
       <nuxt />
     </v-content>
