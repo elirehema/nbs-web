@@ -20,9 +20,7 @@
     </v-app-bar>
 
     <v-content>
-      <v-container ma-0 pa-0 fluid>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-content>
   </v-app>
 </template>

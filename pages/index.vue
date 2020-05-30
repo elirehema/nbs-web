@@ -1,8 +1,8 @@
 <template>
-  <v-container class="pa-3">
+  <v-container class="pa-3" fluid>
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
-        <v-card class="elevation-12">
+        <v-card class="elevation-2">
           <v-toolbar prominent src="https://pbs.twimg.com/media/D-I3_JJXkAAK8Ga.jpg" flat>
             <v-toolbar-title color="white">Login form</v-toolbar-title>
             <v-spacer></v-spacer>
