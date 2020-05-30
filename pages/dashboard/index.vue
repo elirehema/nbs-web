@@ -151,7 +151,8 @@ export default {
       vm.$store.dispatch("getAllRurals"),
       vm.$store.dispatch("getAllSectors"),
       vm.$store.dispatch("getAlltotalfemales"),
-      vm.$store.dispatch("getnews")
+      vm.$store.dispatch("getnews"),
+      vm.$store.dispatch("getAllRegularIndicatorvalues")
     ]).then(function() {
       console.log("Loading complete...");
     });

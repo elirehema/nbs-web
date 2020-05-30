@@ -3,6 +3,8 @@ const state = () => ({
   count: null,
   indicatorvalue: {},
   indicatorvalues: [],
+  regularindicatorvalues: [],
+  regularindicatorvalue: {},
   isLoading: Boolean,
   authToken: true
 
@@ -22,13 +24,28 @@ const mutations = {
   [mutation.GET_INDICATOR_VALUES_ERROR](state) {
     state.isLoading = false;
   },
+    [mutation.GET_REGULAR_INDICATOR_VALUES](state) {
+      state.isLoggedIn = true;
+    },
+    [mutation.GET_REGULAR_INDICATOR_VALUES_SUCCESS](state, payload) {
+      state.isLoading = false;
+      state.regularindicatorvalues = payload;
+    },
+    [mutation.GET_REGULAR_INDICATOR_VALUES_FAILED](state) {
+      state.isLoading = false;
+    },
+    [mutation.GET_REGULAR_INDICATOR_VALUES_ERROR](state) {
+      state.isLoading = false;
+    },
   [mutation.POST_INDICATOR_VALUE](state) {
     state.isLoggedIn = true;
   },
   [mutation.POST_INDICATOR_VALUE_SUCCESS](state, payload) {
     state.isLoading = false;
     state.indicatorvalue = payload;
+    if(payload.periodid == 1){
     state.indicatorvalues.push(payload);
+    }else{ state.regularindicatorvalues.push(payload)}
   },
   [mutation.POST_INDICATOR_VALUE_FAILED](state) {
     state.isLoading = false;
@@ -38,9 +55,7 @@ const mutations = {
   }
 };
 const actions = {
-  async getAllIndicatorvalues({
-    commit
-  }) {
+  async getAllIndicatorvalues({commit}) {
     commit(mutation.GET_INDICATOR_VALUES);
     await this.$api.$get(`indicatorvalues/`)
       .then(response => {
@@ -53,6 +68,17 @@ const actions = {
 
       });
   },
+    async getAllRegularIndicatorvalues({commit}) {
+      commit(mutation.GET_REGULAR_INDICATOR_VALUES);
+      await this.$api.$get(`regular/`)
+        .then(response => {
+        commit(mutation.GET_REGULAR_INDICATOR_VALUES_SUCCESS, response);
+        }).catch(error => {
+          commit(mutation.GET_REGULAR_INDICATOR_VALUES_ERROR);
+          console.log(error);
+
+        });
+    },
   async postindicatorvalues({ commit }, payload) {
     commit(mutation.POST_INDICATOR_VALUE);
     await this.$api.$post(`indicatorvalues/`, payload)
@@ -70,6 +96,9 @@ const actions = {
 const getters = {
   indicatorvaluesdata: function (state) {
     return state.indicatorvalues;
+  },
+  regularindicatorvaluesdata: function(state){
+  return state.regularindicatorvalues;
   }
 
 
