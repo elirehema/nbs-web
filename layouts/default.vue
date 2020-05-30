@@ -6,8 +6,6 @@
         <v-spacer></v-spacer>
 
         <v-toolbar-items></v-toolbar-items>
-
-        <v-app-bar-nav-icon color="white" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-toolbar>
 
       <v-list nav dense class="mt-12 pa-0">
@@ -39,6 +37,11 @@
     </v-navigation-drawer>
     <v-app-bar elevation="0" :clipped-left="clipped" color="primary" fixed app dark>
       <v-toolbar-title>
+        <v-avatar color="primary lighten-1" size="36">
+          <span class="white--text font-weight-bold overline" @click.stop="drawer = !drawer">
+            <v-app-bar-nav-icon color="white" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+          </span>
+        </v-avatar>
         <span
           class="hidden-sm-and-down font-weight-bold default--text"
         >Welcome, {{ userdata.username }}</span>
@@ -85,11 +88,7 @@
     </v-app-bar>
 
     <v-content>
-      <div color="primary">
-        <v-container>
-          <nuxt />
-        </v-container>
-      </div>
+      <nuxt />
     </v-content>
   </v-app>
 </template>

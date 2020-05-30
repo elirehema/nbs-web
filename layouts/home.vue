@@ -2,10 +2,10 @@
 <template>
   <v-app dark class="app">
     <v-container fluid>
-      <v-row class="hidden-md-and-up">
+      <v-row>
         <v-col cols="4" sm="4" class="d-flex child-flex"></v-col>
         <v-col cols="4" sm="4" class="d-flex child-flex">
-          <img :src="require('~/assets/images/logo.png')" alt="NBS" />
+          <v-img align-center aspect-ratio="1" class="white" max-height="100" alt="NBS"></v-img>
         </v-col>
         <v-col cols="4" sm="4" class="d-flex child-flex"></v-col>
       </v-row>

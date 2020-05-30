@@ -59,14 +59,26 @@ const actions = {
 
       });
   },
-  logout({ commit }) {
-    commit(mutation.LOGOUT);
-    localStorage.removeItem('qAccessToken');
-    localStorage.removeItem('uuId');
-    localStorage.removeItem('mmail');
-    localStorage.removeItem('mroles');
-    sessionStorage.clear();
-    this.$router.push('/');
+  async logout({ commit }) {
+    await this.$api.$get(`auth/signout`)
+      .then(response => {
+        if (response.result == 'OK') {
+          commit(mutation.LOGOUT);
+          window.localStorage.clear();
+          localStorage.removeItem('qAccessToken');
+          localStorage.removeItem('uuId');
+          localStorage.removeItem('mmail');
+          localStorage.removeItem('mroles');
+
+          sessionStorage.clear();
+          this.$router.push('/');
+        }
+
+
+      }).catch(error => {
+        commit(mutation.LOGOUT_FAILED);
+
+      });
   }
 };
 const getters = {
