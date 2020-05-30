@@ -31,7 +31,7 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="6">
                     <v-select
-                      v-model="disaggregationid"
+                      v-model="disaggregationtypeid"
                       hint="Select Disaggregations "
                       :items="disaggregations"
                       item-text="disaggregationname"
@@ -144,7 +144,7 @@
         </v-dialog>
       </v-col>
     </v-row>
-    <v-card>
+    <!--<v-card>
       <v-card-title>
         {{titlex}}
         <v-spacer></v-spacer>
@@ -169,6 +169,73 @@
           <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
         </template>
       </v-data-table>
+    </v-card>-->
+    <v-card>
+      <v-tabs background-color="white" color="deep-purple accent-4" right>
+        <v-tab>Indicators</v-tab>
+        <v-tab>Regular</v-tab>
+
+        <v-tab-item>
+          <v-container fluid>
+            <v-card flat color="white">
+              <v-card-title>
+                {{titlex}}
+                <v-spacer></v-spacer>
+                <v-text-field
+                  v-model="search"
+                  append-icon="mdi-magnify"
+                  label="Search"
+                  single-line
+                  hide-details
+                ></v-text-field>
+              </v-card-title>
+              <v-data-table
+                :headers="headers"
+                :items="datalist"
+                :items-per-page="5"
+                :search="search"
+                dense
+                class="elevation-1"
+              >
+                <template v-slot:item.actions="{ item }">
+                  <v-icon small class="mr-2" @click="editItem(item)" color="info">mdi-lead-pencil</v-icon>
+                  <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+                </template>
+              </v-data-table>
+            </v-card>
+          </v-container>
+        </v-tab-item>
+        <v-tab-item>
+          <v-container fluid>
+            <v-card flat color="white">
+              <v-card-title>
+                {{titlef}}
+                <v-spacer></v-spacer>
+                <v-text-field
+                  v-model="search"
+                  append-icon="mdi-magnify"
+                  label="Search"
+                  single-line
+                  hide-details
+                ></v-text-field>
+              </v-card-title>
+              <v-data-table
+                :headers="regular_datatable"
+                :items="regularindicatorvalues"
+                :items-per-page="5"
+                :search="search"
+                dense
+                class="elevation-1"
+              >
+                <template v-slot:item.actions="{ item }">
+                  <v-icon small class="mr-2" @click="editItem(item)" color="info">mdi-lead-pencil</v-icon>
+                  <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+                </template>
+              </v-data-table>
+            </v-card>
+          </v-container>
+        </v-tab-item>
+      </v-tabs>
     </v-card>
   </v-container>
 </template>
@@ -176,14 +243,15 @@
 export default {
   data() {
     return {
-      titlex: 'Indicator values',
+      titlex: 'Regular Indicator values',
+      titlef: 'Frequent Indicator values',
       search: '',
       editedIndex: -1,
     headers: [
 
-                  { text: 'Value ID', value: 'valueid', align: 'start',
+                  { text: ' ID', value: 'valueid', align: 'start',
                     sortable: false, },
-                  { text: 'Email', value: 'email' },
+                  /*{ text: 'Email', value: 'email' },*/
                   { text: 'IndicatorID', value: 'indicatorid' },
                   {text: 'Disag ID', value:'disaggregationid'},
                    {text: 'Second ID', value:'seconddisaggregation'},
@@ -193,14 +261,33 @@ export default {
                   { text: 'Created At', value: 'updatedAt' },
                   { text: 'Actions', value: 'actions', sortable: false },
                 ],
+                    regular_datatable: [
+
+                  { text: ' ID', value: 'valueid', align: 'start',
+                    sortable: false, },
+                  /*{ text: 'Email', value: 'email' },*/
+                  { text: 'IndicatorID', value: 'indicatorid' },
+                  {text: 'Disag ID', value:'disaggregationid'},
+                   {text: 'Second ID', value:'seconddisaggregation'},
+                   {text: 'Period ID', value:'periodid'},
+                   {text: 'Source ID', value: 'sourceid'},
+                    {text: 'Male', value: 'male'},
+                     {text: 'Female', value: 'female'},
+                      {text: 'Total', value: 'total'},
+                  { text: 'Created At', value: 'updatedAt' },
+                  { text: 'Actions', value: 'actions', sortable: false },
+                ],
                 dialog: false,
                 sourcegroup: null,
                 sourceid: null,
                 value: null,
+                total: null,
+                male: null,
+                female: null,
                 shortname: null,
                 periodid:null,
                 indicatorid: null,
-                disaggregationid: null,
+                disaggregationtypeid: null,
                 seconddisaggregation: null,
                 reportingperiod: null,
                 malevalue: null,
@@ -213,12 +300,25 @@ export default {
        if(event.periodcode != 'YYYY'){
          this.malevalue = null;
          this.femalevalue = null;
-this.mf = true;
+         this.mf = true;
        }else{
          this.mf = false;
        }
             
         },
+          editItem: function (item) {
+            this.email = item.email;
+            this.malevalue = item.male;
+            this.femalevalue = item.female;
+            this.total = item.total;
+            this.value = item.value;
+            this.sourceid = item.sourceid;
+            this.periodid = item.periodid;
+            this.indicatorid = item.indicatorid;
+            this.seconddisaggregation = item.seconddisaggregation;
+            this.reportingperiod = item.reportingperiod;
+            this.dialog = true
+          },
     save: function(){
       const data = {
         email : localStorage.getItem("mmail"),
@@ -263,6 +363,10 @@ this.mf = true;
      seconddisaggregationvalues() {
       return this.$store.getters.disaggregationvaluesdata;
     },
+    regularindicatorvalues(){
+      return this.$store.getters.regularindicatorvaluesdata;
+    }
+
    }
 
 };
