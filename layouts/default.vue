@@ -49,20 +49,17 @@
 
       <v-spacer></v-spacer>
       <span class="default--text font-weight-bold hidden-sm-and-down">{{todayDate}}</span>
-      <v-tooltip
-        bottom
-        color="primary"
-        v-if="$vuetify.breakpoint.smAndUp"
-        open-on-hover
-        open-delay="500"
-      >
+      <v-tooltip bottom color="primary" open-on-hover open-delay="500">
         <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-icon color="default">mdi-bell-outline</v-icon>
+          <v-btn icon v-on="on" @click.stop="syncro()">
+            <v-progress-circular v-if="sync" v-on="on" size="20" indeterminate color="white"></v-progress-circular>
+            <v-icon v-else color="default">mdi-sync-circle</v-icon>
           </v-btn>
         </template>
-        <span color="white">Notifications</span>
+        <span v-if="sync" color="white">Sync</span>
+        <span v-else color="white">Sync ....</span>
       </v-tooltip>
+
       <v-tooltip
         bottom
         color="primary"
@@ -126,6 +123,7 @@ export default {
       fixed: false,
       picture: true,
       dark: false,
+      sync: false,
       tabs: [
         { title: "News", icon: "news-component" },
         { title: "Indicators", icon: "mdi-eye" },
@@ -209,30 +207,37 @@ export default {
       } else {
         this.$vuetify.theme.dark = false;
       }
+    },
+    syncro: async function() {
+      const vm = this;
+      vm.sync = !vm.sync;
+      await Promise.all([
+        vm.$store.dispatch("getAllIndicatorCategories"),
+        vm.$store.dispatch("getAllCurrentReleases"),
+        vm.$store.dispatch("getAllDisaggregations"),
+        vm.$store.dispatch("getAlldisaggregationvalues"),
+        vm.$store.dispatch("getAllIndicatorsSources"),
+        vm.$store.dispatch("getAllIndicators"),
+        vm.$store.dispatch("getAllLogins"),
+        vm.$store.dispatch("getAllmainlands"),
+        vm.$store.dispatch("getAllperiodtypes"),
+        vm.$store.dispatch("getAllpublications"),
+        vm.$store.dispatch("getAllRurals"),
+        vm.$store.dispatch("getAllSectors"),
+        vm.$store.dispatch("getAlltotalfemales"),
+        vm.$store.dispatch("getnews"),
+        vm.$store.dispatch("getAllSourceGroups"),
+        vm.$store.dispatch("getAllIndicatorvalues")
+      ]).then(function() {
+        console.log("Loading complete...");
+      });
+      setTimeout(() => {
+        vm.sync = !vm.sync;
+      }, 2000);
     }
   },
   beforeMount: function() {
-    const vm = this;
-    Promise.all([
-      vm.$store.dispatch("getAllIndicatorCategories"),
-      vm.$store.dispatch("getAllCurrentReleases"),
-      vm.$store.dispatch("getAllDisaggregations"),
-      vm.$store.dispatch("getAlldisaggregationvalues"),
-      vm.$store.dispatch("getAllIndicatorsSources"),
-      vm.$store.dispatch("getAllIndicators"),
-      vm.$store.dispatch("getAllLogins"),
-      vm.$store.dispatch("getAllmainlands"),
-      vm.$store.dispatch("getAllperiodtypes"),
-      vm.$store.dispatch("getAllpublications"),
-      vm.$store.dispatch("getAllRurals"),
-      vm.$store.dispatch("getAllSectors"),
-      vm.$store.dispatch("getAlltotalfemales"),
-      vm.$store.dispatch("getnews"),
-      vm.$store.dispatch("getAllSourceGroups"),
-      vm.$store.dispatch("getAllIndicatorvalues")
-    ]).then(function() {
-      console.log("Loading complete...");
-    });
+    this.syncro();
   },
   computed: {
     userdata() {
@@ -319,5 +324,8 @@ export default {
   margin-left: 2px;
   background-color: white;
   border-radius: 20px 0px 0px 20px;
+}
+.v-progress-circular {
+  margin: 1rem;
 }
 </style>
