@@ -145,18 +145,10 @@ export default {
   methods:{
     save: function(){
       const data = {
-        pubid: this.pubid,
           title:this.title,
-                publicationid: this.publicationid,
-                publicationtype: this.publicationtype,
                 description:this.description,
-                releasedate: new Date(Date.now()),
                 link: this.link,
-                publicationcontent: this.publicationcontent,
-                contenttype: this.contenttype,
-                publicationaddress: this.publicationaddress,
-                publicationsize: this.publicationsize,
-                recorder:this.recorder
+               
       }
 
 

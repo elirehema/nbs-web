@@ -60,7 +60,7 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="6">
                     <v-select
-                      v-model="seconddisaggregation"
+                      v-model="disaggregationid"
                       hint="Second Disaggregations"
                       :items="seconddisaggregationvalues"
                       item-text="disaggregationvalue"
@@ -288,7 +288,7 @@ export default {
                 periodid:null,
                 indicatorid: null,
                 disaggregationtypeid: null,
-                seconddisaggregation: null,
+                disaggregationid: null,
                 reportingperiod: null,
                 malevalue: null,
                 femalevalue:null,
@@ -310,12 +310,13 @@ export default {
             this.email = item.email;
             this.malevalue = item.male;
             this.femalevalue = item.female;
-            this.total = item.total;
-            this.value = item.value;
+            this.total = item.total ? item.total : item.value;
+            this.value = item.value ? item.value: item.total;
             this.sourceid = item.sourceid;
             this.periodid = item.periodid;
             this.indicatorid = item.indicatorid;
             this.seconddisaggregation = item.seconddisaggregation;
+            this.disaggregationid = item.disaggregationid;
             this.reportingperiod = item.reportingperiod;
             this.dialog = true
           },
@@ -323,17 +324,15 @@ export default {
       const data = {
         email : localStorage.getItem("mmail"),
         indicatorid: this.indicatorid.indicatorid,
-        disaggregationid: this.disaggregationid.disaggregationtypeid,
-        seconddisaggregation:  parseInt(this.seconddisaggregation),
+        disaggregationid: this.disaggregationtypeid.disaggregationtypeid,
+        seconddisaggregation:  this.disaggregationid.disaggregationid,
         periodid: this.periodid.periodid,
-        male: this.malevalue,
-        female: this.femalevalue,
-         reportingperiod: parseInt(this.reportingperiod),
-         sourceid: this.sourceid.sourceid,
-
-        value: this.value,
-
-
+        male: this.malevalue ? this.malevalue : 0,
+        female: this.femalevalue ? this.femalevalue : 0,
+        reportingperiod: parseInt(this.reportingperiod),
+        sourceid: this.sourceid.sourceid,
+        value: this.value  ? this.value:this.total,
+        total: this.total ? this.total: this.value,
       }
       this.$store.dispatch('postindicatorvalues', data)
       this.dialog = false;
