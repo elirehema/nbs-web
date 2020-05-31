@@ -11,7 +11,7 @@
           </template>
           <v-card>
             <v-card-title>
-              <span class="headline">Add Indicator Source</span>
+              <span class="headline">Add New Indicator Value</span>
             </v-card-title>
             <v-card-text>
               <v-container>
@@ -248,34 +248,30 @@ export default {
       search: '',
       editedIndex: -1,
     headers: [
-
-                  { text: ' ID', value: 'valueid', align: 'start',
-                    sortable: false, },
+            { text: ' ID', value: 'valueid', align: 'start', sortable: false, },
                   /*{ text: 'Email', value: 'email' },*/
-                  { text: 'IndicatorID', value: 'indicatorid' },
-                  {text: 'Disag ID', value:'disaggregationid'},
-                   {text: 'Second ID', value:'seconddisaggregation'},
-                   {text: 'Period ID', value:'periodid'},
-                   {text: 'Source ID', value: 'sourceid'},
-                    {text: 'Value', value: 'value'},
-                  { text: 'Created At', value: 'updatedAt' },
-                  { text: 'Actions', value: 'actions', sortable: false },
+            { text: 'IndicatorID', value: 'indicatorid' },
+            { text: 'Disag ID', value:'disaggregationid'},
+            { text: 'Second ID', value:'seconddisaggregation'},
+            { text: 'Period ID', value:'periodid'},
+            { text: 'Source ID', value: 'sourceid'},
+            { text: 'Value', value: 'value'},
+            { text: 'Created At', value: 'updatedAt' },
+            { text: 'Actions', value: 'actions', sortable: false },
                 ],
-                    regular_datatable: [
-
-                  { text: ' ID', value: 'valueid', align: 'start',
-                    sortable: false, },
+  regular_datatable: [
+                 { text: ' ID', value: 'valueid', align: 'start', sortable: false, },
                   /*{ text: 'Email', value: 'email' },*/
                   { text: 'IndicatorID', value: 'indicatorid' },
                   {text: 'Disag ID', value:'disaggregationid'},
                    {text: 'Second ID', value:'seconddisaggregation'},
                    {text: 'Period ID', value:'periodid'},
                    {text: 'Source ID', value: 'sourceid'},
-                    {text: 'Male', value: 'male'},
-                     {text: 'Female', value: 'female'},
-                      {text: 'Total', value: 'total'},
-                  { text: 'Created At', value: 'updatedAt' },
-                  { text: 'Actions', value: 'actions', sortable: false },
+                   {text: 'Male', value: 'male'},
+                   {text: 'Female', value: 'female'},
+                   {text: 'Total', value: 'total'},
+                   { text: 'Created At', value: 'updatedAt' },
+                   { text: 'Actions', value: 'actions', sortable: false },
                 ],
                 dialog: false,
                 sourcegroup: null,
