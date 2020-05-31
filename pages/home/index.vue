@@ -1,8 +1,16 @@
 <template>
   <v-card elevation="0">
-    <v-tabs background-color="primary" v-model="tab" horizontal center-active show-arrows dark>
+    <v-tabs
+      background-color="primary"
+      class="ma-2"
+      v-model="tab"
+      horizontal
+      center-active
+      show-arrows
+      dark
+    >
       <v-tab v-for="(item, index) in items" :key="index" class="font-weight-medium">{{item.title}}</v-tab>
-      <v-tabs-items v-model="tab">
+      <v-tabs-items v-model="tab" class="ma-0" color="primary">
         <v-tab-item>
           <sectors-component></sectors-component>
         </v-tab-item>
