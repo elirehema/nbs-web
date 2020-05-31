@@ -1,5 +1,5 @@
  <template>
-  <v-container app>
+  <v-container fluid>
     <v-card>
       <v-card-title>
         {{titlex}}
