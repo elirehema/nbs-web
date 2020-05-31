@@ -39,7 +39,8 @@
       <v-toolbar-title>
         <v-avatar color="primary lighten-1" size="36">
           <span class="white--text font-weight-bold overline" @click.stop="drawer = !drawer">
-            <v-app-bar-nav-icon color="white" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+            <v-icon small color="white">mdi-dialpad</v-icon>
+            <!--<v-app-bar-nav-icon color="white" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>-->
           </span>
         </v-avatar>
         <span
@@ -53,11 +54,12 @@
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on" @click.stop="syncro()">
             <v-progress-circular v-if="sync" v-on="on" size="20" indeterminate color="white"></v-progress-circular>
-            <v-icon v-else color="default">mdi-sync-circle</v-icon>
+            <v-icon v-else color="default">mdi-sync</v-icon>
           </v-btn>
         </template>
-        <span v-if="sync" color="white">Sync</span>
-        <span v-else color="white">Sync ....</span>
+
+        <span v-if="sync" color="white">Sync ....</span>
+        <span v-else color="white">Sync</span>
       </v-tooltip>
 
       <v-tooltip
