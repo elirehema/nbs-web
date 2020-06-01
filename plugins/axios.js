@@ -33,7 +33,7 @@ export default function ({
   // Set baseURL to something different
   const REMOTE_DATA = "https://nbsapi.herokuapp.com/api/";
   const LOCAL_DATA = "http://localhost:8080/api/";
-  const LIVENBS_DATA = "http://196.192.78.160:8081/api/";
+  const LIVENBS_DATA = "http://196.192.78.160:8080/api/";
   console.log(process.env.NODE_ENV === 'production' ? process.env.baseUrl : process.env.localUrl);
   api.setBaseURL(process.env.NODE_ENV === 'production' ? process.env.baseUrl : process.env.localUrl);
   // Inject to context as $api
