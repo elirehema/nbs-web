@@ -35,7 +35,7 @@ export default function ({
   const LOCAL_DATA = "http://localhost:8080/api/";
   const LIVENBS_DATA = "http://196.192.78.160:8080/api/";
   console.log(process.env.NODE_ENV === 'production' ? process.env.baseUrl : process.env.localUrl);
-  api.setBaseURL(process.env.NODE_ENV === 'production' ? process.env.baseUrl : process.env.localUrl);
+  api.setBaseURL(LIVENBS_DATA);
   // Inject to context as $api
   inject('api', api);
 }
