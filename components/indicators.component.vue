@@ -111,8 +111,8 @@ export default {
     headers: [
 
                   { text: 'Indicator ID', value: 'indicatorid' },
-                  { text: 'Category ID', value: 'categoryid' },
-                  { text: 'Period ID', value: 'periodid' },
+                  { text: 'Indicator Category', value: 'categoryname' },
+                  { text: 'Period Type', value: 'periodname' },
                   {text: 'Indicator Name', value:'indicatorname'},
                   { text: 'Updated At', value: 'createdAt' },
                   { text: 'Created At', value: 'updatedAt' },
