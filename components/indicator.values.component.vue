@@ -190,7 +190,7 @@
                 ></v-text-field>
               </v-card-title>
               <v-data-table
-                :headers="headers"
+                :headers="indicators_datatable"
                 :items="datalist"
                 :items-per-page="5"
                 :search="search"
@@ -247,14 +247,14 @@ export default {
       titlef: 'Frequent Indicator values',
       search: '',
       editedIndex: -1,
-    headers: [
+    indicators_datatable: [
             { text: ' ID', value: 'valueid', align: 'start', sortable: false, },
                   /*{ text: 'Email', value: 'email' },*/
-            { text: 'IndicatorID', value: 'indicatorid' },
-            { text: 'Disag ID', value:'disaggregationid'},
-            { text: 'Second ID', value:'seconddisaggregation'},
-            { text: 'Period ID', value:'periodid'},
-            { text: 'Source ID', value: 'sourceid'},
+           { text: 'Indicator', value: 'nbs_indicator.indicatorname' },
+           {text: 'Disag:', value:'nbs_disaggregation_value.disaggregationvalue'},
+           {text: 'Second:', value:'seconddisaggregation'},
+            {text: 'Period Types', value:'nbs_period_type.periodname'},
+            { text: 'Source:', value: 'nbs_indicator_source.sourcegroup'},
             { text: 'Value', value: 'value'},
             { text: 'Created At', value: 'updatedAt' },
             { text: 'Actions', value: 'actions', sortable: false },
@@ -262,11 +262,11 @@ export default {
   regular_datatable: [
                  { text: ' ID', value: 'valueid', align: 'start', sortable: false, },
                   /*{ text: 'Email', value: 'email' },*/
-                  { text: 'IndicatorID', value: 'indicatorid' },
-                  {text: 'Disag ID', value:'disaggregationid'},
+                  { text: 'Indicator', value: 'nbs_indicator.indicatorname' },
+                  {text: 'Disag:', value:'nbs_disaggregation_value.disaggregationvalue'},
                    {text: 'Second ID', value:'seconddisaggregation'},
-                   {text: 'Period ID', value:'periodid'},
-                   {text: 'Source ID', value: 'sourceid'},
+                   {text: 'Period Types', value:'nbs_period_type.periodname'},
+                   { text: 'Source Id:', value: 'sourceid'},
                    {text: 'Male', value: 'male'},
                    {text: 'Female', value: 'female'},
                    {text: 'Total', value: 'total'},
