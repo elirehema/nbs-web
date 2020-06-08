@@ -83,7 +83,10 @@ const actions = {
 };
 const getters = {
   isLoggedIn: function (state) {
-    return state.userdata != null;
+    if(Object.keys(state.userdata).length > 0 || localStorage.removeItem('qAccessToken') ){
+      return true
+    }
+    return false
   },
   userInfos: function (state) {
     return state.userdata;

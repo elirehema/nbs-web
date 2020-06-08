@@ -49,7 +49,8 @@ export default {
     },
   },
   beforeMount() {
-    if (localStorage.getItem("qAccessToken") != null) {
+    console.log(this.$store.getters.isLoggedIn);
+    if (this.$store.getters.isLoggedIn) {
       this.$router.push("/dashboard");
     }
   }
