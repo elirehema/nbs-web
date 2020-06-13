@@ -144,42 +144,18 @@
         </v-dialog>
       </v-col>
     </v-row>
-    <!--<v-card>
-      <v-card-title>
-        {{titlex}}
-        <v-spacer></v-spacer>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="Search"
-          single-line
-          hide-details
-        ></v-text-field>
-      </v-card-title>
-      <v-data-table
-        :headers="headers"
-        :items="datalist"
-        :items-per-page="5"
-        :search="search"
-        dense
-        class="elevation-1"
-      >
-        <template v-slot:item.actions="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)" color="info">mdi-lead-pencil</v-icon>
-          <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
-        </template>
-      </v-data-table>
+   
     </v-card>-->
     <v-card>
       <v-tabs background-color="white" color="deep-purple accent-4" right>
-        <v-tab>Indicators</v-tab>
         <v-tab>Regular</v-tab>
-
+        <v-tab>Indicators</v-tab>
+        
         <v-tab-item>
           <v-container fluid>
             <v-card flat color="white">
               <v-card-title>
-                {{titlex}}
+                {{titlef}}
                 <v-spacer></v-spacer>
                 <v-text-field
                   v-model="search"
@@ -191,7 +167,7 @@
               </v-card-title>
               <v-data-table
                 :headers="indicators_datatable"
-                :items="datalist"
+                :items="regularindicatorvalues"
                 :items-per-page="5"
                 :search="search"
                 dense
@@ -209,7 +185,7 @@
           <v-container fluid>
             <v-card flat color="white">
               <v-card-title>
-                {{titlef}}
+                {{titlex}}
                 <v-spacer></v-spacer>
                 <v-text-field
                   v-model="search"
@@ -221,9 +197,9 @@
               </v-card-title>
               <v-data-table
                 :headers="regular_datatable"
-                :items="regularindicatorvalues"
+                :items="datalist"
                 :items-per-page="5"
-                :search="search"
+                :search="regularindicatorvalues"
                 dense
                 class="elevation-1"
               >
@@ -293,12 +269,12 @@ export default {
   },
   methods:{
      onChange(event) {
-       if(event.periodcode != 'YYYY'){
+       if(event.periodcode !== 'YYYY'){
          this.malevalue = null;
          this.femalevalue = null;
-         this.mf = true;
-       }else{
          this.mf = false;
+       }else{
+         this.mf = true;
        }
             
         },
@@ -323,6 +299,7 @@ export default {
         disaggregationid: this.disaggregationtypeid.disaggregationtypeid,
         seconddisaggregation:  this.disaggregationid.disaggregationid,
         periodid: this.periodid.periodid,
+        periodcode:  this.periodid.periodcode,
         male: this.malevalue ? this.malevalue : 0,
         female: this.femalevalue ? this.femalevalue : 0,
         reportingperiod: parseInt(this.reportingperiod),

@@ -25,13 +25,13 @@
           <v-toolbar flat color="transparent">
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
-              <template v-slot:activator="{ on }">
+              <!--<template v-slot:activator="{ on }">
                 <div class="my-2">
                   <v-btn color="info" fab x-small dark v-on="on">
                     <v-icon>mdi-plus</v-icon>
                   </v-btn>
                 </div>
-              </template>
+              </template>-->
               <v-form ref="form" v-model="valid" :lazy-validation="lazy">
                 <v-card>
                   <v-card-title>
@@ -77,10 +77,10 @@
             </v-dialog>
           </v-toolbar>
         </template>
-        <template v-slot:item.actions="{ item }">
+       <!-- <template v-slot:item.actions="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)" color="info">mdi-lead-pencil</v-icon>
           <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
-        </template>
+        </template>-->
       </v-data-table>
     </v-card>
   </v-container>
@@ -101,7 +101,6 @@ export default {
                   { text: 'PeriodCode', value: 'periodcode' },
                   { text: 'Created At', value: 'createdAt' },
                   { text: 'Updated At', value: 'updatedAt' },
-                  { text: 'Actions', value: 'actions', sortable: false },
                 ],
                 dialog: false,
                 periodcode: null,
