@@ -72,7 +72,7 @@ const mutations = {
 const actions = {
   async getAllSectors({ commit }) {
     commit(mutation.GET_SECTORS);
-    await this.$api.$get(`sectors/`)
+    await this.$api.$get(`sectors/all`)
       .then(response => {
         commit(mutation.GET_SECTORS_SUCCESS, response);
       }).catch(error => {
