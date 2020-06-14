@@ -99,9 +99,9 @@ export default {
          updatedAt: ''},
        headers: [
 
-              { text: 'Sector ID', value: 'sector_id', align: 'start',
+              { text: 'Sector ID', value: 'sectorid', align: 'start',
                 sortable: false,},
-              { text: 'Sector Name', value: 'sector_name' },
+              { text: 'Sector Name', value: 'sectorname' },
                { text: 'Updated On:', value:  'updatedAt' },
               { text: 'Actions', value: 'actions', sortable: false },
             ],
