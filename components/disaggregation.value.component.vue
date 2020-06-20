@@ -90,7 +90,7 @@
   </v-container>
 </template>
 <script lang="js">
-import mixin from "~/plugins/mixins.js";
+import mixin from "@/plugins/mixins.js";
 export default {
   mixins: [mixin],
   data() {
