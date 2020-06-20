@@ -11,7 +11,7 @@
           </template>
           <v-card>
             <v-card-title>
-              <span class="headline">Add New Indicator Value</span>
+              <span class="headline">{{formTitle}}</span>
             </v-card-title>
             <v-card-text>
               <v-container>
@@ -144,13 +144,12 @@
         </v-dialog>
       </v-col>
     </v-row>
-   
-    </v-card>-->
+
     <v-card>
       <v-tabs background-color="white" color="deep-purple accent-4" right>
         <v-tab>Regular</v-tab>
         <v-tab>Indicators</v-tab>
-        
+
         <v-tab-item>
           <v-container fluid>
             <v-card flat color="white">
@@ -279,6 +278,11 @@ export default {
             
         },
           editItem: function (item) {
+       if (item.male == null) {
+          this.editedIndex =  this.datalist.indexOf(item)
+       }else{
+          this.editedIndex =  this.regularindicatorvalues.indexOf(item)
+       }
             this.email = item.email;
             this.malevalue = item.male;
             this.femalevalue = item.female;
@@ -308,8 +312,16 @@ export default {
         total: this.total ? this.total: this.value,
       }
       this.$store.dispatch('postindicatorvalues', data)
-      this.dialog = false;
-    }
+       this.close();
+    },
+     close: function () {
+        this.dialog = false
+        setTimeout(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+          this.$refs.form.reset()
+        }, 300)
+      },
 
   },
    created: function () {
@@ -337,7 +349,10 @@ export default {
     },
     regularindicatorvalues(){
       return this.$store.getters.regularindicatorvaluesdata;
-    }
+    },
+     formTitle () {
+        return this.editedIndex === -1 ? 'Add New Indicator Value' : 'Edit Indicator Value'
+      },
 
    }
 

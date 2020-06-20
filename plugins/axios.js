@@ -1,11 +1,8 @@
-export default function ({
-  $axios,
-  redirect
-}, inject) {
+import swal from 'sweetalert';
+export default function ({ $axios, redirect }, inject) {
 
   // Create a custom axios instance
   const api = $axios.create({
-
     headers: {
       common: {
         'Accept': 'text/plain, */*',
@@ -16,11 +13,9 @@ export default function ({
   api.onRequest(config => {
     if (localStorage.getItem('qAccessToken') != null) {
       api.setHeader('x-access-token', localStorage.getItem('qAccessToken'));
-      api.setHeader(
-        "Access-Control-Allow-Headers",
-        "x-access-token, Origin, Content-Type, Accept");
+      api.setHeader("Access-Control-Allow-Headers", "x-access-token, Origin, Content-Type, Accept");
+      api.setHeader('user-id', localStorage.getItem('uuId'));
     }
-    console.log('Making request to ' + config.url);
   });
 
   api.onError(error => {
@@ -28,6 +23,9 @@ export default function ({
     if (code === 400) {
       redirect('/400');
     }
+  });
+  api.onResponseError(error => {
+    swal({ title: error.response.statusText + " !!", text: error.response.data.message + " \n In accessing " + error.config.url + "\n Status code :" + error.response.status, icon: "warning", dangerMode: true, });
   });
 
   // Set baseURL to something different

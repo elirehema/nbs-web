@@ -49,7 +49,7 @@ const mutations = {
   [mutation.DELETE_NEWS_SUCCESS](state, payload) {
     state.isLoading = false;
     state.new = payload;
-    state.news.splice(state.news.indexOf(payload));
+    state.news.splice(state.news.indexOf(payload), 1);
 
   },
   [mutation.DELETE_NEWS_FAILED](state) {

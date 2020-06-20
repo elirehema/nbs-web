@@ -43,7 +43,7 @@ const mutations = {
   [mutation.DELETE_CURRENT_RELEASE_SUCCESS](state, payload) {
     state.isLoading = false;
     state.currentrelease = payload;
-    state.currentreleases.splice(state.currentreleases.indexOf(payload));
+    state.currentreleases.splice(state.currentreleases.indexOf(payload), 1);
 
   },
   [mutation.DELETE_CURRENT_RELEASE_FAILED](state) {
