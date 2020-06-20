@@ -37,36 +37,36 @@ const mutations = {
     state.isLoading = false;
   },
   [mutation.POST_INDICATOR_PERIOD_TYPE_VALUE_ERROR](state) {
-      state.isLoading = false;
-    },
-      [mutation.DELETE_INDICATOR_CATEGORY](state) {
-        state.isLoggedIn = true;
-      },
-      [mutation.DELETE_INDICATOR_CATEGORY_SUCCESS](state, payload) {
-        state.isLoading = false;
-        state.indicatorcategorie = payload;
-        state.indicatorcategories.splice(state.indicatorcategories.indexOf(payload));
+    state.isLoading = false;
+  },
+  [mutation.DELETE_INDICATOR_CATEGORY](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.DELETE_INDICATOR_CATEGORY_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.indicatorcategorie = payload;
+    state.indicatorcategories.splice(state.indicatorcategories.indexOf(payload), 1);
 
-      },
-      [mutation.DELETE_INDICATOR_CATEGORY_FAILED](state) {
-        state.isLoading = false;
-      },
-      [mutation.DELETE_INDICATOR_CATEGORY_ERROR](state) {
-        state.isLoading = false;
-      },
-      [mutation.EDIT_INDICATOR_CATEGORY](state) {
-        state.isLoggedIn = true;
-      },
-      [mutation.EDIT_INDICATOR_CATEGORY_SUCCESS](state, payload) {
-        state.isLoading = false;
-        state.indicatorcategorie = payload;
-      },
-      [mutation.EDIT_INDICATOR_CATEGORY_FAILED](state) {
-        state.isLoading = false;
-      },
-      [mutation.EDIT_INDICATOR_CATEGORY_ERROR](state) {
-        state.isLoading = false;
-      }
+  },
+  [mutation.DELETE_INDICATOR_CATEGORY_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.DELETE_INDICATOR_CATEGORY_ERROR](state) {
+    state.isLoading = false;
+  },
+  [mutation.EDIT_INDICATOR_CATEGORY](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.EDIT_INDICATOR_CATEGORY_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.indicatorcategorie = payload;
+  },
+  [mutation.EDIT_INDICATOR_CATEGORY_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.EDIT_INDICATOR_CATEGORY_ERROR](state) {
+    state.isLoading = false;
+  }
 };
 const actions = {
   async getAllIndicatorCategories({
@@ -97,27 +97,27 @@ const actions = {
 
       });
   },
-    async deleteindicatorcategory({ commit }, payload) {
-      commit(mutation.DELETE_INDICATOR_CATEGORY);
-      await this.$api.$delete(`indicatorcategories/${payload.categoryid}`)
-        .then(response => {
-          if (response != null) {
-            commit(mutation.DELETE_INDICATOR_CATEGORY_SUCCESS, payload);
-          }
-        }).catch(error => {
-          commit(mutation.DELETE_INDICATOR_CATEGORY_FAILED);
-        });
-    },
-    async editindicatorcategory({ commit }, payload) {
-      commit(mutation.EDIT_INDICATOR_CATEGORY);
-      await this.$api.$put(`indicatorcategories/${payload.categoryid}`, payload)
-        .then(response => {
-            commit(mutation.EDIT_INDICATOR_CATEGORY_SUCCESS, response);
+  async deleteindicatorcategory({ commit }, payload) {
+    commit(mutation.DELETE_INDICATOR_CATEGORY);
+    await this.$api.$delete(`indicatorcategories/${payload.categoryid}`)
+      .then(response => {
+        if (response != null) {
+          commit(mutation.DELETE_INDICATOR_CATEGORY_SUCCESS, payload);
+        }
+      }).catch(error => {
+        commit(mutation.DELETE_INDICATOR_CATEGORY_FAILED);
+      });
+  },
+  async editindicatorcategory({ commit }, payload) {
+    commit(mutation.EDIT_INDICATOR_CATEGORY);
+    await this.$api.$put(`indicatorcategories/${payload.categoryid}`, payload)
+      .then(response => {
+        commit(mutation.EDIT_INDICATOR_CATEGORY_SUCCESS, response);
 
-        }).catch(error => {
-          commit(mutation.EDIT_INDICATOR_CATEGORY_FAILED);
-        });
-    },
+      }).catch(error => {
+        commit(mutation.EDIT_INDICATOR_CATEGORY_FAILED);
+      });
+  },
 
 };
 const getters = {

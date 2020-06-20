@@ -82,15 +82,21 @@
         </template>
         <template v-slot:item.actions="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)" color="info">mdi-lead-pencil</v-icon>
-          <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+          <v-icon
+            small
+            @click="delete_selected_item('deleteindicatorcategory', item)"
+            color="warning"
+          >mdi-delete</v-icon>
         </template>
       </v-data-table>
     </v-card>
   </v-container>
 </template>
 <script lang="js">
+import mixin from "~/plugins/mixins.js";
 export default {
-  data() {
+  mixins: [mixin], 
+   data() {
     return {
       search: '',
       title:'Indicator Categories',
@@ -141,12 +147,7 @@ export default {
         this.name = item.name;
         this.dialog = true;
      },
-     deleteItem:function (item) {
-      const index = this.datalist.indexOf(item)
-      if (window.confirm("Are you sure you want to delete "+ item.name +"?")) {
-        this.$store.dispatch('deleteindicatorcategory', item);
-        }
-     }
+   
 
   },
    created: function () {

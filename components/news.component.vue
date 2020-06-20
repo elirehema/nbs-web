@@ -96,7 +96,7 @@
         </template>
         <template v-slot:item.actions="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)" color="info">mdi-lead-pencil</v-icon>
-          <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+          <v-icon small @click="delete_selected_item('deletenews',item)" color="warning">mdi-delete</v-icon>
         </template>
 
         <template v-slot:item.title="{ item }">
@@ -120,13 +120,16 @@
   </v-container>
 </template>
 <script lang="js">
+import mixin from "~/plugins/mixins.js";
 export default {
+  mixins: [mixin],
   data() {
     return {
     dialog: false,
     editedIndex: -1,
     valid: true,
     search: '',
+    titlex: 'News',
     headers: [
                 
                   { text: 'News Title', value: 'title' },
@@ -167,11 +170,7 @@ export default {
         this.url = item.url;
         this.dialog = true
      },
-    deleteItem: function (item) {
-        const index = this.datalist.indexOf(item)
-        if (window.confirm("Are you sure you want to delete this " + item.title + "?")) {
-          this.$store.dispatch('deletenews', item)}
-     },
+    
     close: function () {
         this.dialog = false
         setTimeout(() => {

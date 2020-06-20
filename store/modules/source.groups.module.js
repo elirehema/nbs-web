@@ -36,34 +36,34 @@ const mutations = {
   [mutation.POST_SOURCE_GROUP_ERROR](state) {
     state.isLoading = false;
   },
-   [mutation.DELETE_SOURCE_GROUPS](state) {
-           state.isLoggedIn = true;
-         },
-         [mutation.DELETE_SOURCE_GROUPS_SUCCESS](state, payload) {
-           state.isLoading = false;
-           state.sourcegroup = payload;
-           state.sourcegroups.splice(state.sourcegroups.indexOf(payload));
+  [mutation.DELETE_SOURCE_GROUPS](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.DELETE_SOURCE_GROUPS_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.sourcegroup = payload;
+    state.sourcegroups.splice(state.sourcegroups.indexOf(payload), 1);
 
-         },
-         [mutation.DELETE_SOURCE_GROUPS_FAILED](state) {
-           state.isLoading = false;
-         },
-         [mutation.DELETE_SOURCE_GROUPS_ERROR](state) {
-           state.isLoading = false;
-         },
-         [mutation.EDIT_SOURCE_GROUPS](state) {
-           state.isLoggedIn = true;
-         },
-         [mutation.EDIT_SOURCE_GROUPS_SUCCESS](state, payload) {
-           state.isLoading = false;
-           state.sourcegroup = payload;
-         },
-         [mutation.EDIT_SOURCE_GROUPS_FAILED](state) {
-           state.isLoading = false;
-         },
-         [mutation.EDIT_SOURCE_GROUPS_ERROR](state) {
-           state.isLoading = false;
-         }
+  },
+  [mutation.DELETE_SOURCE_GROUPS_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.DELETE_SOURCE_GROUPS_ERROR](state) {
+    state.isLoading = false;
+  },
+  [mutation.EDIT_SOURCE_GROUPS](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.EDIT_SOURCE_GROUPS_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.sourcegroup = payload;
+  },
+  [mutation.EDIT_SOURCE_GROUPS_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.EDIT_SOURCE_GROUPS_ERROR](state) {
+    state.isLoading = false;
+  }
 };
 const actions = {
   async getAllSourceGroups({ commit }) {
@@ -92,27 +92,27 @@ const actions = {
 
       });
   },
-      async deletedisourcegroup({ commit }, payload) {
-          commit(mutation.DELETE_SOURCE_GROUPS);
-          await this.$api.$delete(`sourcegroups/${payload.sourceid}`)
-            .then(response => {
-              if (response != null) {
-                commit(mutation.DELETE_SOURCE_GROUPS_SUCCESS, payload);
-              }
-            }).catch(error => {
-              commit(mutation.DELETE_SOURCE_GROUPS_FAILED);
-            });
-        },
-        async editdisourcegroup({ commit }, payload) {
-          commit(mutation.EDIT_SOURCE_GROUPS);
-          await this.$api.$patch(`sourcegroups/${payload.sourceid}`, payload)
-            .then(response => {
-                commit(mutation.EDIT_SOURCE_GROUPS_SUCCESS, response);
+  async deletedisourcegroup({ commit }, payload) {
+    commit(mutation.DELETE_SOURCE_GROUPS);
+    await this.$api.$delete(`sourcegroups/${payload.sourceid}`)
+      .then(response => {
+        if (response != null) {
+          commit(mutation.DELETE_SOURCE_GROUPS_SUCCESS, payload);
+        }
+      }).catch(error => {
+        commit(mutation.DELETE_SOURCE_GROUPS_FAILED);
+      });
+  },
+  async editdisourcegroup({ commit }, payload) {
+    commit(mutation.EDIT_SOURCE_GROUPS);
+    await this.$api.$patch(`sourcegroups/${payload.sourceid}`, payload)
+      .then(response => {
+        commit(mutation.EDIT_SOURCE_GROUPS_SUCCESS, response);
 
-            }).catch(error => {
-              commit(mutation.EDIT_SOURCE_GROUPS_FAILED);
-            });
-        },
+      }).catch(error => {
+        commit(mutation.EDIT_SOURCE_GROUPS_FAILED);
+      });
+  },
 
 };
 const getters = {

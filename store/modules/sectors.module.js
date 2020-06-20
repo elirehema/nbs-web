@@ -42,7 +42,7 @@ const mutations = {
   [mutation.DELETE_SECTOR_SUCCESS](state, payload) {
     state.isLoading = false;
     state.sector = payload;
-    state.sectors.splice(state.sectors.indexOf(payload));
+    state.sectors.splice(state.sectors.indexOf(payload), 1);
 
   },
   [mutation.DELETE_SECTOR_FAILED](state) {

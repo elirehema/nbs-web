@@ -36,34 +36,34 @@ const mutations = {
   [mutation.POST_INDICATOR_SOURCE_VALUE_ERROR](state) {
     state.isLoading = false;
   },
-        [mutation.DELETE_INDICATOR_SOURCE](state) {
-            state.isLoggedIn = true;
-          },
-          [mutation.DELETE_INDICATOR_SOURCE_SUCCESS](state, payload) {
-            state.isLoading = false;
-            state.indicatorsource = payload;
-            state.indicatorsources.splice(state.indicatorsources.indexOf(payload));
+  [mutation.DELETE_INDICATOR_SOURCE](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.DELETE_INDICATOR_SOURCE_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.indicatorsource = payload;
+    state.indicatorsources.splice(state.indicatorsources.indexOf(payload), 1);
 
-          },
-          [mutation.DELETE_INDICATOR_SOURCE_FAILED](state) {
-            state.isLoading = false;
-          },
-          [mutation.DELETE_INDICATOR_SOURCE_ERROR](state) {
-            state.isLoading = false;
-          },
-          [mutation.EDIT_INDICATOR_SOURCES](state) {
-            state.isLoggedIn = true;
-          },
-          [mutation.EDIT_INDICATOR_SOURCES_SUCCESS](state, payload) {
-            state.isLoading = false;
-            state.indicatorsource = payload;
-          },
-          [mutation.EDIT_INDICATOR_SOURCES_FAILED](state) {
-            state.isLoading = false;
-          },
-          [mutation.EDIT_INDICATOR_SOURCES_ERROR](state) {
-            state.isLoading = false;
-          }
+  },
+  [mutation.DELETE_INDICATOR_SOURCE_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.DELETE_INDICATOR_SOURCE_ERROR](state) {
+    state.isLoading = false;
+  },
+  [mutation.EDIT_INDICATOR_SOURCES](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.EDIT_INDICATOR_SOURCES_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.indicatorsource = payload;
+  },
+  [mutation.EDIT_INDICATOR_SOURCES_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.EDIT_INDICATOR_SOURCES_ERROR](state) {
+    state.isLoading = false;
+  }
 };
 const actions = {
   async getAllIndicatorsSources({
@@ -94,27 +94,27 @@ const actions = {
 
       });
   },
-   async deleteindicatorsource({ commit }, payload) {
-          commit(mutation.DELETE_INDICATOR_SOURCE);
-          await this.$api.$delete(`indicatorsources/${payload.sourceid}`)
-            .then(response => {
-              if (response != null) {
-                commit(mutation.DELETE_INDICATOR_SOURCE_SUCCESS, payload);
-              }
-            }).catch(error => {
-              commit(mutation.DELETE_INDICATOR_SOURCE_FAILED);
-            });
-        },
-        async editindicatorsource({ commit }, payload) {
-          commit(mutation.EDIT_INDICATOR_SOURCES);
-          await this.$api.$patch(`indicatorsources/${payload.sourceid}`, payload)
-            .then(response => {
-                commit(mutation.EDIT_INDICATOR_SOURCES_SUCCESS, response);
+  async deleteindicatorsource({ commit }, payload) {
+    commit(mutation.DELETE_INDICATOR_SOURCE);
+    await this.$api.$delete(`indicatorsources/${payload.sourceid}`)
+      .then(response => {
+        if (response != null) {
+          commit(mutation.DELETE_INDICATOR_SOURCE_SUCCESS, payload);
+        }
+      }).catch(error => {
+        commit(mutation.DELETE_INDICATOR_SOURCE_FAILED);
+      });
+  },
+  async editindicatorsource({ commit }, payload) {
+    commit(mutation.EDIT_INDICATOR_SOURCES);
+    await this.$api.$patch(`indicatorsources/${payload.sourceid}`, payload)
+      .then(response => {
+        commit(mutation.EDIT_INDICATOR_SOURCES_SUCCESS, response);
 
-            }).catch(error => {
-              commit(mutation.EDIT_INDICATOR_SOURCES_FAILED);
-            });
-        },
+      }).catch(error => {
+        commit(mutation.EDIT_INDICATOR_SOURCES_FAILED);
+      });
+  },
 };
 const getters = {
   indicatorsourcesdata: function (state) {
