@@ -24,9 +24,7 @@ const mutations = {
   }
 };
 const actions = {
-  async getAllLogins({
-    commit
-  }) {
+  async getAllLogins({ commit }) {
     commit(mutation.GET_LOGINS_VALUES);
     await this.$api.$get(`logins/`)
       .then(response => {
@@ -45,8 +43,6 @@ const getters = {
   loginsdata: function (state) {
     return state.logins;
   }
-
-
 };
 export default {
   state,

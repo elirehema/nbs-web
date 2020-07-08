@@ -42,9 +42,6 @@ export default {
                   { text: 'Last Login', value: 'lastlogin' },
                   { text: 'Last Logout', value: 'lastlogout' },
 
-                  { text: 'Updated At', value: 'createdAt' },
-                  { text: 'Created At', value: 'updatedAt' },
-
                 ],
     };
   },

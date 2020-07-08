@@ -45,6 +45,7 @@ const actions = {
           localStorage.setItem('mroles', response.roles);
           localStorage.setItem('mmail', response.email);
           localStorage.setItem('uuId', response.id);
+          localStorage.setItem('loginid', response.loginid);
           this.$router.push('/dashboard');
         }
 
@@ -55,6 +56,7 @@ const actions = {
         localStorage.removeItem('uuId');
         localStorage.removeItem('mmail');
         localStorage.removeItem('mroles');
+        localStorage.removeItem('loginid');
         console.log(error);
 
       });
@@ -69,7 +71,7 @@ const actions = {
           localStorage.removeItem('uuId');
           localStorage.removeItem('mmail');
           localStorage.removeItem('mroles');
-
+          localStorage.removeItem('loginid');
           sessionStorage.clear();
           this.$router.push('/');
         }
@@ -83,10 +85,10 @@ const actions = {
 };
 const getters = {
   isLoggedIn: function (state) {
-    if(Object.keys(state.userdata).length > 0 || localStorage.removeItem('qAccessToken') ){
-      return true
+    if (Object.keys(state.userdata).length > 0 || localStorage.removeItem('qAccessToken')) {
+      return true;
     }
-    return false
+    return false;
   },
   userInfos: function (state) {
     return state.userdata;
