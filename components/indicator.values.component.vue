@@ -131,6 +131,31 @@
                       single-line
                     ></v-select>
                   </v-col>
+                  <v-col cols="12" sm="12" md="6">
+                    <v-dialog
+                      ref="dialog"
+                      v-model="modal"
+                      :return-value.sync="date"
+                      persistent
+                      width="290px"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="date"
+                          label="Select data Date"
+                          prepend-icon="event"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker v-model="date" type="month" color="primary" scrollable>
+                        <v-spacer></v-spacer>
+                        <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
+                        <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                      </v-date-picker>
+                    </v-dialog>
+                  </v-col>
                 </v-row>
               </v-container>
               <small>*indicates required field</small>
@@ -221,34 +246,10 @@ export default {
       titlex: 'Regular Indicator values',
       titlef: 'Frequent Indicator values',
       search: '',
+       date: new Date().toISOString().substr(0, 10),
+       modal: false,
       editedIndex: -1,
-    indicators_datatable: [
-            { text: ' ID', value: 'valueid', align: 'start', sortable: false, },
-                  /*{ text: 'Email', value: 'email' },*/
-           { text: 'Indicator', value: 'indicatorname' },
-           {text: 'Disag:', value:'disaggregationvalue'},
-           {text: 'Second:', value:'seconddisaggregation'},
-            {text: 'Period Types', value:'periodname'},
-            { text: 'Source:', value: 'sourcename'},
-            { text: 'Value', value: 'total'},
-            { text: 'Created At', value: 'updatedAt' },
-            { text: 'Actions', value: 'actions', sortable: false },
-                ],
-  regular_datatable: [
-                 { text: ' ID', value: 'valueid', align: 'start', sortable: false, },
-                  /*{ text: 'Email', value: 'email' },*/
-                  { text: 'Indicator', value: 'indicatorname' },
-                  {text: 'Disag:', value:'disaggregationvalue'},
-                   {text: 'Second ID', value:'seconddisaggregation'},
-                   {text: 'Period Types', value:'periodname'},
-                   { text: 'Source Id:', value: 'sourcename'},
-                   {text: 'Male', value: 'male'},
-                   {text: 'Female', value: 'female'},
-                   {text: 'Total', value: 'total'},
-                   { text: 'Created At', value: 'updatedAt' },
-                   { text: 'Actions', value: 'actions', sortable: false },
-                ],
-                dialog: false,
+           dialog: false,
                 sourcegroup: null,
                 sourceid: null,
                 value: null,
@@ -264,6 +265,31 @@ export default {
                 malevalue: null,
                 femalevalue:null,
                 mf: false,
+    indicators_datatable: [
+            { text: ' ID', value: 'valueid', align: 'start', sortable: false, },
+            { text: 'Indicator', value: 'indicatorname' },
+            { text: 'Disag:', value:'disaggregationvalue'},
+            { text: 'Second:', value:'seconddisaggregation'},
+            { text: 'Period Types', value:'periodname'},
+            { text: 'Source:', value: 'sourcename'},
+            { text: 'Value', value: 'total'},
+            { text: 'Period Time', value: 'date' },
+            { text: 'Actions', value: 'actions', sortable: false },
+            ],
+    regular_datatable: [
+            { text: ' ID', value: 'valueid', align: 'start', sortable: false, },
+            { text: 'Indicator', value: 'indicatorname' },
+            { text: 'Disag:', value:'disaggregationvalue'},
+            { text: 'Second ID', value:'seconddisaggregation'},
+            { text: 'Period Types', value:'periodname'},
+            { text: 'Source Id:', value: 'sourcename'},
+            { text: 'Male', value: 'male'},
+            { text: 'Female', value: 'female'},
+            { text: 'Total', value: 'total'},
+            { text: 'Period Time ', value: 'date' },
+            { text: 'Actions', value: 'actions', sortable: false },
+             ],
+           
     };
   },
   methods:{
@@ -274,13 +300,13 @@ export default {
          this.mf = false;
        }else{
          this.mf = true;
-       }
-            
-        },
-          editItem: function (item) {
+       }},
+
+
+     editItem: function (item) {
        if (item.male == null) {
           this.editedIndex =  this.datalist.indexOf(item)
-       }else{
+          }else{
           this.editedIndex =  this.regularindicatorvalues.indexOf(item)
        }
             this.email = item.email;
@@ -290,6 +316,7 @@ export default {
             this.value = item.value ? item.value: item.total;
             this.sourceid = item.sourceid;
             this.periodid = item.periodid;
+            this.date = item.date;
             this.indicatorid = item.indicatorid;
             this.seconddisaggregation = item.seconddisaggregation;
             this.disaggregationid = item.disaggregationid;
@@ -303,6 +330,7 @@ export default {
         disaggregationid: this.disaggregationtypeid.disaggregationtypeid,
         seconddisaggregation:  this.disaggregationid.disaggregationid,
         periodid: this.periodid.periodid,
+        date: this.date,
         periodcode:  this.periodid.periodcode,
         male: this.malevalue ? this.malevalue : 0,
         female: this.femalevalue ? this.femalevalue : 0,

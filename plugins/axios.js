@@ -15,6 +15,7 @@ export default function ({ $axios, redirect }, inject) {
       api.setHeader('x-access-token', localStorage.getItem('qAccessToken'));
       api.setHeader("Access-Control-Allow-Headers", "x-access-token, Origin, Content-Type, Accept");
       api.setHeader('user-id', localStorage.getItem('uuId'));
+      api.setHeader('loginid', localStorage.getItem('loginid'));
     }
   });
 
@@ -27,11 +28,6 @@ export default function ({ $axios, redirect }, inject) {
   api.onResponseError(error => {
     swal({ title: error.response.statusText + " !!", text: error.response.data.message + " \n In accessing " + error.config.url + "\n Status code :" + error.response.status, icon: "warning", dangerMode: true, });
   });
-
-  // Set baseURL to something different
-  const REMOTE_DATA = "https://nbsapi.herokuapp.com/api/";
-  const LOCAL_DATA = "http://localhost:8080/api/";
-  const LIVENBS_DATA = "http://196.192.78.160:8080/api/";
   console.log(process.env.NODE_ENV === 'production' ? process.env.baseUrl : process.env.localUrl);
   api.setBaseURL(process.env.NODE_ENV === 'production' ? process.env.baseUrl : process.env.localUrl);
   // Inject to context as $api
