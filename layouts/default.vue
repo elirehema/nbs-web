@@ -230,7 +230,9 @@ export default {
         vm.$store.dispatch("getnews"),
         vm.$store.dispatch("getAllRegularIndicatorvalues"),
         vm.$store.dispatch("getAllSourceGroups"),
-        vm.$store.dispatch("getAllIndicatorvalues")
+        vm.$store.dispatch("getAllIndicatorvalues"),
+        vm.$store.dispatch("getAllRegularIndicatorvaluesTemplate"),
+        vm.$store.dispatch("getAllIndicatorValuesTemplate")
       ]).then(function() {
         console.log("Loading complete...");
       });
