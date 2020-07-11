@@ -142,7 +142,7 @@ export default {
 const data = {indicatorid: this.indicatorid, indicatorname: this.indicatorname, categoryid: this.select.categoryid, periodid: this.periodid.periodid};
  if (this.editedIndex > -1) {
           Object.assign(this.datalist[this.editedIndex], this.editedItem)
-          
+
           this.$store.dispatch('editindicator', data)
        } else {
 
@@ -168,7 +168,7 @@ this.$store.dispatch('postindicatorvalue', data);
         this.indicatorname = item.indicatorname;
         this.dialog = true;
      },
-    
+
 
   },
   watch: {

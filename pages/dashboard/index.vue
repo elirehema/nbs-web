@@ -153,7 +153,9 @@ export default {
       vm.$store.dispatch("getAlltotalfemales"),
       vm.$store.dispatch("getAllSourceGroups"),
       vm.$store.dispatch("getnews"),
-      vm.$store.dispatch("getAllRegularIndicatorvalues")
+      vm.$store.dispatch("getAllRegularIndicatorvalues"),
+      vm.$store.dispatch("getAllRegularIndicatorvaluesTemplate"),
+      vm.$store.dispatch("getAllIndicatorValuesTemplate")
     ]).then(function() {
       console.log("Loading complete...");
     });
