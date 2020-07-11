@@ -25,6 +25,7 @@
                         item-text="indicatorname"
                         item-value="indicatorid"
                         label="Select indicator id"
+                        @change="changeIndicatorid(`${indicatorid.indicatorid}`)"
                         persistent-hint
                         return-object
                         single-line
@@ -38,6 +39,7 @@
                         item-text="disaggregationname"
                         item-value="disaggregationtypeid"
                         label="Select disaggregation id"
+                        @change="changeDisaggregationid(`${disaggregationid.disaggregationtypeid}`)"
                         type="number"
                         persistent-hint
                         return-object
@@ -53,7 +55,7 @@
                         item-value="periodid"
                         label="Select period id"
                         type="number"
-                        @change="onChange($event)"
+                        @change="changePeriodId(`${periodid.periodid}`)"
                         persistent-hint
                         return-object
                         single-line
@@ -67,6 +69,7 @@
                         item-text="disaggregationvalue"
                         item-value="disaggregationid"
                         label="Select Second Disaggregations *"
+                        @change="changeSecDisaggregationId(`${seconddisaggregationid.disaggregationid}`)"
                         persistent-hint
                         return-object
                         single-line
@@ -103,7 +106,7 @@
                         persistent-hint
                         required
                         single-line
-                        v-model="value"
+                        v-model="total"
                       ></v-text-field>
                     </v-col>
 
@@ -126,6 +129,7 @@
                         item-text="sourcename"
                         item-value="sourceid"
                         label="Select source id"
+                        @change="changeSourceId(`${sourceid.sourceid}`)"
                         required
                         persistent-hint
                         return-object
@@ -142,18 +146,18 @@
                       >
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
-                            v-model="date"
+                            v-model="dateRangeText"
                             label="Select data Date"
                             prepend-icon="event"
                             readonly
                             v-bind="attrs"
                             v-on="on"
-                          ></v-text-field>
+                          >{{ dates }}</v-text-field>
                         </template>
-                        <v-date-picker v-model="date" type="month" color="primary" scrollable>
+                        <v-date-picker v-model="dates" type="month" color="primary" range>
                           <v-spacer></v-spacer>
                           <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
-                          <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                          <v-btn text color="primary" @click="$refs.dialog.save(dates)">OK</v-btn>
                         </v-date-picker>
                       </v-dialog>
                     </v-col>
@@ -261,13 +265,14 @@ export default {
       dialog: false,
       sourcegroup: null,
       sourceid: null,
+      dates: ['2019-09-10', '2019-09-20'],
       value: null,
       total: null,
       male: null,
       female: null,
       shortname: null,
       periodid:null,
-      indicatorid: null,
+      indicatorid: 0,
       seconddisaggregationid: null,
       disaggregationid: null,
       reportingperiod: null,
@@ -282,7 +287,7 @@ export default {
             { text: 'Second:', value:'seconddisaggregation'},
             { text: 'Period Types', value:'periodid'},
             { text: 'Source:', value: 'sourceid'},
-            { text: 'Value', value: 'value'},
+            { text: 'Value', value: 'total'},
             { text: 'Period Time', value: 'datadate' },
             { text: 'Actions', value: 'actions', sortable: false },
             ],
@@ -303,15 +308,38 @@ export default {
     };
   },
   methods:{
-    onChange(event) {
-       if(event.periodcode !== 'YYYY'){
+    changePeriodId(a) {
+       if(parseInt(a) !== 1){
          this.malevalue = null;
          this.femalevalue = null;
          this.mf = false;
        }else{
          this.mf = true;
        }
+       this.periodid = parseInt(a);
+        console.log(a);
+        console.log(this.mf);
     },
+    changeIndicatorid(b){
+      console.log(b);
+      this.indicatorid = parseInt(b);
+    },
+    changeDisaggregationid(c){
+       console.log(c);
+      this.disaggregationid = parseInt(c)
+    },
+    changeSecDisaggregationId(d){
+       console.log(d);
+      this.seconddisaggregationid = parseInt(d);
+    },
+    changeSourceId(e){
+       console.log(e);
+      this.sourceid = parseInt(e);
+    },
+    formatDate(f){
+
+    },
+
     close: function () {
         this.dialog = false
         setTimeout(() => {
@@ -327,37 +355,40 @@ export default {
           this.email = item.email;
           this.malevalue = item.male;
           this.femalevalue = item.female;
-          this.total = item.total ? item.total : item.value;
-          this.value = item.value ? item.value: item.total;
+          this.total = item.total;
           this.sourceid = item.sourceid;
           this.periodid = item.periodid;
-          this.date = item.date ? item.date : this.date;
-          this.indicatorid = item.indicatorid;
-          this.seconddisaggregationid = item.seconddisaggregation;
-          this.disaggregationid = item.disaggregationid;
+          this.date = item.date;
+          //this.indicatorid = item.indicatorid;
+          //this.seconddisaggregationid = item.seconddisaggregation;
+          //this.disaggregationid = item.disaggregationid;
           this.reportingperiod = item.reportingperiod;
-          //console.log(this.editedIndex );
-          console.log(item);
+          
+          this.changeIndicatorid(item.indicatorid);
+          this.changeDisaggregationid(item.disaggregationid);
+          this.changeSourceId(item.sourceid);
+          this.changePeriodId(item.periodid);
+          this.changeSecDisaggregationId(item.seconddisaggregation);
+          
           this.dialog = true
     },
 
      editItem(item) {
+          this.date = null;
           this.editedIndex =  this.regularindicatorvaluestemplate.indexOf(item)
           this.editedItem = Object.assign({}, item)
           this.editedtItemId = item.valueid;
           this.email = item.email;
           this.malevalue = item.male;
           this.femalevalue = item.female;
-          this.total = item.total ? item.total : item.value;
-          this.value = item.value ? item.value: item.total;
-          this.sourceid = item.sourceid;
-          this.periodid = item.periodid;
-          this.date = item.date ? item.date : this.date;
-          this.indicatorid = item.indicatorid;
-          this.seconddisaggregationid = item.seconddisaggregation;
-          this.disaggregationid = item.disaggregationid;
+          this.total = item.total;
+          this.date = item.date;
+          this.changeIndicatorid(item.indicatorid);
           this.reportingperiod = item.reportingperiod;
-          //console.log(this.editedIndex );
+          this.changeDisaggregationid(item.disaggregationid);
+          this.changeSourceId(item.sourceid);
+          this.changePeriodId(item.periodid);
+          this.changeSecDisaggregationId(item.seconddisaggregation);
           console.log(item);
           this.dialog = true
       },
@@ -365,18 +396,17 @@ export default {
     save(){
       const newDataItem = {
         email : localStorage.getItem("mmail"),
-        indicatorid: this.indicatorid.indicatorid,
-        disaggregationid: this.disaggregationid.disaggregationtypeid,
-        seconddisaggregation:  this.seconddisaggregationid.disaggregationid,
-        periodid: this.periodid.periodid,
-        date: this.date,
-        periodcode:  this.periodid.periodcode,
+        indicatorid: this.indicatorid,
+        disaggregationid: this.disaggregationid,
+        seconddisaggregation:  this.seconddisaggregationid,
+        periodid: this.periodid,
+        date: this.dateRangeText,
+        periodcode:  this.periodid,
         male: this.malevalue ? this.malevalue : 0,
         female: this.femalevalue ? this.femalevalue : 0,
         reportingperiod: parseInt(this.reportingperiod),
-        sourceid: this.sourceid.sourceid,
-        value: this.value  ? this.value:this.total,
-        total: this.total ? this.total: this.value,
+        sourceid: this.sourceid,
+        total:  this.total,
       }
       var editedDataItem ={
         valueid: this.editedtItemId,
@@ -385,21 +415,24 @@ export default {
         disaggregationid: this.disaggregationid,
         seconddisaggregation:  this.seconddisaggregationid,
         periodid: this.periodid,
-        date: this.date,
+        date: this.dateRangeText ? this.dateRangeText:this.date,
         periodcode:  this.periodid,
         male: this.malevalue ? this.malevalue : 0,
         female: this.femalevalue ? this.femalevalue : 0,
         reportingperiod: parseInt(this.reportingperiod),
         sourceid: this.sourceid,
-        value: this.value  ? this.value:this.total,
-        total: this.total ? this.total: this.value,
+        total: this.total,
       }
       //console.log(editedDataItem);
       
       if (this.editedIndex > -1) {
         console.log("Edit Item: " + this.editedtItemId);
-          console.log(editedDataItem);
+       console.log(editedDataItem);
+          if(parseInt(editedDataItem.periodid) !== 1){
           this.$store.dispatch('editindicatorvalues', editedDataItem)
+          }else{
+          this.$store.dispatch('editdefaultindicatorvalues',editedDataItem)
+        }
       }else{
         console.log("New Item");
         
@@ -446,6 +479,9 @@ export default {
     },
     formTitle () {
         return this.editedIndex === -1 ? 'Add New Indicator Value' : 'Edit Indicator Value'
+    },
+    dateRangeText () {
+        return this.dates.join(' ~ ')
     },
 
    },

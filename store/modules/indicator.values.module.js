@@ -181,6 +181,19 @@ const actions = {
 
       });
   },
+  async editdefaultindicatorvalues({ commit }, payload) {
+    commit(mutation.EDIT_INDICATOR_VALUE);
+    await this.$api.$patch(`indicatorvalues/default/${payload.valueid}`, payload)
+      .then(response => {
+        if (response) {
+          commit(mutation.EDIT_INDICATOR_VALUE_SUCCESS, response);
+        }
+      }).catch(error => {
+        commit(mutation.EDIT_INDICATOR_VALUE_ERROR);
+        console.log(error);
+
+      });
+  },
 };
 
 const getters = {
