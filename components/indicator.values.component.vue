@@ -137,29 +137,16 @@
                       ></v-select>
                     </v-col>
                     <v-col cols="12" sm="12" md="6">
-                      <v-dialog
-                        ref="dialog"
-                        v-model="modal"
-                        :return-value.sync="date"
-                        persistent
-                        width="290px"
-                      >
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-text-field
-                            v-model="dateRangeText"
-                            label="Select data Date"
-                            prepend-icon="event"
-                            readonly
-                            v-bind="attrs"
-                            v-on="on"
-                          >{{ dates }}</v-text-field>
-                        </template>
-                        <v-date-picker v-model="dates" type="month" color="primary" range>
-                          <v-spacer></v-spacer>
-                          <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
-                          <v-btn text color="primary" @click="$refs.dialog.save(dates)">OK</v-btn>
-                        </v-date-picker>
-                      </v-dialog>
+                      <v-text-field
+                        label="Date *"
+                        hint="Date"
+                        persistent-hint
+                        single-line
+                        required
+                        type="text"
+                        v-model="date"
+                        @change="uppercase()"
+                      ></v-text-field>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -258,14 +245,13 @@ export default {
       titlef: 'Frequent Indicator values',
       search: "",
       valid: true,
-      date: null,
+      date: '',
       modal: false,
       editedIndex: -1,
       editedtItemId: null,
       dialog: false,
       sourcegroup: null,
       sourceid: null,
-      dates: ['2019-09-10', '2019-09-20'],
       value: null,
       total: null,
       male: null,
@@ -336,8 +322,8 @@ export default {
        console.log(e);
       this.sourceid = parseInt(e);
     },
-    formatDate(f){
-
+    uppercase() {
+        this.date = this.date.toUpperCase();
     },
 
     close: function () {
@@ -400,7 +386,7 @@ export default {
         disaggregationid: this.disaggregationid,
         seconddisaggregation:  this.seconddisaggregationid,
         periodid: this.periodid,
-        date: this.dateRangeText,
+        date: this.date,
         periodcode:  this.periodid,
         male: this.malevalue ? this.malevalue : 0,
         female: this.femalevalue ? this.femalevalue : 0,
@@ -415,7 +401,7 @@ export default {
         disaggregationid: this.disaggregationid,
         seconddisaggregation:  this.seconddisaggregationid,
         periodid: this.periodid,
-        date: this.dateRangeText ? this.dateRangeText:this.date,
+        date:  this.date,
         periodcode:  this.periodid,
         male: this.malevalue ? this.malevalue : 0,
         female: this.femalevalue ? this.femalevalue : 0,
@@ -480,9 +466,7 @@ export default {
     formTitle () {
         return this.editedIndex === -1 ? 'Add New Indicator Value' : 'Edit Indicator Value'
     },
-    dateRangeText () {
-        return this.dates.join(' ~ ')
-    },
+ 
 
    },
    watch: {
