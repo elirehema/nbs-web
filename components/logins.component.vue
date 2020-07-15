@@ -47,11 +47,8 @@ export default {
   },
    created: function () {
     let vm = this;
-    if (localStorage.getItem("mroles").includes("ROLE_ADMIN")) {
     vm.$store.dispatch("getAllLogins");
-    }else{
-      console.log("Not Admin");
-    }
+   
   },
    computed: {
     datalist() {
