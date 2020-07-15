@@ -26,6 +26,9 @@
         </v-tab-item>
 
         <v-tab-item>
+          <source-group-component></source-group-component>
+        </v-tab-item>
+        <v-tab-item>
           <indicatorsource-component></indicatorsource-component>
         </v-tab-item>
         <v-tab-item>
@@ -44,9 +47,7 @@
         <!-- <v-tab-item>
         <mainland-component></mainland-component>
         </v-tab-item>-->
-        <v-tab-item>
-          <source-group-component></source-group-component>
-        </v-tab-item>
+
         <v-tab-item>
           <currentrelease-component></currentrelease-component>
         </v-tab-item>
@@ -138,7 +139,7 @@ export default {
         { title: "Indicator Categories", icon: "mdi-eye" },
 
         { title: "Indicators", icon: "mdi-eye" },
-
+        { title: "Source Groups", icon: "mdi-eye" },
         { title: "Indicator Sources", icon: "mdi-eye" },
         { title: "Indicator Values", icon: "mdi-eye" },
 
@@ -147,7 +148,7 @@ export default {
         { title: "Disaggregations Values", icon: "mdi-eye" },
         { title: "Logins", icon: "mdi-eye" },
         // { title: "Main Land", icon: "mdi-eye" },
-        { title: "Source Groups", icon: "mdi-eye" },
+
         { title: "Current Releases", icon: "mdi-eye" },
         { title: "News", icon: "news-component" },
         { title: "Publications", icon: "mdi-eye" }

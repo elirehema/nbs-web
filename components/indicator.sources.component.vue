@@ -40,6 +40,36 @@
                     <v-container>
                       <v-row>
                         <v-col cols="12" sm="6" md="6">
+                          <v-select
+                            v-model="sourcegroup"
+                            hint="Select Source Group *"
+                            :items="sourcegroups"
+                            item-text="sourcename"
+                            item-value="sourcename"
+                            label="Select source id"
+                            @change="changeSourceGroup(`${sourcegroup.sourcename}`)"
+                            required
+                            persistent-hint
+                            return-object
+                            single-line
+                          ></v-select>
+                        </v-col>
+
+                        <v-col cols="12" sm="6" md="6">
+                          <v-text-field
+                            label="Short Name *"
+                            hint="Short Name"
+                            persistent-hint
+                            single-line
+                            required
+                            type="text"
+                            readonly
+                            autocomplete="false"
+                            v-model="shortname"
+                          ></v-text-field>
+                        </v-col>
+
+                        <v-col cols="12" sm="12" md="12">
                           <v-text-field
                             label="Source Name *"
                             hint="Source Name *"
@@ -49,29 +79,6 @@
                             :rules="nameRules"
                             single-line
                             v-model="sourcename"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6" md="6">
-                          <v-text-field
-                            label="Short Name *"
-                            hint="Short Name"
-                            persistent-hint
-                            single-line
-                            required
-                            type="text"
-                            autocomplete="false"
-                            v-model="shortname"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6" md="6">
-                          <v-text-field
-                            label="Source Group *"
-                            hint="Source Group"
-                            persistent-hint
-                            single-line
-                            required
-                            type="text"
-                            v-model="sourcegroup"
                           ></v-text-field>
                         </v-col>
                       </v-row>
@@ -164,6 +171,11 @@ export default {
           this.$refs.form.reset()
         }, 300)
       },
+       changeSourceGroup(e){
+       console.log(e);
+      this.sourcegroup = e;
+      this.shortname = e;
+    },
 
   },
    created: function () {
@@ -178,6 +190,9 @@ export default {
    computed: {
     datalist() {
       return this.$store.getters.indicatorsourcesdata;
+    },
+     sourcegroups() {
+      return this.$store.getters.sourcegroupsdata;
     },
      formTitle () {
         return this.editedIndex === -1 ? 'New Indicator source' : 'Edit Indicator source'
