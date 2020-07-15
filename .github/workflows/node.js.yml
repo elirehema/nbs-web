@@ -43,12 +43,14 @@ jobs:
       if: github.event.action == 'opened'
       with:
         project: 'https://github.com/elirehema/nbs-web/projects/2'
+        project: 'https://github.com/users/elirehema/projects/2'
 
-    - name: Assign issues and pull requests with `bug` label to project 3
+    - name: Assign issues and pull requests with `enhancement` label to project 2
       uses: srggrs/assign-one-project-github-action@1.2.0
       if: |
-        contains(github.event.issue.labels.*.name, 'bug') ||
-        contains(github.event.pull_request.labels.*.name, 'bug')
+        contains(github.event.issue.labels.*.name, 'enhancement') ||
+        contains(github.event.pull_request.labels.*.name, 'enhancement')
       with:
         project: 'https://github.com/elirehema/nbs-web/projects/2'
-        column_name: 'Labeled' 
+        project: 'https://github.com/users/elirehema/projects/2'
+        column_name: 'To do' 
