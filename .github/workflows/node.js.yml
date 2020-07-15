@@ -52,7 +52,6 @@ jobs:
       with:
         project: 'https://github.com/elirehema/nbs-web/projects/2'
         column_name: 'To do'
-    steps:
     - name: Assign NEW issues and NEW pull requests to project 2
       uses: srggrs/assign-one-project-github-action@1.2.0
       if: github.event.action == 'opened'
