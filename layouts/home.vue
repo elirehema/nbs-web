@@ -8,9 +8,9 @@
     background: linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71);
   "
   >
-    <v-content>
+    <v-main>
       <nuxt />
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
