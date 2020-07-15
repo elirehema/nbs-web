@@ -143,7 +143,6 @@ export default {
       vm.$store.dispatch("getAlldisaggregationvalues"),
       vm.$store.dispatch("getAllIndicatorsSources"),
       vm.$store.dispatch("getAllIndicators"),
-      vm.$store.dispatch("getAllLogins"),
       vm.$store.dispatch("getAllmainlands"),
       vm.$store.dispatch("getAllperiodtypes"),
       vm.$store.dispatch("getAllprivileges"),
