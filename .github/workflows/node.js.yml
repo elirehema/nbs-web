@@ -14,6 +14,7 @@ on:
    # types: [opened, labeled]
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+  MY_GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 jobs:
   build:
 
