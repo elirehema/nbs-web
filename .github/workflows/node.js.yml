@@ -7,11 +7,11 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: [ opened, labeled, master ]
   issues:
     types: [opened, labeled]
-  pull_request:
-    types: [opened, labeled]
+  #pull_request:
+   # types: [opened, labeled]
 jobs:
   build:
 
@@ -32,7 +32,7 @@ jobs:
     - run: npm test
 
   assign_one_project:
-    
+
     runs-on: ubuntu-latest
     name: Assign to One Project
     steps:
