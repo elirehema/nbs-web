@@ -128,7 +128,7 @@
                         :items="sourcegroups"
                         item-text="sourcename"
                         item-value="sourceid"
-                        label="Select source id"
+                        label="Select source "
                         @change="changeSourceId(`${sourceid.sourceid}`)"
                         required
                         persistent-hint
@@ -449,7 +449,7 @@ export default {
       return this.$store.getters.disaggregationdata;
     },
      sourcegroups() {
-      return this.$store.getters.sourcegroupsdata;
+      return this.$store.getters.indicatorsourcesdata;
     },
      seconddisaggregationvalues() {
       return this.$store.getters.disaggregationvaluesdata;
