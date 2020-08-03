@@ -19,9 +19,9 @@
       </v-btn>
     </v-app-bar>
 
-    <v-content>
+    <v-main>
       <nuxt />
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
@@ -32,15 +32,15 @@ export default {
     return {
       drawer: false,
       pagetitle: "Administrator Dashboard",
-      locales: ["English", "Kiswahili"]
+      locales: ["English", "Kiswahili"],
     };
   },
   head() {
     return {
-      title: "Home Page"
+      title: "Home Page",
     };
   },
-  beforeMount: function() {
+  beforeMount: function () {
     const vm = this;
     /*Promise.all([
       vm.$store.dispatch("getAllIndicatorCategories"),
@@ -62,7 +62,7 @@ export default {
       console.log("Loading complete...");
     });
     */
-  }
+  },
 };
 </script>
 <style >
