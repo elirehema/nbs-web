@@ -13,6 +13,7 @@ export default function ({ $axios, redirect }, inject) {
   api.onRequest(config => {
     if (localStorage.getItem('qAccessToken') != null) {
       api.setHeader('x-access-token', localStorage.getItem('qAccessToken'));
+      api.setHeader('Content-Type', 'application/json')
       api.setHeader("Access-Control-Allow-Headers", "x-access-token, Origin, Content-Type, Accept");
       api.setHeader('user-id', localStorage.getItem('uuId'));
       api.setHeader('loginid', localStorage.getItem('loginid'));
