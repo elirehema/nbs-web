@@ -1,4 +1,6 @@
 import * as mutation from './mutation-types';
+import swal from "sweetalert";
+
 const state = () => ({
   count: null,
   indicatorvalue: {},
@@ -78,7 +80,8 @@ const mutations = {
   [mutation.EDIT_INDICATOR_VALUE_SUCCESS](state, payload) {
     state.isLoading = false;
     state.indicatorvalue = payload;
-    //Object.assign(this.indicatorvaluestemplate[0], payload);
+    this.dispatch('getAllIndicatorvalues');
+    this.dispatch('getAllRegularIndicatorvaluesTemplate');
   },
   [mutation.EDIT_INDICATOR_VALUE_FAILED](state) {
     state.isLoading = false;
@@ -93,7 +96,7 @@ const mutations = {
   [mutation.POST_INDICATOR_VALUE_SUCCESS](state, payload) {
     state.isLoading = false;
     state.indicatorvalue = payload;
-    if (payload.periodid == 1) {
+    if (payload.periodid === 1) {
       state.indicatorvaluestemplate.push(payload);
     } else {
       state.regularindicatorvaluestemplate.push(payload);
@@ -104,7 +107,22 @@ const mutations = {
   },
   [mutation.POST_INDICATOR_VALUE_ERROR](state) {
     state.isLoading = false;
-  }
+  },
+  [mutation.DELETE_INDICATOR_VALUE](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.DELETE_INDICATOR_VALUE_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.indicatorvalue = payload;
+    this.dispatch('getAllIndicatorvalues');
+    this.dispatch('getAllRegularIndicatorvaluesTemplate');
+  },
+  [mutation.DELETE_INDICATOR_VALUE_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.DELETE_INDICATOR_VALUE_ERROR](state) {
+    state.isLoading = false;
+  },
 };
 const actions = {
   async getAllIndicatorvalues({ commit }) {
@@ -194,6 +212,20 @@ const actions = {
 
       });
   },
+  async deleteIndicatorValue({ commit }, payload) {
+    commit(mutation.DELETE_INDICATOR_VALUE);
+    //console.log(payload)
+    await this.$api.$delete(`indicatorvalues/${payload.valueid}/${payload.periodid}`, payload)
+      .then(response => {
+        if (response != null) {
+          commit(mutation.DELETE_INDICATOR_VALUE_SUCCESS, response);
+        }
+      }).catch(error => {
+        commit(mutation.DELETE_INDICATOR_VALUE_ERROR);
+        console.log(error.toString());
+
+      });
+  }
 };
 
 const getters = {

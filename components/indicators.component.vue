@@ -1,8 +1,8 @@
- <template>
+<template>
   <v-container fluid>
     <v-card>
       <v-card-title>
-        {{titlex}}
+        {{ titlex }}
         <v-spacer></v-spacer>
         <v-text-field
           v-model="search"
@@ -36,7 +36,7 @@
               <v-form ref="form" v-model="valid" lazy-validation>
                 <v-card>
                   <v-card-title>
-                    <span class="headline">{{formTitle}}</span>
+                    <span class="headline">{{ formTitle }}</span>
                   </v-card-title>
                   <v-card-text>
                     <v-container>
@@ -98,7 +98,8 @@
             small
             @click="delete_selected_item('deleteindicator',item)"
             color="warning"
-          >mdi-delete</v-icon>
+          >mdi-delete
+          </v-icon>
         </template>
       </v-data-table>
     </v-card>
@@ -106,90 +107,96 @@
 </template>
 <script lang="js">
 import mixin from "@/plugins/mixins.js";
+
 export default {
   mixins: [mixin],
   data() {
     return {
-      search:'',
-      titlex:'Indicators',
+      search: '',
+      titlex: 'Indicators',
       editedIndex: -1,
       valid: true,
-    headers: [
+      headers: [
 
-                  { text: 'Indicator ID', value: 'indicatorid' },
-                  { text: 'Indicator Category', value: 'categoryname' },
-                  { text: 'Period Type', value: 'periodname' },
-                  {text: 'Indicator Name', value:'indicatorname'},
-                  { text: 'Updated At', value: 'createdAt' },
-                  { text: 'Created At', value: 'updatedAt' },
-                  { text: 'Actions', value: 'actions', sortable: false },
-                ],
-                dialog: false,
-                select: null,
-                indicatorname: null,
-                indicatorid: null,
-                periodid: null,
-                categoryid: null
+        {text: 'Indicator ID', value: 'indicatorid'},
+        {text: 'Indicator Category', value: 'categoryname'},
+        {text: 'Period Type', value: 'periodname'},
+        {text: 'Indicator Name', value: 'indicatorname'},
+        {text: 'Updated At', value: 'createdAt'},
+        {text: 'Created At', value: 'updatedAt'},
+        {text: 'Actions', value: 'actions', sortable: false},
+      ],
+      dialog: false,
+      select: null,
+      indicatorname: null,
+      indicatorid: null,
+      periodid: null,
+      categoryid: null
 
     };
   },
-   created: function () {
+  created: function () {
     let vm = this;
 
   },
-  methods:{
-    save: function(){
-const data = {indicatorid: this.indicatorid, indicatorname: this.indicatorname, categoryid: this.select.categoryid, periodid: this.periodid.periodid};
- if (this.editedIndex > -1) {
-          Object.assign(this.datalist[this.editedIndex], this.editedItem)
+  methods: {
+    save: function () {
+      const data = {
+        indicatorid: this.indicatorid,
+        indicatorname: this.indicatorname,
+        categoryid: this.select.categoryid,
+        periodid: this.periodid.periodid
+      };
+      if (this.editedIndex > -1) {
+        Object.assign(this.datalist[this.editedIndex], this.editedItem)
 
-          this.$store.dispatch('editindicator', data)
-       } else {
+        this.$store.dispatch('editindicator', data)
+      } else {
 
-this.$store.dispatch('postindicatorvalue', data);
+        this.$store.dispatch('postindicatorvalue', data);
       }
       this.close();
     },
-          close: function () {
-        this.dialog = false
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.indicatorid = this.indicatorid;
-          this.editedIndex = -1
-          this.$refs.form.reset()
-        }, 300)
-      },
-    editItem:function (item) {
-        this.editedIndex = this.datalist.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.indicatorid = item.indicatorid;
-        this.periodid = this.periodid;
-        this.categoryid = this.categoryid;
-        this.indicatorname = item.indicatorname;
-        this.dialog = true;
-     },
+    close: function () {
+      this.dialog = false
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.indicatorid = this.indicatorid;
+        this.editedIndex = -1
+        this.$refs.form.reset()
+      }, 300)
+    },
+    editItem: function (item) {
+      this.editedIndex = this.datalist.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.indicatorid = item.indicatorid;
+      this.periodid = this.periodid;
+      this.categoryid = this.categoryid;
+      this.indicatorname = item.indicatorname;
+      this.dialog = true;
+    },
 
 
   },
   watch: {
-      dialog (val) {
-        val || this.close()
-      },
+    dialog(val) {
+      val || this.close()
     },
-   computed: {
+  },
+  computed: {
     datalist() {
       return this.$store.getters.indicatorsdata;
     },
-    indicatorcategories(){
+    indicatorcategories() {
       return this.$store.getters.indicatorcategoriesdata;
     },
-    periodtypes(){
+    periodtypes() {
       return this.$store.getters.periodtypesdata;
     },
-    formTitle () {
-        return this.editedIndex === -1 ? 'New Indicator ' : 'Edit Indicator'
-      },
-   }
+    formTitle() {
+      return this.editedIndex === -1 ? 'New Indicator ' : 'Edit Indicator'
+    },
+  }
 
 };
 </script>

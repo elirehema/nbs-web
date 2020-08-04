@@ -1,4 +1,4 @@
- <template>
+<template>
   <v-container fluid>
     <v-row>
       <v-col cols="12" md="11"></v-col>
@@ -12,7 +12,7 @@
           <v-form ref="form" v-model="valid" lazy-validation>
             <v-card>
               <v-card-title>
-                <span class="headline">{{formTitle}}</span>
+                <span class="headline">{{ formTitle }}</span>
               </v-card-title>
               <v-card-text>
                 <v-container>
@@ -172,7 +172,7 @@
           <v-container fluid>
             <v-card flat color="white">
               <v-card-title>
-                {{titlef}}
+                {{ titlef }}
                 <v-spacer></v-spacer>
                 <v-text-field
                   v-model="search"
@@ -192,7 +192,12 @@
               >
                 <template v-slot:item.actions="{ item }">
                   <v-icon small class="mr-2" @click="editItem(item)" color="info">mdi-lead-pencil</v-icon>
-                  <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+                  <v-icon
+                    small
+                    @click="delete_selected_item('deleteIndicatorValue',item)"
+                    color="warning"
+                  >mdi-delete
+                  </v-icon>
                 </template>
               </v-data-table>
             </v-card>
@@ -202,7 +207,7 @@
           <v-container fluid>
             <v-card flat color="white">
               <v-card-title>
-                {{titlex}}
+                {{ titlex }}
                 <v-spacer></v-spacer>
                 <v-text-field
                   v-model="search"
@@ -226,8 +231,14 @@
                     class="mr-2"
                     @click="editDefaultIndicator(item)"
                     color="info"
-                  >mdi-lead-pencil</v-icon>
-                  <v-icon small @click="deleteItem(item)" color="warning">mdi-delete</v-icon>
+                  >mdi-lead-pencil
+                  </v-icon>
+                  <v-icon
+                    small
+                    @click="delete_selected_item('deleteIndicatorValue',item)"
+                    color="warning"
+                  >mdi-delete
+                  </v-icon>
                 </template>
               </v-data-table>
             </v-card>
@@ -238,7 +249,10 @@
   </v-container>
 </template>
 <script lang="js">
+import mixin from "@/plugins/mixins.js";
+
 export default {
+  mixins: [mixin],
   data() {
     return {
       titlex: 'Regular Indicator values',
@@ -257,152 +271,152 @@ export default {
       male: null,
       female: null,
       shortname: null,
-      periodid:null,
+      periodid: null,
       indicatorid: 0,
       seconddisaggregationid: null,
       disaggregationid: null,
       reportingperiod: null,
       malevalue: null,
-      femalevalue:null,
+      femalevalue: null,
       mf: false,
 
-    regular_indicators_datatable: [
-            { text: ' ID', value: 'valueid', align: 'start', sortable: false, },
-            { text: 'Indicator', value: 'indicatorid' },
-            { text: 'Disag:', value:'disaggregationid'},
-            { text: 'Second:', value:'seconddisaggregation'},
-            { text: 'Period Types', value:'periodid'},
-            { text: 'Source:', value: 'sourceid'},
-            { text: 'Value', value: 'total'},
-            { text: 'Period Time', value: 'datadate' },
-            { text: 'Actions', value: 'actions', sortable: false },
-            ],
-    regular_datatable: [
-            { text: ' ID', value: 'valueid', align: 'start', sortable: false, },
-            { text: 'Indicator', value: 'indicatorid' },
-            { text: 'Disag:', value:'disaggregationid'},
-            { text: 'Second ID', value:'seconddisaggregation'},
-            { text: 'Period Types', value:'periodid'},
-            { text: 'Source Id:', value: 'sourceid'},
-            { text: 'Male', value: 'male'},
-            { text: 'Female', value: 'female'},
-            { text: 'Total', value: 'total'},
-            { text: 'Period Time ', value: 'datadate' },
-            { text: 'Actions', value: 'actions', sortable: false },
-             ],
-           
+      regular_indicators_datatable: [
+        {text: ' ID', value: 'valueid', align: 'start', sortable: false,},
+        {text: 'Indicator', value: 'indicatorid'},
+        {text: 'Disag:', value: 'disaggregationid'},
+        {text: 'Second:', value: 'seconddisaggregation'},
+        {text: 'Period Types', value: 'periodid'},
+        {text: 'Source:', value: 'sourceid'},
+        {text: 'Value', value: 'total'},
+        {text: 'Period Time', value: 'datadate'},
+        {text: 'Actions', value: 'actions', sortable: false},
+      ],
+      regular_datatable: [
+        {text: ' ID', value: 'valueid', align: 'start', sortable: false,},
+        {text: 'Indicator', value: 'indicatorid'},
+        {text: 'Disag:', value: 'disaggregationid'},
+        {text: 'Second ID', value: 'seconddisaggregation'},
+        {text: 'Period Types', value: 'periodid'},
+        {text: 'Source Id:', value: 'sourceid'},
+        {text: 'Male', value: 'male'},
+        {text: 'Female', value: 'female'},
+        {text: 'Total', value: 'total'},
+        {text: 'Period Time ', value: 'datadate'},
+        {text: 'Actions', value: 'actions', sortable: false},
+      ],
+
     };
   },
-  methods:{
+  methods: {
     changePeriodId(a) {
-       if(parseInt(a) !== 1){
-         this.malevalue = null;
-         this.femalevalue = null;
-         this.mf = false;
-       }else{
-         this.mf = true;
-       }
-       this.periodid = parseInt(a);
-        console.log(a);
-        console.log(this.mf);
+      if (parseInt(a) !== 1) {
+        this.malevalue = null;
+        this.femalevalue = null;
+        this.mf = false;
+      } else {
+        this.mf = true;
+      }
+      this.periodid = parseInt(a);
+      console.log(a);
+      console.log(this.mf);
     },
-    changeIndicatorid(b){
+    changeIndicatorid(b) {
       console.log(b);
       this.indicatorid = parseInt(b);
     },
-    changeDisaggregationid(c){
-       console.log(c);
+    changeDisaggregationid(c) {
+      console.log(c);
       this.disaggregationid = parseInt(c)
     },
-    changeSecDisaggregationId(d){
-       console.log(d);
+    changeSecDisaggregationId(d) {
+      console.log(d);
       this.seconddisaggregationid = parseInt(d);
     },
-    changeSourceId(e){
-       console.log(e);
+    changeSourceId(e) {
+      console.log(e);
       this.sourceid = parseInt(e);
     },
     uppercase() {
-        this.date = this.date.toUpperCase();
+      this.date = this.date.toUpperCase();
     },
 
     close: function () {
-        this.dialog = false
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-          this.$refs.form.reset()
-        }, 300)
+      this.dialog = false
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+        this.$refs.form.reset()
+      }, 300)
     },
-    editDefaultIndicator(item){
-        this.editedIndex =  this.indicatorvaluestemplate.indexOf(item)
-          //this.editedItem = Object.assign({}, item)
-          this.editedtItemId = item.valueid;
-          this.email = item.email;
-          this.malevalue = item.male;
-          this.femalevalue = item.female;
-          this.total = item.total;
-          this.sourceid = item.sourceid;
-          this.periodid = item.periodid;
-          this.date = item.date;
-          //this.indicatorid = item.indicatorid;
-          //this.seconddisaggregationid = item.seconddisaggregation;
-          //this.disaggregationid = item.disaggregationid;
-          this.reportingperiod = item.reportingperiod;
-          
-          this.changeIndicatorid(item.indicatorid);
-          this.changeDisaggregationid(item.disaggregationid);
-          this.changeSourceId(item.sourceid);
-          this.changePeriodId(item.periodid);
-          this.changeSecDisaggregationId(item.seconddisaggregation);
-          
-          this.dialog = true
+    editDefaultIndicator(item) {
+      this.editedIndex = this.indicatorvaluestemplate.indexOf(item)
+      //this.editedItem = Object.assign({}, item)
+      this.editedtItemId = item.valueid;
+      this.email = item.email;
+      this.malevalue = item.male;
+      this.femalevalue = item.female;
+      this.total = item.total;
+      this.sourceid = item.sourceid;
+      this.periodid = item.periodid;
+      this.date = item.datadate;
+      //this.indicatorid = item.indicatorid;
+      //this.seconddisaggregationid = item.seconddisaggregation;
+      //this.disaggregationid = item.disaggregationid;
+      this.reportingperiod = item.reportingperiod;
+
+      this.changeIndicatorid(item.indicatorid);
+      this.changeDisaggregationid(item.disaggregationid);
+      this.changeSourceId(item.sourceid);
+      this.changePeriodId(item.periodid);
+      this.changeSecDisaggregationId(item.seconddisaggregation);
+
+      this.dialog = true
     },
 
-     editItem(item) {
-          this.date = null;
-          this.editedIndex =  this.regularindicatorvaluestemplate.indexOf(item)
-          this.editedItem = Object.assign({}, item)
-          this.editedtItemId = item.valueid;
-          this.email = item.email;
-          this.malevalue = item.male;
-          this.femalevalue = item.female;
-          this.total = item.total;
-          this.date = item.date;
-          this.changeIndicatorid(item.indicatorid);
-          this.reportingperiod = item.reportingperiod;
-          this.changeDisaggregationid(item.disaggregationid);
-          this.changeSourceId(item.sourceid);
-          this.changePeriodId(item.periodid);
-          this.changeSecDisaggregationId(item.seconddisaggregation);
-          console.log(item);
-          this.dialog = true
-      },
+    editItem(item) {
+      this.date = null;
+      this.editedIndex = this.regularindicatorvaluestemplate.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.editedtItemId = item.valueid;
+      this.email = item.email;
+      this.malevalue = item.male;
+      this.femalevalue = item.female;
+      this.total = item.total;
+      this.date = item.datadate;
+      this.changeIndicatorid(item.indicatorid);
+      this.reportingperiod = item.reportingperiod;
+      this.changeDisaggregationid(item.disaggregationid);
+      this.changeSourceId(item.sourceid);
+      this.changePeriodId(item.periodid);
+      this.changeSecDisaggregationId(item.seconddisaggregation);
+      console.log(item);
+      this.dialog = true
+    },
 
-    save(){
+    save() {
       const newDataItem = {
-        email : localStorage.getItem("mmail"),
+        email: localStorage.getItem("mmail"),
         indicatorid: this.indicatorid,
         disaggregationid: this.disaggregationid,
-        seconddisaggregation:  this.seconddisaggregationid,
+        seconddisaggregation: this.seconddisaggregationid,
         periodid: this.periodid,
         date: this.date,
-        periodcode:  this.periodid,
+        periodcode: this.periodid,
         male: this.malevalue ? this.malevalue : 0,
         female: this.femalevalue ? this.femalevalue : 0,
         reportingperiod: parseInt(this.reportingperiod),
         sourceid: this.sourceid,
-        total:  this.total,
+        total: this.total,
       }
-      var editedDataItem ={
+      var editedDataItem = {
         valueid: this.editedtItemId,
-        email : localStorage.getItem("mmail"),
+        email: localStorage.getItem("mmail"),
         indicatorid: this.indicatorid,
         disaggregationid: this.disaggregationid,
-        seconddisaggregation:  this.seconddisaggregationid,
+        seconddisaggregation: this.seconddisaggregationid,
         periodid: this.periodid,
-        date:  this.date,
-        periodcode:  this.periodid,
+        date: this.date,
+        periodcode: this.periodid,
         male: this.malevalue ? this.malevalue : 0,
         female: this.femalevalue ? this.femalevalue : 0,
         reportingperiod: parseInt(this.reportingperiod),
@@ -410,74 +424,74 @@ export default {
         total: this.total,
       }
       //console.log(editedDataItem);
-      
+
       if (this.editedIndex > -1) {
         console.log("Edit Item: " + this.editedtItemId);
-       console.log(editedDataItem);
-          if(parseInt(editedDataItem.periodid) !== 1){
+        console.log(editedDataItem);
+        if (parseInt(editedDataItem.periodid) !== 1) {
           this.$store.dispatch('editindicatorvalues', editedDataItem)
-          }else{
-          this.$store.dispatch('editdefaultindicatorvalues',editedDataItem)
+        } else {
+          this.$store.dispatch('editdefaultindicatorvalues', editedDataItem)
         }
-      }else{
+      } else {
         console.log("New Item");
-        
+
         console.log(newDataItem);
-        
-      this.$store.dispatch('postindicatorvalues', newDataItem)
+
+        this.$store.dispatch('postindicatorvalues', newDataItem)
       }
-       this.close();
+      this.close();
     },
-   
+
 
   },
-   created: function () {
+  created: function () {
     let vm = this;
 
   },
-   computed: {
+  computed: {
     datalist() {
       return this.$store.getters.indicatorvaluesdata;
     },
-     periodtypes(){
+    periodtypes() {
       return this.$store.getters.periodtypesdata;
     },
-     indicators() {
+    indicators() {
       return this.$store.getters.indicatorsdata;
     },
-     disaggregations() {
+    disaggregations() {
       return this.$store.getters.disaggregationdata;
     },
-     sourcegroups() {
+    sourcegroups() {
       return this.$store.getters.indicatorsourcesdata;
     },
-     seconddisaggregationvalues() {
+    seconddisaggregationvalues() {
       return this.$store.getters.disaggregationvaluesdata;
     },
-    regularindicatorvalues(){
+    regularindicatorvalues() {
       return this.$store.getters.regularindicatorvaluesdata;
     },
-    indicatorvaluestemplate(){
+    indicatorvaluestemplate() {
       return this.$store.getters.indicatorvaluestemplate;
     },
-    regularindicatorvaluestemplate(){
+    regularindicatorvaluestemplate() {
       return this.$store.getters.regularindicatorvaluestemplate;
     },
-    formTitle () {
-        return this.editedIndex === -1 ? 'Add New Indicator Value' : 'Edit Indicator Value'
+    formTitle() {
+      return this.editedIndex === -1 ? 'Add New Indicator Value' : 'Edit Indicator Value'
     },
- 
 
-   },
-   watch: {
-      dialog (val) {
-        val || this.close()
-      },
+
+  },
+  watch: {
+    dialog(val) {
+      val || this.close()
     },
+  },
 
 };
 </script>
-<style >
+<style>
 .greencontainer {
   background-color: #81c784;
 }
