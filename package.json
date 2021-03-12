@@ -18,7 +18,7 @@
     "nuxt": "^2.15.3",
     "nuxt-material-design-icons": "^1.0.4",
     "sweetalert": "^2.1.2",
-    "vue-i18n": "^8.24.0",
+    "vue-i18n": "^8.24.1",
     "vuetify": "^2.4.6",
     "vuex-persistedstate": "^3.2.0"
   },
