@@ -1,7 +1,13 @@
 <template>
   <v-app class="app">
     <!--NAVIGATION DRAWER-->
-    <v-navigation-drawer class="primary" elevation="0" v-model="drawer" width="180" app>
+    <v-navigation-drawer
+      class="primary"
+      elevation="0"
+      v-model="drawer"
+      width="180"
+      app
+    >
       <v-toolbar color="primary" elevation="0">
         <v-spacer></v-spacer>
 
@@ -16,10 +22,16 @@
             v-on:click="nativateToHere(item.route)"
           >
             <v-list-item-icon>
-              <v-icon color="default" v-text="item.icon"></v-icon>
-            </v-list-item-icon>&nbsp;&nbsp;
+              <v-icon
+                color="default"
+                v-text="item.icon"
+              ></v-icon> </v-list-item-icon
+            >&nbsp;&nbsp;
             <v-list-item-content>
-              <v-list-item-title class="font-weight-bold default--text" v-text="item.text"></v-list-item-title>
+              <v-list-item-title
+                class="font-weight-bold default--text"
+                v-text="item.text"
+              ></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -27,33 +39,56 @@
       <template v-slot:append>
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-subtitle class="subtitle white--text font-weight-bold">Light/Dark</v-list-item-subtitle>
+            <v-list-item-subtitle class="subtitle white--text font-weight-bold"
+              >Light/Dark</v-list-item-subtitle
+            >
           </v-list-item-content>
           <v-list-item-action>
-            <v-switch :value="true" @change="toggle($event !== null)"></v-switch>
+            <v-switch
+              :value="true"
+              @change="toggle($event !== null)"
+            ></v-switch>
           </v-list-item-action>
         </v-list-item>
       </template>
     </v-navigation-drawer>
-    <v-app-bar elevation="0" :clipped-left="clipped" color="primary" fixed app dark>
+    <v-app-bar
+      elevation="0"
+      :clipped-left="clipped"
+      color="primary"
+      fixed
+      app
+      dark
+    >
       <v-toolbar-title>
         <v-avatar color="primary lighten-1" size="36">
-          <span class="white--text font-weight-bold overline" @click.stop="drawer = !drawer">
+          <span
+            class="white--text font-weight-bold overline"
+            @click.stop="drawer = !drawer"
+          >
             <v-icon small color="white">mdi-dialpad</v-icon>
             <!--<v-app-bar-nav-icon color="white" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>-->
           </span>
         </v-avatar>
-        <span
-          class="hidden-sm-and-down font-weight-bold default--text"
-        >Welcome, {{ userdata.username }}</span>
+        <span class="hidden-sm-and-down font-weight-bold default--text"
+          >Welcome, {{ userdata.username }}</span
+        >
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <span class="default--text font-weight-bold hidden-sm-and-down">{{todayDate}}</span>
+      <span class="default--text font-weight-bold hidden-sm-and-down">{{
+        todayDate
+      }}</span>
       <v-tooltip bottom color="primary" open-on-hover open-delay="500">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on" @click.stop="syncro()">
-            <v-progress-circular v-if="sync" v-on="on" size="20" indeterminate color="white"></v-progress-circular>
+            <v-progress-circular
+              v-if="sync"
+              v-on="on"
+              size="20"
+              indeterminate
+              color="white"
+            ></v-progress-circular>
             <v-icon v-else color="default">mdi-sync</v-icon>
           </v-btn>
         </template>
@@ -79,7 +114,9 @@
       <v-tooltip bottom color="primary" open-on-hover open-delay="500">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
-            <v-icon color="default" @click="logoutsession">mdi-logout-variant</v-icon>
+            <v-icon color="default" @click="logoutsession"
+              >mdi-logout-variant</v-icon
+            >
           </v-btn>
         </template>
         <span>Click to logout</span>
@@ -214,22 +251,9 @@ export default {
       const vm = this;
       vm.sync = !vm.sync;
       await Promise.all([
-        vm.$store.dispatch("getAllIndicatorCategories"),
-        vm.$store.dispatch("getAllCurrentReleases"),
-        vm.$store.dispatch("getAllDisaggregations"),
-        vm.$store.dispatch("getAlldisaggregationvalues"),
-        vm.$store.dispatch("getAllIndicatorsSources"),
-        vm.$store.dispatch("getAllIndicators"),
         vm.$store.dispatch("getAllmainlands"),
-        vm.$store.dispatch("getAllperiodtypes"),
-        vm.$store.dispatch("getAllpublications"),
         vm.$store.dispatch("getAllRurals"),
-        vm.$store.dispatch("getAllSectors"),
         vm.$store.dispatch("getAlltotalfemales"),
-        vm.$store.dispatch("getnews"),
-        vm.$store.dispatch("getAllRegularIndicatorvalues"),
-        vm.$store.dispatch("getAllSourceGroups"),
-        vm.$store.dispatch("getAllIndicatorvalues"),
         vm.$store.dispatch("getAllRegularIndicatorvaluesTemplate"),
         vm.$store.dispatch("getAllIndicatorValuesTemplate")
       ]).then(function() {
