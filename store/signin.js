@@ -67,11 +67,7 @@ const actions = {
         if (response.result == 'OK') {
           commit(mutation.LOGOUT);
           window.localStorage.clear();
-          localStorage.removeItem('qAccessToken');
-          localStorage.removeItem('uuId');
-          localStorage.removeItem('mmail');
-          localStorage.removeItem('mroles');
-          localStorage.removeItem('loginid');
+          localStorage.clear();
           sessionStorage.clear();
           this.$router.push('/');
         }
