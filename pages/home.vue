@@ -9,7 +9,13 @@
       show-arrows
       dark
     >
-      <v-tab v-for="(item, index) in items" :key="index" class="font-weight-medium">{{item.title}}</v-tab>
+      <v-tab
+        v-for="(item, index) in items"
+        :key="index"
+        class="font-weight-medium"
+        @click="store(item.store)"
+        >{{ item.title }}</v-tab
+      >
       <v-tabs-items v-model="tab" class="ma-0" color="primary">
         <v-tab-item>
           <sectors-component></sectors-component>
@@ -134,24 +140,52 @@ export default {
         { day: "Thursday", icon: "mdi-cloud", temp: "25\xB0/15\xB0" }
       ],
       items: [
-        { title: "Sectors", icon: "mdi-eye" },
-        { title: "Period Types", icon: "mdi-eye" },
-        { title: "Indicator Categories", icon: "mdi-eye" },
+        { title: "Sectors", icon: "mdi-eye", store: "getAllSectors" },
+        { title: "Period Types", icon: "mdi-eye", store: "getAllperiodtypes" },
+        {
+          title: "Indicator Categories",
+          icon: "mdi-eye",
+          store: "getAllIndicatorCategories"
+        },
 
-        { title: "Indicators", icon: "mdi-eye" },
-        { title: "Source Groups", icon: "mdi-eye" },
-        { title: "Indicator Sources", icon: "mdi-eye" },
-        { title: "Indicator Values", icon: "mdi-eye" },
+        { title: "Indicators", icon: "mdi-eye", store: "getAllIndicators" },
+        {
+          title: "Source Groups",
+          icon: "mdi-eye",
+          store: "getAllSourceGroups"
+        },
+        {
+          title: "Indicator Sources",
+          icon: "mdi-eye",
+          store: "getAllIndicatorsSources"
+        },
+        {
+          title: "Indicator Values",
+          icon: "mdi-eye",
+          store: "getAllIndicatorvalues"
+        },
 
-        { title: "Disaggregations", icon: "mdi-eye" },
+        {
+          title: "Disaggregations",
+          icon: "mdi-eye",
+          store: "getAllDisaggregations"
+        },
 
-        { title: "Disaggregations Values", icon: "mdi-eye" },
-        { title: "Logins", icon: "mdi-eye" },
+        {
+          title: "Disaggregations Values",
+          icon: "mdi-eye",
+          store: "getAlldisaggregationvalues"
+        },
+        { title: "Logins", icon: "mdi-eye", store: "" },
         // { title: "Main Land", icon: "mdi-eye" },
 
-        { title: "Current Releases", icon: "mdi-eye" },
-        { title: "News", icon: "news-component" },
-        { title: "Publications", icon: "mdi-eye" }
+        {
+          title: "Current Releases",
+          icon: "mdi-eye",
+          store: "getAllCurrentReleases"
+        },
+        { title: "News", icon: "news-component", store: "getnews" },
+        { title: "Publications", icon: "mdi-eye", store: "getAllpublications" }
         // { title: "Privilages", icon: "mdi-eye" },
         // { title: "Rural", icon: "mdi-eye" },
         // { title: "Total Females", icon: "mdi-eye" }
@@ -162,6 +196,11 @@ export default {
     return {
       title: "Home Page"
     };
+  },
+  methods: {
+    store: function(it) {
+      this.$store.dispatch(it);
+    }
   },
   created: function() {
     let vm = this;
