@@ -36,34 +36,34 @@ const mutations = {
   [mutation.POST_INDICATOR_PERIOD_TYPE_VALUE_ERROR](state) {
     state.isLoading = false;
   },
-    [mutation.DELETE_PERIOD_TYPE](state) {
-      state.isLoggedIn = true;
-    },
-    [mutation.DELETE_PERIOD_TYPE_SUCCESS](state, payload) {
-      state.isLoading = false;
-      state.sector = payload;
-      state.periodtypes.splice(state.periodtypes.indexOf(payload));
+  [mutation.DELETE_PERIOD_TYPE](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.DELETE_PERIOD_TYPE_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.sector = payload;
+    state.periodtypes.splice(state.periodtypes.indexOf(payload));
 
-    },
-    [mutation.DELETE_PERIOD_TYPE_FAILED](state) {
-      state.isLoading = false;
-    },
-    [mutation.DELETE_PERIOD_TYPE_ERROR](state) {
-      state.isLoading = false;
-    },
-    [mutation.EDIT_PERIOD_TYPE](state) {
-      state.isLoggedIn = true;
-    },
-    [mutation.EDIT_PERIOD_TYPE_SUCCESS](state, payload) {
-      state.isLoading = false;
-      state.sector = payload;
-    },
-    [mutation.EDIT_PERIOD_TYPE_FAILED](state) {
-      state.isLoading = false;
-    },
-    [mutation.EDIT_PERIOD_TYPE_ERROR](state) {
-      state.isLoading = false;
-    }
+  },
+  [mutation.DELETE_PERIOD_TYPE_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.DELETE_PERIOD_TYPE_ERROR](state) {
+    state.isLoading = false;
+  },
+  [mutation.EDIT_PERIOD_TYPE](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.EDIT_PERIOD_TYPE_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.sector = payload;
+  },
+  [mutation.EDIT_PERIOD_TYPE_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.EDIT_PERIOD_TYPE_ERROR](state) {
+    state.isLoading = false;
+  }
 };
 const actions = {
   async getAllperiodtypes({ commit }) {
@@ -112,7 +112,7 @@ const actions = {
     commit(mutation.EDIT_PERIOD_TYPE);
     await this.$api.$put(`periodtypes/${payload.periodid}`, payload)
       .then(response => {
-          commit(mutation.EDIT_PERIOD_TYPE_SUCCESS, response);
+        commit(mutation.EDIT_PERIOD_TYPE_SUCCESS, response);
 
       }).catch(error => {
         commit(mutation.EDIT_PERIOD_TYPE_FAILED);
@@ -131,6 +131,7 @@ const getters = {
 
 };
 export default {
+  namespaced: false,
   state,
   getters,
   mutations,
