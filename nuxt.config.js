@@ -71,7 +71,7 @@ export default {
     '~/plugins/axios',
     '~/plugins/route',
     '~/plugins/pwa.client.js',
-    { src: '~/plugins/localStorage.js', ssr: false }
+    { src: '~/plugins/vuepersistence.js', ssr: false }
   ],
   /*
    ** Nuxt.js dev-modules
