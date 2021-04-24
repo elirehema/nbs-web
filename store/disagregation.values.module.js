@@ -36,34 +36,34 @@ const mutations = {
   [mutation.POST_DISAGGREGATION_VALUE_ERROR](state) {
     state.isLoading = false;
   },
-       [mutation.DELETE_DISAGGREGATION_VALUE](state) {
-         state.isLoggedIn = true;
-       },
-       [mutation.DELETE_DISAGGREGATION_VALUE_SUCCESS](state, payload) {
-         state.isLoading = false;
-         state.disaggregationvalue = payload;
-         state.disaggregationvalues.splice(state.disaggregationvalues.indexOf(payload));
+  [mutation.DELETE_DISAGGREGATION_VALUE](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.DELETE_DISAGGREGATION_VALUE_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.disaggregationvalue = payload;
+    state.disaggregationvalues.splice(state.disaggregationvalues.indexOf(payload));
 
-       },
-       [mutation.DELETE_DISAGGREGATION_VALUE_FAILED](state) {
-         state.isLoading = false;
-       },
-       [mutation.DELETE_DISAGGREGATION_VALUE_ERROR](state) {
-         state.isLoading = false;
-       },
-       [mutation.EDIT_DISAGGREGATION_VALUE](state) {
-         state.isLoggedIn = true;
-       },
-       [mutation.EDIT_DISAGGREGATION_VALUE_SUCCESS](state, payload) {
-         state.isLoading = false;
-         state.disaggregationvalue = payload;
-       },
-       [mutation.EDIT_DISAGGREGATION_VALUE_FAILED](state) {
-         state.isLoading = false;
-       },
-       [mutation.EDIT_DISAGGREGATION_VALUE_ERROR](state) {
-         state.isLoading = false;
-       }
+  },
+  [mutation.DELETE_DISAGGREGATION_VALUE_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.DELETE_DISAGGREGATION_VALUE_ERROR](state) {
+    state.isLoading = false;
+  },
+  [mutation.EDIT_DISAGGREGATION_VALUE](state) {
+    state.isLoggedIn = true;
+  },
+  [mutation.EDIT_DISAGGREGATION_VALUE_SUCCESS](state, payload) {
+    state.isLoading = false;
+    state.disaggregationvalue = payload;
+  },
+  [mutation.EDIT_DISAGGREGATION_VALUE_FAILED](state) {
+    state.isLoading = false;
+  },
+  [mutation.EDIT_DISAGGREGATION_VALUE_ERROR](state) {
+    state.isLoading = false;
+  }
 };
 const actions = {
   async getAlldisaggregationvalues({
@@ -94,27 +94,27 @@ const actions = {
 
       });
   },
-    async deletedisaggregationvalue({ commit }, payload) {
-        commit(mutation.DELETE_DISAGGREGATION_VALUE);
-        await this.$api.$delete(`disaggregationvalues/${payload.disaggregationid}`)
-          .then(response => {
-            if (response != null) {
-              commit(mutation.DELETE_DISAGGREGATION_VALUE_SUCCESS, payload);
-            }
-          }).catch(error => {
-            commit(mutation.DELETE_DISAGGREGATION_VALUE_FAILED);
-          });
-      },
-      async editdisaggregationvalue({ commit }, payload) {
-        commit(mutation.EDIT_DISAGGREGATION_VALUE);
-        await this.$api.$patch(`disaggregationvalues/${payload.disaggregationid}`, payload)
-          .then(response => {
-              commit(mutation.EDIT_DISAGGREGATION_VALUE_SUCCESS, response);
+  async deletedisaggregationvalue({ commit }, payload) {
+    commit(mutation.DELETE_DISAGGREGATION_VALUE);
+    await this.$api.$delete(`disaggregationvalues/${payload.disaggregationid}`)
+      .then(response => {
+        if (response != null) {
+          commit(mutation.DELETE_DISAGGREGATION_VALUE_SUCCESS, payload);
+        }
+      }).catch(error => {
+        commit(mutation.DELETE_DISAGGREGATION_VALUE_FAILED);
+      });
+  },
+  async editdisaggregationvalue({ commit }, payload) {
+    commit(mutation.EDIT_DISAGGREGATION_VALUE);
+    await this.$api.$patch(`disaggregationvalues/${payload.disaggregationid}`, payload)
+      .then(response => {
+        commit(mutation.EDIT_DISAGGREGATION_VALUE_SUCCESS, response);
 
-          }).catch(error => {
-            commit(mutation.EDIT_DISAGGREGATION_VALUE_FAILED);
-          });
-      },
+      }).catch(error => {
+        commit(mutation.EDIT_DISAGGREGATION_VALUE_FAILED);
+      });
+  },
 
 };
 const getters = {
@@ -125,6 +125,7 @@ const getters = {
 
 };
 export default {
+  namespaced: false,
   state,
   getters,
   mutations,
