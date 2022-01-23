@@ -6,6 +6,8 @@ name: Build
 on:
   push:
     branches: [ master ]
+  pull_request:
+    branches: [ opened, master ]
  
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
