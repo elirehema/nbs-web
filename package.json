@@ -21,7 +21,7 @@
     "secure-ls": "^1.2.6",
     "sweetalert": "^2.1.2",
     "vue-i18n": "^8.24.5",
-    "vuetify": "^2.5.6",
+    "vuetify": "^2.6.10",
     "vuex-persistedstate": "^3.2.0"
   },
   "devDependencies": {
